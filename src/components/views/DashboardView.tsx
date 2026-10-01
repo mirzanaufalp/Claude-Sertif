@@ -8,7 +8,6 @@ import {
   AlertTriangle,
   XCircle,
   ShieldCheck,
-  UserX,
   TrendingUp,
   ArrowRight,
   Clock,
@@ -24,7 +23,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   LineChart,
   Line,
@@ -73,13 +71,13 @@ export const DashboardView: React.FC = () => {
   const missingSMKP = countMissingCert('SMKP');
   const missingCP = countMissingCert('CP');
 
-  // 2. Pie Chart Data: Sertifikasi per Jenis
+  // 2. Pie Chart Data: Palet warna harmonis & kontras
   const pieData = [
-    { name: 'POP (Pertama)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'POP').length, color: '#3b82f6' },
-    { name: 'POM (Madya)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'POM').length, color: '#6366f1' },
-    { name: 'POU (Utama)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'POU').length, color: '#a855f7' },
-    { name: 'SMKP', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'SMKP').length, color: '#14b8a6' },
-    { name: 'CP (Competent Person)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'CP').length, color: '#f59e0b' },
+    { name: 'POP (Pertama)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'POP').length, color: '#2563eb' }, // Royal Blue
+    { name: 'POM (Madya)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'POM').length, color: '#0d9488' },   // Teal
+    { name: 'POU (Utama)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'POU').length, color: '#7c3aed' },   // Deep Violet
+    { name: 'SMKP', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'SMKP').length, color: '#f59e0b' },          // Amber
+    { name: 'CP (Competent Person)', value: sertifikasiList.filter(c => c.JENIS_SERTIFIKASI === 'CP').length, color: '#10b981' }, // Emerald
   ];
 
   // 3. Bar Chart Data: Jumlah Pegawai per Divisi
@@ -248,12 +246,34 @@ export const DashboardView: React.FC = () => {
           <div className="h-56 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={pieData} cx="50%" cy="50%" innerRadius={50} outerRadius={75} paddingAngle={4} dataKey="value">
+                <Pie
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={75}
+                  paddingAngle={4}
+                  dataKey="value"
+                >
                   {pieData.map((entry, idx) => (
                     <Cell key={`cell-${idx}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#0f172a',
+                    borderRadius: '10px',
+                    border: '1px solid #334155',
+                    boxShadow: '0 8px 16px -2px rgba(0, 0, 0, 0.3)',
+                    color: '#ffffff',
+                  }}
+                  itemStyle={{
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                  }}
+                  formatter={(value: any, name: any) => [`${value} orang`, name]}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -261,7 +281,7 @@ export const DashboardView: React.FC = () => {
             {pieData.map((item, idx) => (
               <div key={idx} className="flex justify-between items-center py-1 border-b border-gray-100 dark:border-slate-800 last:border-none">
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                  <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
                   <span className="text-gray-600 dark:text-gray-300 font-medium">{item.name}</span>
                 </div>
                 <span className="font-bold text-gray-900 dark:text-white">{item.value}</span>
@@ -282,8 +302,27 @@ export const DashboardView: React.FC = () => {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                 <XAxis dataKey="division" tick={{ fontSize: 11 }} />
                 <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
-                <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                <Bar dataKey="JumlahPegawai" fill="#1E3A8A" radius={[6, 6, 0, 0]} />
+                <Tooltip
+                  cursor={{ fill: 'rgba(37, 99, 235, 0.08)' }}
+                  contentStyle={{
+                    backgroundColor: '#0f172a',
+                    borderRadius: '10px',
+                    border: '1px solid #334155',
+                    boxShadow: '0 8px 16px -2px rgba(0, 0, 0, 0.3)',
+                  }}
+                  labelStyle={{
+                    color: '#ffffff',
+                    fontWeight: 'bold',
+                    fontSize: '12px',
+                    marginBottom: '4px',
+                  }}
+                  itemStyle={{
+                    color: '#f8fafc',
+                    fontSize: '12px',
+                  }}
+                  formatter={(value: any) => [`${value} orang`, 'Jumlah Pegawai']}
+                />
+                <Bar dataKey="JumlahPegawai" fill="#2563eb" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -301,7 +340,17 @@ export const DashboardView: React.FC = () => {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                 <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                 <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
-                <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#0f172a',
+                    borderRadius: '10px',
+                    border: '1px solid #334155',
+                    color: '#ffffff',
+                    fontSize: '12px',
+                  }}
+                  labelStyle={{ color: '#ffffff', fontWeight: 'bold' }}
+                  itemStyle={{ color: '#f8fafc' }}
+                />
                 <Line type="monotone" dataKey="Pelatihan" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
@@ -327,9 +376,12 @@ export const DashboardView: React.FC = () => {
             onChange={e => setSelectedTimelineEmpId(e.target.value)}
             className="px-3 py-1.5 text-xs bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl font-bold text-gray-800 dark:text-gray-200 focus:outline-none"
           >
-            {personilList.map(p => (
-              <option key={p.ID_PERSONIL} value={p.ID_PERSONIL}>
-                {p.NAMA} ({p.ID_PERSONIL}) - {getLookupName('DIVDEP', p.DIVISI_DEPARTEMEN)}
+            {personilList.map((p, idx) => (
+              <option
+                key={p.ID_PERSONIL ? `${p.ID_PERSONIL}-${idx}` : `emp-${idx}`}
+                value={p.ID_PERSONIL || ''}
+              >
+                {p.NAMA} ({p.ID_PERSONIL || 'Tanpa ID'}) - {getLookupName('DIVDEP', p.DIVISI_DEPARTEMEN)}
               </option>
             ))}
           </select>
