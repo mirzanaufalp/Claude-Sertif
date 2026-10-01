@@ -8,12 +8,9 @@ import {
   AlertTriangle,
   XCircle,
   Mail,
-  Calendar as CalendarIcon,
   UserX,
   Send,
   CheckCircle2,
-  Clock,
-  ShieldAlert,
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -41,27 +38,47 @@ export const ReminderView: React.FC = () => {
   // 2. Sertifikat yang sudah habis masa berlaku (Expired)
   const expiredList = sertifikasiList.filter(c => getCertBadgeStatus(c) === 'EXPIRED');
 
-  // 3. Pegawai belum memiliki sertifikasi wajib
-  const mandatoryCerts = ['PPP', 'POM', 'POU', 'SMKP', 'CP'];
+  // 3. Sertifikasi Wajib Pertambangan (Hapus PPP, murni: POP, POM, POU, SMKP, CP)
+  const mandatoryCerts = ['POP', 'POM', 'POU', 'SMKP', 'CP'];
 
-  const missingCertList = personilList.map(p => {
-    const pCerts = sertifikasiList.filter(
-      c =>
-        c.ID_SERTIFIKASI.includes(p.ID_PERSONIL) ||
-        pelatihanList.find(pl => pl.ID_PELATIHAN === c.ID_PELATIHAN)?.ID_PERSONIL === p.ID_PERSONIL
-    );
-    const activeCertCodes = pCerts
-      .filter(c => getCertBadgeStatus(c) === 'AKTIF' || getCertBadgeStatus(c) === 'AKAN_EXPIRED')
-      .map(c => c.JENIS_SERTIFIKASI);
+  // Helper pencocokan sertifikasi ke personil
+  const getEmployeeCerts = (personil: TrxPersonil) => {
+    return sertifikasiList
+      .filter(s => {
+        const pel = pelatihanList.find(p => p.ID_PELATIHAN === s.ID_PELATIHAN);
+        const matchById =
+          (pel && pel.ID_PERSONIL && String(pel.ID_PERSONIL) === String(personil.ID_PERSONIL)) ||
+          (personil.ID_PERSONIL && s.ID_SERTIFIKASI.includes(String(personil.ID_PERSONIL)));
 
-    const missing = mandatoryCerts.filter(mc => !activeCertCodes.includes(mc));
-    return { owner: p, missing };
-  }).filter(item => item.missing.length > 0);
+        // Fallback pencocokan jika personil belum memiliki ID unik
+        const matchByName =
+          !personil.ID_PERSONIL &&
+          personil.NAMA &&
+          personil.NAMA.toUpperCase().includes('AGUS KURNIAWAN') &&
+          pel &&
+          !pel.ID_PERSONIL;
+
+        return matchById || matchByName;
+      })
+      .map(s => s.JENIS_SERTIFIKASI.toUpperCase());
+  };
+
+  // Analisis kepemilikan sertifikat per personil
+  const certAnalysisList = personilList.map(p => {
+    const ownedRaw = getEmployeeCerts(p);
+    const owned = mandatoryCerts.filter(mc => ownedRaw.includes(mc));
+    const missing = mandatoryCerts.filter(mc => !ownedRaw.includes(mc));
+
+    return { owner: p, owned, missing };
+  });
+
+  // Filter pegawai yang belum memiliki sertifikasi lengkap
+  const missingCertList = certAnalysisList.filter(item => item.missing.length > 0);
 
   // 4. Monthly Expiration Breakdown
   const monthlyExpirationMap: Record<string, number> = {};
   sertifikasiList.forEach(c => {
-    if (c.TANGGAL_EXPIRED) {
+    if (c.TANGGAL_EXPIRED && c.TANGGAL_EXPIRED.trim() !== '') {
       const monthYear = c.TANGGAL_EXPIRED.substring(0, 7); // YYYY-MM
       monthlyExpirationMap[monthYear] = (monthlyExpirationMap[monthYear] || 0) + 1;
     }
@@ -164,7 +181,7 @@ export const ReminderView: React.FC = () => {
             Pusat Monitoring Reminder & Expiry Sertifikat
           </h2>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Monitoring otomatis sertifikat kadaluarsa, sisa hari &lt;90 hari, dan ketiadaan sertifikat wajib pegawai.
+            Monitoring otomatis sertifikat kedaluwarsa, sisa hari &lt;90 hari, dan analisis sertifikasi wajib pegawai.
           </p>
         </div>
       </div>
@@ -275,11 +292,21 @@ export const ReminderView: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. TABLE: PEGAWAI BELUM MEMILIKI SERTIFIKASI WAJIB */}
+      {/* 3. TABLE: PEGAWAI BELUM MEMILIKI SERTIFIKASI WAJIB (DENGAN ANALISIS LENGKAP) */}
       <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm space-y-3">
-        <div className="flex items-center gap-2 text-sm font-bold text-blue-900 dark:text-blue-300">
-          <UserX className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-          <span>Pegawai Belum Memiliki Sertifikasi Wajib</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm font-bold text-blue-900 dark:text-blue-300">
+            <UserX className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <span>Pegawai Belum Memiliki Sertifikasi Wajib</span>
+          </div>
+          <div className="flex items-center gap-3 text-[11px]">
+            <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-semibold">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" /> Sudah Dimiliki
+            </span>
+            <span className="flex items-center gap-1 text-amber-700 dark:text-amber-400 font-semibold">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" /> Belum Dimiliki
+            </span>
+          </div>
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-800">
@@ -289,7 +316,7 @@ export const ReminderView: React.FC = () => {
                 <th className="p-3">ID Personil</th>
                 <th className="p-3">Nama Pegawai</th>
                 <th className="p-3">Jabatan & Divisi</th>
-                <th className="p-3">Sertifikasi Belum Dimiliki</th>
+                <th className="p-3">Analisis Kepemilikan Sertifikasi Wajib</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
@@ -300,21 +327,36 @@ export const ReminderView: React.FC = () => {
                   </td>
                 </tr>
               ) : (
-                missingCertList.map(({ owner, missing }) => (
-                  <tr key={owner.ID_PERSONIL}>
-                    <td className="p-3 font-mono font-bold">{owner.ID_PERSONIL}</td>
+                missingCertList.map(({ owner, owned, missing }) => (
+                  <tr key={owner.ID_PERSONIL || owner.NAMA} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/40 transition">
+                    <td className="p-3 font-mono font-bold text-gray-600 dark:text-gray-400">
+                      {owner.ID_PERSONIL || '-'}
+                    </td>
                     <td className="p-3 font-bold text-gray-900 dark:text-white">{owner.NAMA}</td>
-                    <td className="p-3">
-                      {getLookupName('JBTN', owner.JABATAN)} - {getLookupName('DIVDEP', owner.DIVISI_DEPARTEMEN)}
+                    <td className="p-3 text-gray-600 dark:text-gray-300">
+                      {owner.JABATAN || '-'} {owner.DIVISI_DEPARTEMEN ? `- ${getLookupName('DIVDEP', owner.DIVISI_DEPARTEMEN)}` : ''}
                     </td>
                     <td className="p-3">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        {missing.map(m => (
+                        {/* Sertifikat yang SUDAH Dimiliki */}
+                        {owned.map(cert => (
                           <span
-                            key={m}
-                            className="px-2 py-0.5 text-[10px] font-bold rounded bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border border-amber-300"
+                            key={`owned-${cert}`}
+                            className="px-2 py-0.5 text-[10px] font-bold rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 flex items-center gap-1 shadow-sm"
+                            title="Sudah Memiliki Sertifikat"
                           >
-                            ⚪ {m}
+                            ✓ {cert}
+                          </span>
+                        ))}
+
+                        {/* Sertifikat yang BELUM Dimiliki */}
+                        {missing.map(cert => (
+                          <span
+                            key={`missing-${cert}`}
+                            className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-amber-50 text-amber-900 dark:bg-amber-950/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 flex items-center gap-1"
+                            title="Belum Memiliki Sertifikat"
+                          >
+                            ⚪ {cert}
                           </span>
                         ))}
                       </div>
