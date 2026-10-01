@@ -31,7 +31,7 @@ export const SertifikasiView: React.FC = () => {
 
   // Helper mandiri yang aman agar tidak crash jika context helper error/undefined
   const calculateDaysRemaining = (dateStr?: string): number | null => {
-    if (!dateStr || typeof dateStr !== 'string' || dateStr.trim() === '') return null;
+    if (!dateStr || typeof dateStr !== 'string' || dateStr.trim() === '' || dateStr.trim() === '-') return null;
     const target = new Date(dateStr);
     if (isNaN(target.getTime())) return null;
     const today = new Date();
@@ -40,7 +40,7 @@ export const SertifikasiView: React.FC = () => {
   };
 
   const calculateBadgeStatus = (s: TrxSertifikasi): 'AKTIF' | 'AKAN_EXPIRED' | 'EXPIRED' => {
-    if (!s.TANGGAL_EXPIRED || s.TANGGAL_EXPIRED.trim() === '') {
+    if (!s.TANGGAL_EXPIRED || s.TANGGAL_EXPIRED.trim() === '' || s.TANGGAL_EXPIRED.trim() === '-') {
       return 'AKTIF';
     }
     const days = calculateDaysRemaining(s.TANGGAL_EXPIRED);
@@ -195,16 +195,27 @@ export const SertifikasiView: React.FC = () => {
       accessorKey: 'TANGGAL_EXPIRED',
       sortable: true,
       cell: s => {
+        // Format tanggal terbit (Terbit: - jika kosong)
+        const tglTerbit = s.TANGGAL_MULAI && s.TANGGAL_MULAI.trim() !== '' 
+          ? s.TANGGAL_MULAI.trim() 
+          : '-';
+
+        // Format tanggal expired (Expired: - jika kosong)
+        const tglExpired = s.TANGGAL_EXPIRED && s.TANGGAL_EXPIRED.trim() !== '' 
+          ? s.TANGGAL_EXPIRED.trim() 
+          : '-';
+
         const days = calculateDaysRemaining(s.TANGGAL_EXPIRED);
+
         return (
           <div className="text-[11px] space-y-0.5">
             <div>
-              Terbit: <span className="font-semibold text-gray-700 dark:text-gray-300">{s.TANGGAL_MULAI || '-'}</span>
+              Terbit: <span className="font-semibold text-gray-700 dark:text-gray-300">{tglTerbit}</span>
             </div>
             <div>
               Expired:{' '}
               <span className="font-semibold text-gray-900 dark:text-white">
-                {s.TANGGAL_EXPIRED ? s.TANGGAL_EXPIRED : 'Seumur Hidup'}
+                {tglExpired}
               </span>
             </div>
             {days !== null && days >= 0 && days <= 90 && (
@@ -273,7 +284,7 @@ export const SertifikasiView: React.FC = () => {
                   noCert: s.NO_SERTIFIKAT || '-',
                   name: owner?.NAMA || 'Pegawai',
                   jenis: getLookupName('SRT', s.JENIS_SERTIFIKASI),
-                  tglExp: s.TANGGAL_EXPIRED || 'Seumur Hidup',
+                  tglExp: s.TANGGAL_EXPIRED || '-',
                 })
               }
               className="p-1 rounded bg-amber-50 text-amber-600 hover:bg-amber-100 dark:bg-amber-950 dark:text-amber-400 transition"
@@ -443,7 +454,7 @@ export const SertifikasiView: React.FC = () => {
                 value={formData.NO_SERTIFIKAT}
                 onChange={e => setFormData({ ...formData, NO_SERTIFIKAT: e.target.value })}
                 required
-                placeholder="PPP-2026-0001"
+                placeholder="POP-2026-0001"
                 className="w-full px-3 py-2 text-xs bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl font-mono"
               />
             </div>
@@ -451,12 +462,12 @@ export const SertifikasiView: React.FC = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Tanggal Terbit *</label>
+              <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Tanggal Terbit</label>
               <input
-                type="date"
-                value={formData.TANGGAL_MULAI}
+                type="text"
+                value={formData.TANGGAL_MULAI || ''}
                 onChange={e => setFormData({ ...formData, TANGGAL_MULAI: e.target.value })}
-                required
+                placeholder="-"
                 className="w-full px-3 py-2 text-xs bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl"
               />
             </div>
@@ -464,9 +475,10 @@ export const SertifikasiView: React.FC = () => {
             <div>
               <label className="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Tanggal Expired</label>
               <input
-                type="date"
-                value={formData.TANGGAL_EXPIRED}
+                type="text"
+                value={formData.TANGGAL_EXPIRED || ''}
                 onChange={e => setFormData({ ...formData, TANGGAL_EXPIRED: e.target.value })}
+                placeholder="-"
                 className="w-full px-3 py-2 text-xs bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl"
               />
             </div>
