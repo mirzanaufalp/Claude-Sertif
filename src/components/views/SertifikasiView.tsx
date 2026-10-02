@@ -29,10 +29,17 @@ export const SertifikasiView: React.FC = () => {
   const deleteSertifikasi = appContext.deleteSertifikasi || (() => { });
   const getLookupName = appContext.getLookupName || ((_cat: string, code: string) => code);
 
-  // Helper mandiri yang aman agar tidak crash jika context helper error/undefined
+  // Helper mandiri yang aman untuk menghitung sisa hari
   const calculateDaysRemaining = (dateStr?: string): number | null => {
     if (!dateStr || typeof dateStr !== 'string' || dateStr.trim() === '' || dateStr.trim() === '-') return null;
-    const target = new Date(dateStr);
+    
+    // Jika format teks deskriptif (misal: "Tanggal Expired POM : 25 November 2029"), ambil bagian tanggalnya saja
+    let cleanDateStr = dateStr;
+    if (dateStr.includes(':')) {
+      cleanDateStr = dateStr.split(':').pop()?.trim() || dateStr;
+    }
+
+    const target = new Date(cleanDateStr);
     if (isNaN(target.getTime())) return null;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -92,12 +99,31 @@ export const SertifikasiView: React.FC = () => {
     DOK_SERTIFIKAT: 'sertifikat_pop.pdf',
   });
 
+  // FUNGSI PERBAIKAN: getOwnerByCert dengan Presisi Tinggi
   const getOwnerByCert = (s: TrxSertifikasi) => {
     if (!s) return null;
+
+    // 1. Cari via pelatihanList terlebih dahulu
     const pel = pelatihanList.find(p => p && p.ID_PELATIHAN === s.ID_PELATIHAN);
-    if (pel && pel.ID_PERSONIL && String(pel.ID_PERSONIL).trim() !== '') {
-      return personilList.find(per => per && String(per.ID_PERSONIL) === String(pel.ID_PERSONIL));
+
+    // 2. Jika ID_PERSONIL valid (bukan empty string/undefined), cocokkan langsung via ID
+    if (pel && pel.ID_PERSONIL && String(pel.ID_PERSONIL).trim() !== '' && String(pel.ID_PERSONIL) !== 'undefined') {
+      const ownerById = personilList.find(per => per && String(per.ID_PERSONIL) === String(pel.ID_PERSONIL));
+      if (ownerById) return ownerById;
     }
+
+    // 3. FALLBACK: Pencocokan NAMA untuk data tanpa ID (seperti LA ENDANG)
+    const targetString = `${s.ID_SERTIFIKASI || ''} ${pel?.ID_PELATIHAN || ''}`.toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+    const ownerByName = personilList.find(per => {
+      if (!per || !per.NAMA) return false;
+      const cleanPersonilName = per.NAMA.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+      // Minimal panjang nama 3 karakter untuk menghindari false positive match
+      return cleanPersonilName.length >= 3 && targetString.includes(cleanPersonilName);
+    });
+
+    if (ownerByName) return ownerByName;
+
     return null;
   };
 
