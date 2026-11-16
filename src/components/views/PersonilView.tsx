@@ -28,6 +28,7 @@ import {
   Clock,
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
+import { buildImportBundle, mergeImportBundle } from '../../lib/excelImport';
 
 export const PersonilView: React.FC = () => {
   const {
@@ -41,6 +42,10 @@ export const PersonilView: React.FC = () => {
     deletePersonil,
     getLookupName,
     getCertBadgeStatus,
+    setPersonilList,
+    setPelatihanList,
+    setSertifikasiList,
+    addAuditLog,
   } = useApp();
 
   // Modals state
@@ -183,31 +188,48 @@ export const PersonilView: React.FC = () => {
 
   const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (evt: ProgressEvent<FileReader>) => {
-        const bstr = evt.target?.result;
-        const wb = XLSX.read(bstr, { type: 'binary' });
-        const wsName = wb.SheetNames[0];
-        const ws = wb.Sheets[wsName];
-        const data: any[] = XLSX.utils.sheet_to_json(ws);
+    if (!file) return;
 
-        data.forEach(row => {
-          if (row['Nama'] || row['NAMA']) {
-            addPersonil({
-              ID_PERSONIL: String(row['ID Personil'] || row['ID_PERSONIL'] || Math.floor(1000 + Math.random() * 9000)),
-              NAMA: String(row['Nama'] || row['NAMA']),
-              JABATAN: String(row['Jabatan'] || row['JABATAN'] || 'Supervisor'),
-              DIVISI_DEPARTEMEN: String(row['Divisi'] || row['DIVISI_DEPARTEMEN'] || 'GGD'),
-              JENIS_PEGAWAI: String(row['Jenis Pegawai'] || row['JENIS_PEGAWAI'] || 'Pegawai Tetap'),
-              EMAIL_PERSONIL: String(row['Email'] || row['EMAIL_PERSONIL'] || 'email@mining.co.id'),
-              FOTO_PERSONIL: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-            });
-          }
-        });
-      };
-      reader.readAsBinaryString(file);
-    }
+    const reader = new FileReader();
+    reader.onload = (evt: ProgressEvent<FileReader>) => {
+      try {
+        const wb = XLSX.read(evt.target?.result, { type: 'binary', cellDates: true });
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const rows: any[] = XLSX.utils.sheet_to_json(ws, { defval: '' });
+
+        if (rows.length === 0) {
+          alert('File Excel kosong atau format tidak dikenali.');
+          return;
+        }
+
+        const bundle = buildImportBundle(rows);
+        const merged = mergeImportBundle(personilList, pelatihanList, sertifikasiList, bundle);
+
+        setPersonilList(merged.personilList);
+        setPelatihanList(merged.pelatihanList);
+        setSertifikasiList(merged.sertifikasiList);
+
+        const tanpaTanggal = bundle.stats.pelatihan - bundle.stats.withDates;
+        addAuditLog(
+          'IMPOR_EXCEL_PERSONIL',
+          `Import Excel ${file.name}: ${bundle.stats.personil} pegawai (${merged.added} baru, ${merged.updated} diperbarui), ${bundle.stats.pelatihan} pelatihan, ${bundle.stats.sertifikasi} sertifikasi.`
+        );
+
+        alert(
+          `Import selesai tanpa duplikat.\n\n` +
+            `Baris Excel: ${bundle.stats.rows} (dilewati: ${bundle.stats.skipped})\n` +
+            `Pegawai unik: ${bundle.stats.personil} → ${merged.added} baru, ${merged.updated} sudah ada/diperbarui\n` +
+            `Pelatihan unik: ${bundle.stats.pelatihan}\n` +
+            `Sertifikasi unik: ${bundle.stats.sertifikasi}\n` +
+            (tanpaTanggal > 0 ? `Catatan: ${tanpaTanggal} pelatihan tanpa tanggal karena Excel tidak memuat tanggal expired.` : '')
+        );
+      } catch (error) {
+        console.error(error);
+        alert('Gagal membaca file Excel. Pastikan format kolom sesuai (ID_PERSONIL, NAMA, SERT_PPP, TGL_EXPIRED_PPP, dst).');
+      }
+    };
+    reader.readAsBinaryString(file);
+    e.target.value = '';
   };
 
   // Helper Badge for Table Rows

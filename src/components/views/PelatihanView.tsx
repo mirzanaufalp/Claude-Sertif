@@ -132,8 +132,18 @@ export const PelatihanView: React.FC = () => {
       header: 'Periode Pelatihan',
       cell: p => (
         <div className="text-[11px]">
-          <div>Mulai: <span className="font-semibold text-gray-800 dark:text-gray-200">{p.TANGGAL_MULAI}</span></div>
-          <div>Selesai: <span className="font-semibold text-gray-800 dark:text-gray-200">{p.TANGGAL_SELESAI}</span></div>
+          <div>
+            Mulai:{' '}
+            <span className={`font-semibold ${p.TANGGAL_MULAI ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400 italic'}`}>
+              {p.TANGGAL_MULAI || 'belum ada data'}
+            </span>
+          </div>
+          <div>
+            Selesai:{' '}
+            <span className={`font-semibold ${p.TANGGAL_SELESAI ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400 italic'}`}>
+              {p.TANGGAL_SELESAI || 'belum ada data'}
+            </span>
+          </div>
         </div>
       ),
     },

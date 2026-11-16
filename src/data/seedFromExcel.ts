@@ -1,0 +1,3312 @@
+import { TrxPersonil, TrxPelatihan, TrxSertifikasi } from '../types';
+
+// AUTO-GENERATED dari DB_Sertifikasi HSE.xlsx via script generate_seed_excel.mts
+// Jangan edit manual; jalankan ulang script bila Excel berubah.
+export const SEED_PERSONIL: TrxPersonil[] = [
+  {
+    "ID_PERSONIL": "8632",
+    "NAMA": "FIANDRI INDRAGUNAWAN RINAWAN",
+    "JABATAN": "Geophysics Development Engineer",
+    "DIVISI_DEPARTEMEN": "GGD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "FIANDRI.INDRAGUNAWAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7362",
+    "NAMA": "SATRIYA ALRIZKI",
+    "JABATAN": "Geospatial and Geology Database Manager",
+    "DIVISI_DEPARTEMEN": "GGD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "SATRIYA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7346",
+    "NAMA": "RM. AGUS SUGIHARTO",
+    "JABATAN": "Geographic Information System Analysis Junior Specialist",
+    "DIVISI_DEPARTEMEN": "GGD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AGUS@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7347",
+    "NAMA": "AZRUL ANDRIANZAH",
+    "JABATAN": "Resource Engineering Junior Engineer",
+    "DIVISI_DEPARTEMEN": "GGD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AZRUL@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8693",
+    "NAMA": "BELLA WIJDANI SAKINA",
+    "JABATAN": "Geology Database Junior Specialist",
+    "DIVISI_DEPARTEMEN": "GGD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "BELLA.WIJDANI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7512",
+    "NAMA": "RURI PITALOKA",
+    "JABATAN": "Petrology Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "RURI.PITALOKA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7687",
+    "NAMA": "ABDUL BARI",
+    "JABATAN": "General Manager, Geomin Unit",
+    "DIVISI_DEPARTEMEN": "GM",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ABDUL.BARI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "PEGAGUSKURNIAWAN",
+    "NAMA": "AGUS KURNIAWAN",
+    "JABATAN": "Supervisor",
+    "DIVISI_DEPARTEMEN": "HSSE",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "6708",
+    "NAMA": "YOSEPH HERWINDO PASKARINO",
+    "JABATAN": "Exploration Lead Specialist",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "YOSEP@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7167",
+    "NAMA": "ELWIN ELBUR",
+    "JABATAN": "Exploration Senior Manager",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ELWIN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7190",
+    "NAMA": "ANDI KURNIAWAN",
+    "JABATAN": "Regional Exploration Manager",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ANDI.KURNIAWAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7212",
+    "NAMA": "PRAYATNA",
+    "JABATAN": "Geochemistry and Petrology Development Senior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "PRAYATNA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7382",
+    "NAMA": "ARIEF PRAWIRA KUSUMAH",
+    "JABATAN": "Project Exploration Geology Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ARIEF.PRAWIRA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7610",
+    "NAMA": "SATRIYA BESARI",
+    "JABATAN": "Geochemistry Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "SATRIYA.BESARI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7142",
+    "NAMA": "DUDUK SUMARGONO",
+    "JABATAN": "Project Exploration Geology Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "DUDUK@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7965",
+    "NAMA": "YOSAFAT PALTY Y SIMANJUNTAK",
+    "JABATAN": "Regional Exploration Geology Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "YOSAFAT@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7147",
+    "NAMA": "SISWADI",
+    "JABATAN": "Regional Exploration Geology Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "SISWADI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7383",
+    "NAMA": "WANDA ILHAM DANI",
+    "JABATAN": "Project Exploration Geology Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "WANDA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7510",
+    "NAMA": "ANDIKA HUTASOIT",
+    "JABATAN": "Project Exploration Geology Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ANDIKA.HUTASOIT@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7922",
+    "NAMA": "DEDI SUNJAYA",
+    "JABATAN": "Geology Resource Estimation Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "DEDI.SUNJAYA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7143",
+    "NAMA": "HENDRATA RAHMANTO",
+    "JABATAN": "Regional Exploration Geology Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "HENDRATA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7163",
+    "NAMA": "JOKO PRAWITO",
+    "JABATAN": "Project Exploration Geology Junior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "JOKOPRW@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7275",
+    "NAMA": "TULUS SEMEDIE",
+    "JABATAN": "Regional Exploration Geology Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "TULUS.SEMEDIE@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7363",
+    "NAMA": "CIPUTRA",
+    "JABATAN": "Project Exploration Manager",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "CIPUTRA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "PEGLAENDANG",
+    "NAMA": "LA ENDANG",
+    "JABATAN": "Supervisor",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8649",
+    "NAMA": "NAAFIAKRA NOUVAL",
+    "JABATAN": "Project Exploration Geology Supporting Senior Operator",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "NAAFIAKRA.NOUVAL@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8650",
+    "NAMA": "NADIA SORAYA",
+    "JABATAN": "Project Exploration Geology Supporting Senior Operator",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "NADIA.SORAYA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8651",
+    "NAMA": "ASEP SUPRIYADI",
+    "JABATAN": "Regional Exploration Geology surveyor",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ASEP.SUPRIYADI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9217",
+    "NAMA": "GUNTUR GHIFFARI",
+    "JABATAN": "Regional Exploration Geology Junior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "GUNTUR.GHIFFARI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9233",
+    "NAMA": "REZA RIEZQI RAMADHAN",
+    "JABATAN": "Regional Exploration Geology Junior Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "REZA.RAMADHAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "95000051",
+    "NAMA": "THAHA RIZAL ULHAQUE",
+    "JABATAN": "Project Exploration Geology Project Engineer",
+    "DIVISI_DEPARTEMEN": "Eksplorasi",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "THAHA.ULHAQUE@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7244",
+    "NAMA": "MUHAMMAD AKBAR KARTADIREDJA",
+    "JABATAN": "Exploration Support Manager",
+    "DIVISI_DEPARTEMEN": "Geofisika & Pengukuran",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MAKBAR@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8635",
+    "NAMA": "PRAMUDYA SEPTIAN PERMADI",
+    "JABATAN": "Geophysics and Geodesy Assistant Manager",
+    "DIVISI_DEPARTEMEN": "Geofisika & Pengukuran",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "PRAMUDYA.SEPTIAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8689",
+    "NAMA": "MUHAMMAD ARIEF WICAKSONO",
+    "JABATAN": "Geodesy Development Engineer",
+    "DIVISI_DEPARTEMEN": "Geofisika & Pengukuran",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MUHAMMAD.WICAKSONO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7945",
+    "NAMA": "RAMLAN RAMANDANI",
+    "JABATAN": "Senior Surveyor",
+    "DIVISI_DEPARTEMEN": "Geofisika & Pengukuran",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "RAMLAN.RAHMADANI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8640",
+    "NAMA": "ARDI SURYA RAHMAT",
+    "JABATAN": "Project Exploration Geology surveyor",
+    "DIVISI_DEPARTEMEN": "Geofisika & Pengukuran",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ARDI.SURYA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7145",
+    "NAMA": "SINGGIH ILMIAWAN",
+    "JABATAN": "Drilling Assistant Manager",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "SINGGIH@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7298",
+    "NAMA": "MUHAMMAD SHODIQ",
+    "JABATAN": "Drilling Junior Engineer",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MUHAMMAD.SHODIQ@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7352",
+    "NAMA": "ARIF HIDAYAT",
+    "JABATAN": "Drilling Monitoring Supervisor",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7489",
+    "NAMA": "AGUS SUGIANTO",
+    "JABATAN": "Drilling Development Engineer",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AGUS.SUGIANTO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7351",
+    "NAMA": "AGUS SETIAWAN",
+    "JABATAN": "Regional Exploration Geology surveyor",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AGUS.SETIAWAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7488",
+    "NAMA": "ABDUL KODIR",
+    "JABATAN": "Project Exploration Geology surveyor",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ABDUL.KODIRGEO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7613",
+    "NAMA": "AANG PURNAMA",
+    "JABATAN": "Drilling Monitoring Supervisor",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AANG.PURNAMA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7947",
+    "NAMA": "I NYOMAN TERISNA WIYADNYANA",
+    "JABATAN": "Drilling Control Technician",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "NYOMAN.TERISNA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8652",
+    "NAMA": "HARIS WIBOWO",
+    "JABATAN": "Drilling Operator",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "HARIS.WIBOWO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8653",
+    "NAMA": "MARDOI",
+    "JABATAN": "Regional Exploration Geology surveyor",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MARDOI.MARDOI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8921",
+    "NAMA": "SANDI RUSDIANA",
+    "JABATAN": "Drilling Technician",
+    "DIVISI_DEPARTEMEN": "Drilling",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "SANDI.RUSDIANA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7470",
+    "NAMA": "BRONTO SUTOPO",
+    "JABATAN": "Exploration Planning and Mine Development Senior Manager",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "BRONTO.SUTOPO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7662",
+    "NAMA": "ARIF HINDARTO",
+    "JABATAN": "Remote sensing and Geology Structure Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ARIF.HINDARTO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "6754",
+    "NAMA": "NOVI FERY RUSIANA DEWI",
+    "JABATAN": "Geology Resource Engineering Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "NOVI6754@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7211",
+    "NAMA": "INDRA BAGIO SAPUTRO",
+    "JABATAN": "Petrology Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "INDRA.BAGIO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7457",
+    "NAMA": "BAYUAJI JOKOSATRIYO P",
+    "JABATAN": "Geology Resource Engineering Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "BAYUAJI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7943",
+    "NAMA": "DWI MARGIANTO",
+    "JABATAN": "Resource Estimation Analysis Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "DWI.MARGIANTO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8923",
+    "NAMA": "ARNAZT PURBA ADRYANTO",
+    "JABATAN": "Geology Resource Estimation Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ARNAZT.ADRYANTO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8892",
+    "NAMA": "BAYU AJIE ARRASYID",
+    "JABATAN": "Geology Database Senior Officer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "BAYU.ARRASYID@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8691",
+    "NAMA": "BAYU RAHMANTO",
+    "JABATAN": "Remote Sensing Analysis Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "BAYU.RAHMANTO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8692",
+    "NAMA": "DIRGA DAVID SUHENDI",
+    "JABATAN": "Resource Estimation Analysis Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "DIRGA.SUHENDI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7440",
+    "NAMA": "HALLEY RIONANDA",
+    "JABATAN": "Geology Resource Estimation Concept Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "HALLEY@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8924",
+    "NAMA": "HERLANDO JUNIANSYAH PUTRA PERDANA",
+    "JABATAN": "Mine Plan Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "HERLANDO.PERDANA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8925",
+    "NAMA": "JUKI BODI SEMBADA",
+    "JABATAN": "Mine Plan Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "JUKI.SEMBADA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9210",
+    "NAMA": "MAYTA KAMILA",
+    "JABATAN": "Resource Engineering Junior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MAYTA.KAMILA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7300",
+    "NAMA": "MUCHAMAD FAJAR RICKIADI",
+    "JABATAN": "Geology Resource Engineering and Estimation Development Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "M_FAJAR@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9053",
+    "NAMA": "MUHAMMAD CHANDRA RM",
+    "JABATAN": "Geochemistry Analysis Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MUHAMMAD.CHANDRA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7301",
+    "NAMA": "MUHAMMAD DIAN SYAHPUTRA S",
+    "JABATAN": "Mine Planning and Valuation Senior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "M_DIAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9048",
+    "NAMA": "MUHAMMAD ILHAM KALAMI",
+    "JABATAN": "Mine Planning and Valuation Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MUHAMMAD.KALAMI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9238",
+    "NAMA": "MUHAMMAD KHAIDIR HUSAIN",
+    "JABATAN": "Mine Data Analysis Junior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "KHAIDIR.HUSAIN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8707",
+    "NAMA": "OKTA CHRISTAL SITUMORANG",
+    "JABATAN": "Mine Development Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "OKTA.SITUMORANG@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7487",
+    "NAMA": "ONI SETIA HIMAWAN",
+    "JABATAN": "Resource Engineering Junior Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ONNY@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8926",
+    "NAMA": "PHERTO RIMOS",
+    "JABATAN": "Mine Evaluation Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "PHERTO.RIMOS@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8914",
+    "NAMA": "RUBIMA AISHA YULMAN",
+    "JABATAN": "Petrology Engineer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "RUBIMA.YULMAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8919",
+    "NAMA": "ERWIN SETIAWAN",
+    "JABATAN": "Geology Database Senior Officer",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ERWIN.SETIAWAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "PEGIVANSATRIADI",
+    "NAMA": "IVAN SATRIADI",
+    "JABATAN": "Supervisor",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "93000119",
+    "NAMA": "MOCHAMAD KEVIN MAQOMI SAEFULHAQ",
+    "JABATAN": "Mine Planning and Controlling Technician",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "PEGSYAIFULHILAL",
+    "NAMA": "SYAIFUL HILAL",
+    "JABATAN": "Supervisor",
+    "DIVISI_DEPARTEMEN": "EPMD",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7455",
+    "NAMA": "RUSWANA",
+    "JABATAN": "Laboratory Manager",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "RUSWANA@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7236",
+    "NAMA": "RAHMAT FAUZI",
+    "JABATAN": "Chemical & Instrument Analysis Assistant Manager",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "FAUZIE@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7293",
+    "NAMA": "ZULI MUSTOFA",
+    "JABATAN": "Sample Preparation Assistant Manager",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "ZULI@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7296",
+    "NAMA": "AHMAD RIDWAN",
+    "JABATAN": "Laboratory Preparation Senior Operator",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AHMAD.RIDWAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7492",
+    "NAMA": "MAMAN SURAHMAN",
+    "JABATAN": "Laboratory Preparation Operator",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "MAMAN@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "7948",
+    "NAMA": "RIYAN PARMADIYANTO",
+    "JABATAN": "Senior Laboran",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "RIYAN.PARMADIYANTO@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "8642",
+    "NAMA": "AHDI ANWAR",
+    "JABATAN": "Laboratory Preparation Operator",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "AHDI.ANWAR@ANTAM.COM",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  },
+  {
+    "ID_PERSONIL": "9255",
+    "NAMA": "VERA NINGSIH RAMDHANI",
+    "JABATAN": "Laboratory Officer",
+    "DIVISI_DEPARTEMEN": "Laboratorium",
+    "JENIS_PEGAWAI": "PEG",
+    "EMAIL_PERSONIL": "",
+    "FOTO_PERSONIL": "",
+    "STATUS_PERSONIL": "AKTIF"
+  }
+];
+
+export const SEED_PELATIHAN: TrxPelatihan[] = [
+  {
+    "ID_PELATIHAN": "PEL_8632_POP",
+    "ID_PERSONIL": "8632",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7362_POP",
+    "ID_PERSONIL": "7362",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7346_POP",
+    "ID_PERSONIL": "7346",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7346_POM",
+    "ID_PERSONIL": "7346",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7347_POP",
+    "ID_PERSONIL": "7347",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8693_POP",
+    "ID_PERSONIL": "8693",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7512_POP",
+    "ID_PERSONIL": "7512",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7687_POP",
+    "ID_PERSONIL": "7687",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7687_POM",
+    "ID_PERSONIL": "7687",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7687_POU",
+    "ID_PERSONIL": "7687",
+    "JENIS_PELATIHAN": "POU",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POU",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_POP",
+    "ID_PERSONIL": "PEGAGUSKURNIAWAN",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_POM",
+    "ID_PERSONIL": "PEGAGUSKURNIAWAN",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_POU",
+    "ID_PERSONIL": "PEGAGUSKURNIAWAN",
+    "JENIS_PELATIHAN": "POU",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POU",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_SMKP",
+    "ID_PERSONIL": "PEGAGUSKURNIAWAN",
+    "JENIS_PELATIHAN": "SMKP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi SMKP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_6708_POP",
+    "ID_PERSONIL": "6708",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_6708_POU",
+    "ID_PERSONIL": "6708",
+    "JENIS_PELATIHAN": "POU",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POU",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7167_POP",
+    "ID_PERSONIL": "7167",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7167_POM",
+    "ID_PERSONIL": "7167",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7167_POU",
+    "ID_PERSONIL": "7167",
+    "JENIS_PELATIHAN": "POU",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POU",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7190_POP",
+    "ID_PERSONIL": "7190",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7190_POM",
+    "ID_PERSONIL": "7190",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7212_POP",
+    "ID_PERSONIL": "7212",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7212_POM",
+    "ID_PERSONIL": "7212",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7382_POP",
+    "ID_PERSONIL": "7382",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7382_POM",
+    "ID_PERSONIL": "7382",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7610_POP",
+    "ID_PERSONIL": "7610",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7610_POM",
+    "ID_PERSONIL": "7610",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7142_POP",
+    "ID_PERSONIL": "7142",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7965_POP",
+    "ID_PERSONIL": "7965",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7965_POM",
+    "ID_PERSONIL": "7965",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7147_POP",
+    "ID_PERSONIL": "7147",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7383_POP",
+    "ID_PERSONIL": "7383",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7383_POM",
+    "ID_PERSONIL": "7383",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7510_POP",
+    "ID_PERSONIL": "7510",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7510_POM",
+    "ID_PERSONIL": "7510",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7922_POP",
+    "ID_PERSONIL": "7922",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7922_POM",
+    "ID_PERSONIL": "7922",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7143_POP",
+    "ID_PERSONIL": "7143",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7143_POM",
+    "ID_PERSONIL": "7143",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7163_POP",
+    "ID_PERSONIL": "7163",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7163_POM",
+    "ID_PERSONIL": "7163",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7275_POP",
+    "ID_PERSONIL": "7275",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7275_POM",
+    "ID_PERSONIL": "7275",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7363_POP",
+    "ID_PERSONIL": "7363",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7363_POM",
+    "ID_PERSONIL": "7363",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGLAENDANG_POP",
+    "ID_PERSONIL": "PEGLAENDANG",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGLAENDANG_POM",
+    "ID_PERSONIL": "PEGLAENDANG",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8649_POP",
+    "ID_PERSONIL": "8649",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8649_POM",
+    "ID_PERSONIL": "8649",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8650_POP",
+    "ID_PERSONIL": "8650",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8651_POP",
+    "ID_PERSONIL": "8651",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9217_POP",
+    "ID_PERSONIL": "9217",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9233_POP",
+    "ID_PERSONIL": "9233",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9233_POM",
+    "ID_PERSONIL": "9233",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_95000051_POP",
+    "ID_PERSONIL": "95000051",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7244_POP",
+    "ID_PERSONIL": "7244",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7244_POM",
+    "ID_PERSONIL": "7244",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8635_POP",
+    "ID_PERSONIL": "8635",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8635_POM",
+    "ID_PERSONIL": "8635",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8689_POP",
+    "ID_PERSONIL": "8689",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7945_POP",
+    "ID_PERSONIL": "7945",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8640_POP",
+    "ID_PERSONIL": "8640",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7145_POP",
+    "ID_PERSONIL": "7145",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7298_POP",
+    "ID_PERSONIL": "7298",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7352_POP",
+    "ID_PERSONIL": "7352",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7489_POP",
+    "ID_PERSONIL": "7489",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7351_POP",
+    "ID_PERSONIL": "7351",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7488_POP",
+    "ID_PERSONIL": "7488",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7613_POP",
+    "ID_PERSONIL": "7613",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7947_POP",
+    "ID_PERSONIL": "7947",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8652_POP",
+    "ID_PERSONIL": "8652",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8653_POP",
+    "ID_PERSONIL": "8653",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8921_POP",
+    "ID_PERSONIL": "8921",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7470_POP",
+    "ID_PERSONIL": "7470",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7470_POM",
+    "ID_PERSONIL": "7470",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7662_POP",
+    "ID_PERSONIL": "7662",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7662_POM",
+    "ID_PERSONIL": "7662",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_6754_POP",
+    "ID_PERSONIL": "6754",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7211_POP",
+    "ID_PERSONIL": "7211",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7211_POM",
+    "ID_PERSONIL": "7211",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7457_POP",
+    "ID_PERSONIL": "7457",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7943_POP",
+    "ID_PERSONIL": "7943",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7943_POM",
+    "ID_PERSONIL": "7943",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8923_POP",
+    "ID_PERSONIL": "8923",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8892_POP",
+    "ID_PERSONIL": "8892",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8691_POP",
+    "ID_PERSONIL": "8691",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8691_POM",
+    "ID_PERSONIL": "8691",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8692_POP",
+    "ID_PERSONIL": "8692",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8692_POM",
+    "ID_PERSONIL": "8692",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7440_POP",
+    "ID_PERSONIL": "7440",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8924_POP",
+    "ID_PERSONIL": "8924",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8924_POM",
+    "ID_PERSONIL": "8924",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8925_POP",
+    "ID_PERSONIL": "8925",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8925_POM",
+    "ID_PERSONIL": "8925",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9210_POP",
+    "ID_PERSONIL": "9210",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7300_POP",
+    "ID_PERSONIL": "7300",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9053_POP",
+    "ID_PERSONIL": "9053",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9053_POM",
+    "ID_PERSONIL": "9053",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7301_POP",
+    "ID_PERSONIL": "7301",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7301_POM",
+    "ID_PERSONIL": "7301",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9048_POP",
+    "ID_PERSONIL": "9048",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9238_POP",
+    "ID_PERSONIL": "9238",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8707_POP",
+    "ID_PERSONIL": "8707",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7487_POP",
+    "ID_PERSONIL": "7487",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8926_POP",
+    "ID_PERSONIL": "8926",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8914_POP",
+    "ID_PERSONIL": "8914",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8919_POP",
+    "ID_PERSONIL": "8919",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGIVANSATRIADI_POP",
+    "ID_PERSONIL": "PEGIVANSATRIADI",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGIVANSATRIADI_POM",
+    "ID_PERSONIL": "PEGIVANSATRIADI",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGIVANSATRIADI_POU",
+    "ID_PERSONIL": "PEGIVANSATRIADI",
+    "JENIS_PELATIHAN": "POU",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POU",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_93000119_POP",
+    "ID_PERSONIL": "93000119",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_PEGSYAIFULHILAL_POP",
+    "ID_PERSONIL": "PEGSYAIFULHILAL",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7455_POP",
+    "ID_PERSONIL": "7455",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7455_POM",
+    "ID_PERSONIL": "7455",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7236_POP",
+    "ID_PERSONIL": "7236",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7236_POM",
+    "ID_PERSONIL": "7236",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7293_POP",
+    "ID_PERSONIL": "7293",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7293_POM",
+    "ID_PERSONIL": "7293",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7296_POP",
+    "ID_PERSONIL": "7296",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7492_POP",
+    "ID_PERSONIL": "7492",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_7948_POP",
+    "ID_PERSONIL": "7948",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_8642_POP",
+    "ID_PERSONIL": "8642",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9255_POP",
+    "ID_PERSONIL": "9255",
+    "JENIS_PELATIHAN": "POP",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  },
+  {
+    "ID_PELATIHAN": "PEL_9255_POM",
+    "ID_PERSONIL": "9255",
+    "JENIS_PELATIHAN": "POM",
+    "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POM",
+    "PENYELENGGARA": "Pusdiklat Antam / Minerba",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_SELESAI": "",
+    "STATUS_PELATIHAN": "SELESAI"
+  }
+];
+
+export const SEED_SERTIFIKASI: TrxSertifikasi[] = [
+  {
+    "ID_SERTIFIKASI": "SERT_8632_POP",
+    "ID_PELATIHAN": "PEL_8632_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8632",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7362_POP",
+    "ID_PELATIHAN": "PEL_7362_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7362",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7346_POP",
+    "ID_PELATIHAN": "PEL_7346_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7346",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7346_POM",
+    "ID_PELATIHAN": "PEL_7346_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7346",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7347_POP",
+    "ID_PELATIHAN": "PEL_7347_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7347",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8693_POP",
+    "ID_PELATIHAN": "PEL_8693_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8693",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7512_POP",
+    "ID_PELATIHAN": "PEL_7512_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7512",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7687_POP",
+    "ID_PELATIHAN": "PEL_7687_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7687",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7687_POM",
+    "ID_PELATIHAN": "PEL_7687_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7687",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7687_POU",
+    "ID_PELATIHAN": "PEL_7687_POU",
+    "JENIS_SERTIFIKASI": "POU",
+    "NO_SERTIFIKAT": "POU-7687",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGAGUSKURNIAWAN_POP",
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-PEGAGUSKURNIAWAN",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGAGUSKURNIAWAN_POM",
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-PEGAGUSKURNIAWAN",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGAGUSKURNIAWAN_POU",
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_POU",
+    "JENIS_SERTIFIKASI": "POU",
+    "NO_SERTIFIKAT": "POU-PEGAGUSKURNIAWAN",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGAGUSKURNIAWAN_SMKP",
+    "ID_PELATIHAN": "PEL_PEGAGUSKURNIAWAN_SMKP",
+    "JENIS_SERTIFIKASI": "SMKP",
+    "NO_SERTIFIKAT": "SMKP-PEGAGUSKURNIAWAN",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_6708_POP",
+    "ID_PELATIHAN": "PEL_6708_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-6708",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_6708_POU",
+    "ID_PELATIHAN": "PEL_6708_POU",
+    "JENIS_SERTIFIKASI": "POU",
+    "NO_SERTIFIKAT": "POU-6708",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7167_POP",
+    "ID_PELATIHAN": "PEL_7167_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7167",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7167_POM",
+    "ID_PELATIHAN": "PEL_7167_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7167",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7167_POU",
+    "ID_PELATIHAN": "PEL_7167_POU",
+    "JENIS_SERTIFIKASI": "POU",
+    "NO_SERTIFIKAT": "POU-7167",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7190_POP",
+    "ID_PELATIHAN": "PEL_7190_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7190",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7190_POM",
+    "ID_PELATIHAN": "PEL_7190_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7190",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7212_POP",
+    "ID_PELATIHAN": "PEL_7212_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7212",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7212_POM",
+    "ID_PELATIHAN": "PEL_7212_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7212",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7382_POP",
+    "ID_PELATIHAN": "PEL_7382_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7382",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7382_POM",
+    "ID_PELATIHAN": "PEL_7382_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7382",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7610_POP",
+    "ID_PELATIHAN": "PEL_7610_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7610",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7610_POM",
+    "ID_PELATIHAN": "PEL_7610_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7610",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7142_POP",
+    "ID_PELATIHAN": "PEL_7142_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7142",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7965_POP",
+    "ID_PELATIHAN": "PEL_7965_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7965",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7965_POM",
+    "ID_PELATIHAN": "PEL_7965_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7965",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7147_POP",
+    "ID_PELATIHAN": "PEL_7147_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7147",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7383_POP",
+    "ID_PELATIHAN": "PEL_7383_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7383",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7383_POM",
+    "ID_PELATIHAN": "PEL_7383_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7383",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7510_POP",
+    "ID_PELATIHAN": "PEL_7510_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7510",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7510_POM",
+    "ID_PELATIHAN": "PEL_7510_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7510",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7922_POP",
+    "ID_PELATIHAN": "PEL_7922_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7922",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7922_POM",
+    "ID_PELATIHAN": "PEL_7922_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7922",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7143_POP",
+    "ID_PELATIHAN": "PEL_7143_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7143",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7143_POM",
+    "ID_PELATIHAN": "PEL_7143_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7143",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7163_POP",
+    "ID_PELATIHAN": "PEL_7163_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7163",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7163_POM",
+    "ID_PELATIHAN": "PEL_7163_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7163",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7275_POP",
+    "ID_PELATIHAN": "PEL_7275_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7275",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7275_POM",
+    "ID_PELATIHAN": "PEL_7275_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7275",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2030-07-08",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7363_POP",
+    "ID_PELATIHAN": "PEL_7363_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7363",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7363_POM",
+    "ID_PELATIHAN": "PEL_7363_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7363",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGLAENDANG_POP",
+    "ID_PELATIHAN": "PEL_PEGLAENDANG_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-PEGLAENDANG",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGLAENDANG_POM",
+    "ID_PELATIHAN": "PEL_PEGLAENDANG_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-PEGLAENDANG",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8649_POP",
+    "ID_PELATIHAN": "PEL_8649_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8649",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2025-07-22",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8649_POM",
+    "ID_PELATIHAN": "PEL_8649_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-8649",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8650_POP",
+    "ID_PELATIHAN": "PEL_8650_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8650",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2023-08-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8651_POP",
+    "ID_PELATIHAN": "PEL_8651_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8651",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2030-07-30",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9217_POP",
+    "ID_PELATIHAN": "PEL_9217_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9217",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2027-11-28",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9233_POP",
+    "ID_PELATIHAN": "PEL_9233_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9233",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9233_POM",
+    "ID_PELATIHAN": "PEL_9233_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-9233",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2028-09-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_95000051_POP",
+    "ID_PELATIHAN": "PEL_95000051_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-95000051",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7244_POP",
+    "ID_PELATIHAN": "PEL_7244_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7244",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7244_POM",
+    "ID_PELATIHAN": "PEL_7244_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7244",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8635_POP",
+    "ID_PELATIHAN": "PEL_8635_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8635",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8635_POM",
+    "ID_PELATIHAN": "PEL_8635_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-8635",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8689_POP",
+    "ID_PELATIHAN": "PEL_8689_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8689",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7945_POP",
+    "ID_PELATIHAN": "PEL_7945_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7945",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8640_POP",
+    "ID_PELATIHAN": "PEL_8640_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8640",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7145_POP",
+    "ID_PELATIHAN": "PEL_7145_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7145",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7298_POP",
+    "ID_PELATIHAN": "PEL_7298_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7298",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2021-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7352_POP",
+    "ID_PELATIHAN": "PEL_7352_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7352",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7489_POP",
+    "ID_PELATIHAN": "PEL_7489_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7489",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7351_POP",
+    "ID_PELATIHAN": "PEL_7351_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7351",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7488_POP",
+    "ID_PELATIHAN": "PEL_7488_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7488",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2027-11-28",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7613_POP",
+    "ID_PELATIHAN": "PEL_7613_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7613",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7947_POP",
+    "ID_PELATIHAN": "PEL_7947_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7947",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8652_POP",
+    "ID_PELATIHAN": "PEL_8652_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8652",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8653_POP",
+    "ID_PELATIHAN": "PEL_8653_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8653",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8921_POP",
+    "ID_PELATIHAN": "PEL_8921_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8921",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2028-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7470_POP",
+    "ID_PELATIHAN": "PEL_7470_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7470",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7470_POM",
+    "ID_PELATIHAN": "PEL_7470_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7470",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7662_POP",
+    "ID_PELATIHAN": "PEL_7662_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7662",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7662_POM",
+    "ID_PELATIHAN": "PEL_7662_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7662",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_6754_POP",
+    "ID_PELATIHAN": "PEL_6754_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-6754",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7211_POP",
+    "ID_PELATIHAN": "PEL_7211_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7211",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7211_POM",
+    "ID_PELATIHAN": "PEL_7211_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7211",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2030-07-08",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7457_POP",
+    "ID_PELATIHAN": "PEL_7457_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7457",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7943_POP",
+    "ID_PELATIHAN": "PEL_7943_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7943",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2027-11-28",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7943_POM",
+    "ID_PELATIHAN": "PEL_7943_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7943",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8923_POP",
+    "ID_PELATIHAN": "PEL_8923_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8923",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8892_POP",
+    "ID_PELATIHAN": "PEL_8892_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8892",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8691_POP",
+    "ID_PELATIHAN": "PEL_8691_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8691",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2030-07-30",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8691_POM",
+    "ID_PELATIHAN": "PEL_8691_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-8691",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8692_POP",
+    "ID_PELATIHAN": "PEL_8692_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8692",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2030-07-30",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8692_POM",
+    "ID_PELATIHAN": "PEL_8692_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-8692",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7440_POP",
+    "ID_PELATIHAN": "PEL_7440_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7440",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8924_POP",
+    "ID_PELATIHAN": "PEL_8924_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8924",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8924_POM",
+    "ID_PELATIHAN": "PEL_8924_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-8924",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-03-23",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8925_POP",
+    "ID_PELATIHAN": "PEL_8925_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8925",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8925_POM",
+    "ID_PELATIHAN": "PEL_8925_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-8925",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2032-03-23",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9210_POP",
+    "ID_PELATIHAN": "PEL_9210_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9210",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7300_POP",
+    "ID_PELATIHAN": "PEL_7300_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7300",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9053_POP",
+    "ID_PELATIHAN": "PEL_9053_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9053",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9053_POM",
+    "ID_PELATIHAN": "PEL_9053_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-9053",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7301_POP",
+    "ID_PELATIHAN": "PEL_7301_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7301",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7301_POM",
+    "ID_PELATIHAN": "PEL_7301_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7301",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9048_POP",
+    "ID_PELATIHAN": "PEL_9048_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9048",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9238_POP",
+    "ID_PELATIHAN": "PEL_9238_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9238",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2027-11-28",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8707_POP",
+    "ID_PELATIHAN": "PEL_8707_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8707",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7487_POP",
+    "ID_PELATIHAN": "PEL_7487_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7487",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2027-11-28",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8926_POP",
+    "ID_PELATIHAN": "PEL_8926_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8926",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8914_POP",
+    "ID_PELATIHAN": "PEL_8914_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8914",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2028-09-08",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8919_POP",
+    "ID_PELATIHAN": "PEL_8919_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8919",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGIVANSATRIADI_POP",
+    "ID_PELATIHAN": "PEL_PEGIVANSATRIADI_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-PEGIVANSATRIADI",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGIVANSATRIADI_POM",
+    "ID_PELATIHAN": "PEL_PEGIVANSATRIADI_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-PEGIVANSATRIADI",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGIVANSATRIADI_POU",
+    "ID_PELATIHAN": "PEL_PEGIVANSATRIADI_POU",
+    "JENIS_SERTIFIKASI": "POU",
+    "NO_SERTIFIKAT": "POU-PEGIVANSATRIADI",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_93000119_POP",
+    "ID_PELATIHAN": "PEL_93000119_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-93000119",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_PEGSYAIFULHILAL_POP",
+    "ID_PELATIHAN": "PEL_PEGSYAIFULHILAL_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-PEGSYAIFULHILAL",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7455_POP",
+    "ID_PELATIHAN": "PEL_7455_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7455",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7455_POM",
+    "ID_PELATIHAN": "PEL_7455_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7455",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2031-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7236_POP",
+    "ID_PELATIHAN": "PEL_7236_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7236",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7236_POM",
+    "ID_PELATIHAN": "PEL_7236_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7236",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2032-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7293_POP",
+    "ID_PELATIHAN": "PEL_7293_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7293",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7293_POM",
+    "ID_PELATIHAN": "PEL_7293_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-7293",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2029-11-25",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7296_POP",
+    "ID_PELATIHAN": "PEL_7296_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7296",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7492_POP",
+    "ID_PELATIHAN": "PEL_7492_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7492",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_7948_POP",
+    "ID_PELATIHAN": "PEL_7948_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-7948",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2028-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_8642_POP",
+    "ID_PELATIHAN": "PEL_8642_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-8642",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9255_POP",
+    "ID_PELATIHAN": "PEL_9255_POP",
+    "JENIS_SERTIFIKASI": "POP",
+    "NO_SERTIFIKAT": "POP-9255",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  },
+  {
+    "ID_SERTIFIKASI": "SERT_9255_POM",
+    "ID_PELATIHAN": "PEL_9255_POM",
+    "JENIS_SERTIFIKASI": "POM",
+    "NO_SERTIFIKAT": "POM-9255",
+    "TANGGAL_MULAI": "",
+    "TANGGAL_EXPIRED": "2032-01-01",
+    "STATUS_SERTIFIKASI": "LULUS",
+    "DOK_SERTIFIKAT": "sertifikat.pdf"
+  }
+];

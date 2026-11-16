@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { TrxSertifikasi, TrxPersonil } from '../../types';
 import { DataTable, Column } from '../common/DataTable';
@@ -11,8 +11,13 @@ import {
   UserX,
   Send,
   CheckCircle2,
+  Loader2,
+  RefreshCw,
+  ServerOff,
+  CalendarDays,
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { reminderApi, ServerHealth, ReminderPreviewItem } from '../../lib/api';
 
 export const ReminderView: React.FC = () => {
   const {
@@ -30,7 +35,37 @@ export const ReminderView: React.FC = () => {
     cert?: TrxSertifikasi;
     owner?: TrxPersonil;
     sentSuccess?: boolean;
+    previewUrl?: string;
   }>({ isOpen: false });
+
+  const [serverHealth, setServerHealth] = useState<ServerHealth | null>(null);
+  const [serverOnline, setServerOnline] = useState<boolean | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [bulkInfo, setBulkInfo] = useState<string | null>(null);
+  const [bulkPreview, setBulkPreview] = useState<string | null>(null);
+  const [simDate, setSimDate] = useState('2027-09-01');
+  const [simLoading, setSimLoading] = useState(false);
+  const [simInfo, setSimInfo] = useState<string | null>(null);
+  const [simPreviewUrl, setSimPreviewUrl] = useState<string | null>(null);
+  const [simPreviewList, setSimPreviewList] = useState<ReminderPreviewItem[]>([]);
+
+  const refreshServerStatus = () => {
+    reminderApi
+      .health()
+      .then(health => {
+        setServerHealth(health);
+        setServerOnline(true);
+      })
+      .catch(() => {
+        setServerHealth(null);
+        setServerOnline(false);
+      });
+  };
+
+  useEffect(() => {
+    refreshServerStatus();
+  }, []);
 
   // 1. Sertifikat akan habis dalam 90 hari
   const expiringSoonList = sertifikasiList.filter(c => getCertBadgeStatus(c) === 'AKAN_EXPIRED');
@@ -104,16 +139,108 @@ export const ReminderView: React.FC = () => {
     });
   };
 
-  const handleConfirmSendEmail = () => {
-    if (emailModalData.cert && emailModalData.owner) {
+  const handleConfirmSendEmail = async () => {
+    const cert = emailModalData.cert;
+    const owner = emailModalData.owner;
+    if (!cert) return;
+
+    setSending(true);
+    setSendError(null);
+    try {
+      const result = await reminderApi.send({ certIds: [cert.ID_SERTIFIKASI] });
+      if (result.sent === 0) {
+        const detail = result.results[0]?.error;
+        throw new Error(
+          detail ||
+            'Sertifikat ini belum masuk periode reminder H-90 hari, sudah pernah dikirim, atau email pegawai kosong.'
+        );
+      }
       addAuditLog(
         'KIRIM_EMAIL_REMINDER',
-        `Notifikasi email pengingat kedaluwarsa terkirim ke ${emailModalData.owner.EMAIL_PERSONIL} untuk Sertifikat ${emailModalData.cert.NO_SERTIFIKAT}`
+        `Notifikasi email pengingat kedaluwarsa terkirim ke ${owner?.EMAIL_PERSONIL || '-'} untuk Sertifikat ${cert.NO_SERTIFIKAT}${
+          result.dryRun ? ' (dry-run)' : ''
+        }`
       );
-      setEmailModalData(prev => ({ ...prev, sentSuccess: true }));
+      setEmailModalData(prev => ({ ...prev, sentSuccess: true, previewUrl: result.results[0]?.previewUrl }));
       setTimeout(() => {
         setEmailModalData({ isOpen: false });
       }, 1500);
+      refreshServerStatus();
+    } catch (error) {
+      setSendError(error instanceof Error ? error.message : 'Gagal mengirim email.');
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleSendAllDue = async () => {
+    setSending(true);
+    setSendError(null);
+    setBulkInfo(null);
+    setBulkPreview(null);
+    try {
+      const result = await reminderApi.send({});
+      const failed = result.failed > 0 ? `, ${result.failed} gagal` : '';
+      const preview = result.results.find(r => r.previewUrl)?.previewUrl || null;
+      setBulkPreview(preview);
+      setBulkInfo(
+        result.sent > 0
+          ? `${result.sent} email reminder terkirim${failed}${result.dryRun ? ' (mode dry-run: file .eml disimpan di server/data/outbox)' : result.results[0]?.mode === 'ethereal' ? ' (mode Ethereal: buka link preview)' : ''}.`
+          : 'Tidak ada sertifikat yang masuk periode reminder H-90 hari saat ini.'
+      );
+      addAuditLog('KIRIM_EMAIL_REMINDER_MASSAL', `Kirim reminder otomatis: ${result.sent} terkirim${failed}`);
+      refreshServerStatus();
+    } catch (error) {
+      setSendError(error instanceof Error ? error.message : 'Gagal mengirim email massal.');
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handlePreviewH90 = async () => {
+    setSending(true);
+    setSendError(null);
+    setSimInfo(null);
+    setSimPreviewUrl(null);
+    setSimPreviewList([]);
+    try {
+      const result = await reminderApi.preview(simDate);
+      setSimPreviewList(result.pending);
+      setSimInfo(
+        result.total > 0
+          ? `Simulasi ${result.simulatedDate}: ${result.total} sertifikat masuk jendela H-${result.reminderDays} hari.`
+          : `Simulasi ${result.simulatedDate}: tidak ada sertifikat yang masuk jendela H-${result.reminderDays} hari.`
+      );
+    } catch (error) {
+      setSendError(error instanceof Error ? error.message : 'Gagal memuat preview H-90.');
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleSendH90 = async () => {
+    setSending(true);
+    setSendError(null);
+    setSimInfo(null);
+    setSimPreviewUrl(null);
+    setSimPreviewList([]);
+    try {
+      const result = await reminderApi.send({ date: simDate });
+      const failed = result.failed > 0 ? `, ${result.failed} gagal` : '';
+      setSimInfo(
+        result.sent > 0
+          ? `Simulasi ${simDate}: ${result.sent} email terkirim${failed}${
+              result.results[0]?.mode === 'ethereal' ? ' (Ethereal, buka link preview)' : ''
+            }.`
+          : `Simulasi ${simDate}: tidak ada sertifikat yang masuk jendela H-90 hari.`
+      );
+      setSimPreviewUrl(result.results.find(r => r.previewUrl)?.previewUrl || null);
+      addAuditLog('UJI_REMINDER_H90', `Simulasi H-90 tanggal ${simDate}: ${result.sent} email terkirim${failed}`);
+      refreshServerStatus();
+    } catch (error) {
+      setSendError(error instanceof Error ? error.message : 'Gagal mengirim simulasi H-90.');
+    } finally {
+      setSending(false);
     }
   };
 
@@ -185,6 +312,166 @@ export const ReminderView: React.FC = () => {
           </p>
         </div>
       </div>
+
+      {/* STATUS LAYANAN EMAIL OTOMATIS H-90 HARI */}
+      <div
+        className={`p-4 rounded-2xl border flex flex-col lg:flex-row lg:items-center justify-between gap-3 ${
+          serverOnline === false
+            ? 'bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900'
+            : serverHealth?.mailer.mode === 'smtp'
+              ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900'
+              : 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900'
+        }`}
+      >
+        <div className="flex items-start gap-3">
+          <div
+            className={`p-2.5 rounded-xl font-bold shadow ${
+              serverOnline === false
+                ? 'bg-rose-600 text-white'
+                : serverHealth?.mailer.mode === 'smtp'
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-amber-500 text-slate-950'
+            }`}
+          >
+            {serverOnline === false ? <ServerOff className="w-5 h-5" /> : <Mail className="w-5 h-5" />}
+          </div>
+          <div>
+            <div className="text-sm font-bold text-gray-900 dark:text-white">
+              Reminder Email Otomatis H-{serverHealth?.reminderDays ?? 90} Hari
+            </div>
+            <p className="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+              {serverOnline === false
+                ? 'Server email belum aktif. Jalankan "npm run server" (atau "npm run dev:full") agar pengiriman otomatis berjalan.'
+                : serverHealth?.mailer.mode === 'dry-run'
+                  ? 'Mode DRY RUN: email tidak dikirim sungguhan, hasilnya disimpan sebagai file .eml di server/data/outbox. Isi SMTP di .env untuk kirim nyata.'
+                  : serverHealth?.mailer.mode === 'ethereal'
+                    ? `Mode ETHEREAL: email dikirim lewat SMTP uji (${serverHealth.mailer.host}). Buka link preview untuk melihat isi email yang terkirim.`
+                    : `SMTP aktif melalui ${serverHealth?.mailer.host}. Cron harian ${serverHealth?.cron.schedule} (${serverHealth?.cron.timezone})${
+                        serverHealth?.auto?.enabled
+                          ? `, plus cek otomatis tiap ${serverHealth.auto.intervalMinutes} menit dan saat server start`
+                          : ''
+                      }.`}
+              {serverOnline !== false && serverHealth
+                ? ` Terakhir kirim: ${serverHealth.lastRun.at ? `${serverHealth.lastRun.sent} email` : 'belum ada'}.`
+                : ''}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={refreshServerStatus}
+            disabled={sending}
+            className="p-2 rounded-xl bg-white/70 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 hover:bg-white transition disabled:opacity-50"
+            title="Segarkan status server email"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+          <button
+            onClick={handleSendAllDue}
+            disabled={sending || serverOnline === false}
+            className="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold text-[11px] rounded-xl shadow flex items-center gap-1.5 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {sending ? <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-400" /> : <Send className="w-3.5 h-3.5 text-amber-400" />}
+            <span>{sending ? 'Mengirim...' : 'Kirim Semua Reminder Jatuh Tempo'}</span>
+          </button>
+        </div>
+      </div>
+
+      {serverHealth && serverHealth.mailer.mode !== 'smtp' && (
+        <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="flex items-center gap-2">
+            <CalendarDays className="w-4 h-4 text-blue-700 dark:text-blue-400" />
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white">Uji Jendela H-90 (Simulasi Tanggal)</h3>
+          </div>
+          <p className="text-[11px] text-gray-500 dark:text-gray-400">
+            Pilih tanggal untuk melihat sertifikat mana yang akan masuk periode reminder H-90 pada tanggal tersebut.
+            Tombol kirim hanya tersedia saat mode dry-run/Ethereal.
+          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              type="date"
+              value={simDate}
+              onChange={event => setSimDate(event.target.value)}
+              className="px-3 py-2 rounded-xl border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-semibold text-gray-800 dark:text-gray-100"
+            />
+            <button
+              onClick={handlePreviewH90}
+              disabled={sending || !simDate}
+              className="px-3 py-2 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-800 dark:text-gray-100 font-bold text-[11px] rounded-xl border border-gray-200 dark:border-slate-700 transition disabled:opacity-50"
+            >
+              Lihat Preview
+            </button>
+            <button
+              onClick={handleSendH90}
+              disabled={sending || !simDate || serverOnline === false}
+              className="px-3 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold text-[11px] rounded-xl shadow flex items-center gap-1.5 transition disabled:opacity-50"
+            >
+              {sending ? <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-400" /> : <Send className="w-3.5 h-3.5 text-amber-400" />}
+              <span>Kirim Simulasi</span>
+            </button>
+          </div>
+          {simInfo && <div className="text-[11px] font-bold text-blue-800 dark:text-blue-300">{simInfo}</div>}
+          {simPreviewUrl && (
+            <a
+              href={simPreviewUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[11px] font-bold underline text-blue-800 dark:text-blue-300"
+            >
+              Buka preview email simulasi
+            </a>
+          )}
+          {simPreviewList.length > 0 && (
+            <div className="max-h-52 overflow-auto rounded-xl border border-gray-200 dark:border-slate-800">
+              <table className="w-full text-[11px]">
+                <thead className="bg-gray-50 dark:bg-slate-800 text-gray-500 dark:text-gray-400">
+                  <tr>
+                    <th className="text-left px-2 py-1.5">Nama</th>
+                    <th className="text-left px-2 py-1.5">Jenis</th>
+                    <th className="text-left px-2 py-1.5">Kedaluwarsa</th>
+                    <th className="text-right px-2 py-1.5">Sisa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {simPreviewList.map(item => (
+                    <tr key={item.key} className="border-t border-gray-100 dark:border-slate-800 text-gray-700 dark:text-gray-200">
+                      <td className="px-2 py-1.5 font-semibold">{item.nama}</td>
+                      <td className="px-2 py-1.5">{item.jenis}</td>
+                      <td className="px-2 py-1.5">{item.tanggalExpired}</td>
+                      <td className="px-2 py-1.5 text-right font-bold text-amber-700 dark:text-amber-400">{item.daysLeft} hari</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
+
+      {bulkInfo && (
+        <div className="p-3 bg-emerald-100 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300 font-bold rounded-xl text-center text-xs flex flex-col items-center justify-center gap-2">
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5" /> {bulkInfo}
+          </span>
+          {bulkPreview && (
+            <a
+              href={bulkPreview}
+              target="_blank"
+              rel="noreferrer"
+              className="underline font-bold text-blue-800 dark:text-blue-300"
+            >
+              Buka preview email terkirim
+            </a>
+          )}
+        </div>
+      )}
+
+      {sendError && (
+        <div className="p-3 bg-rose-100 text-rose-900 dark:bg-rose-950/40 dark:text-rose-300 font-bold rounded-xl text-center text-xs flex items-center justify-center gap-2">
+          <XCircle className="w-5 h-5" /> {sendError}
+        </div>
+      )}
 
       {/* SUMMARY BANNER CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -272,7 +559,7 @@ export const ReminderView: React.FC = () => {
                       <td className="p-3 font-mono text-rose-600 dark:text-rose-400 font-bold">{s.TANGGAL_EXPIRED}</td>
                       <td className="p-3">
                         <span className="px-2 py-0.5 text-[10px] font-bold rounded bg-rose-100 text-rose-800 border border-rose-300">
-                          🔴 EXPIRED
+                          ðŸ”´ EXPIRED
                         </span>
                       </td>
                       <td className="p-3 text-center">
@@ -345,7 +632,7 @@ export const ReminderView: React.FC = () => {
                             className="px-2 py-0.5 text-[10px] font-bold rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 flex items-center gap-1 shadow-sm"
                             title="Sudah Memiliki Sertifikat"
                           >
-                            ✓ {cert}
+                            âœ“ {cert}
                           </span>
                         ))}
 
@@ -356,7 +643,7 @@ export const ReminderView: React.FC = () => {
                             className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-amber-50 text-amber-900 dark:bg-amber-950/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 flex items-center gap-1"
                             title="Belum Memiliki Sertifikat"
                           >
-                            ⚪ {cert}
+                            âšª {cert}
                           </span>
                         ))}
                       </div>
@@ -389,7 +676,7 @@ export const ReminderView: React.FC = () => {
       <Modal
         isOpen={emailModalData.isOpen}
         onClose={() => setEmailModalData({ isOpen: false })}
-        title="Simulasi Kirim Email Reminder Expiry"
+        title="Kirim Email Reminder Expiry"
         maxWidth="md"
       >
         <div className="space-y-4">
@@ -421,9 +708,27 @@ export const ReminderView: React.FC = () => {
             <p className="mt-1">Mohon segera mendaftar perpanjangan pelatihan melalui Divisi HRD / K3LH PT ANTAM Tbk.</p>
           </div>
 
+          {serverHealth?.mailer.dryRun && (
+            <div className="p-2 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 rounded-xl text-[11px] font-semibold text-amber-800 dark:text-amber-300 text-center">
+              Mode DRY RUN aktif: email disimpan sebagai file .eml, belum dikirim lewat SMTP.
+            </div>
+          )}
+
           {emailModalData.sentSuccess && (
-            <div className="p-3 bg-emerald-100 text-emerald-800 font-bold rounded-xl text-center flex items-center justify-center gap-2 animate-bounce">
-              <CheckCircle2 className="w-5 h-5" /> Notifikasi Email Berhasil Terkirim!
+            <div className="p-3 bg-emerald-100 text-emerald-800 font-bold rounded-xl text-center flex flex-col items-center justify-center gap-1 animate-bounce">
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" /> Email Reminder Berhasil Diproses!
+              </span>
+              {emailModalData.previewUrl && (
+                <a
+                  href={emailModalData.previewUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline text-[11px] text-blue-800"
+                >
+                  Buka preview email
+                </a>
+              )}
             </div>
           )}
 
@@ -436,10 +741,11 @@ export const ReminderView: React.FC = () => {
             </button>
             <button
               onClick={handleConfirmSendEmail}
-              className="px-5 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow flex items-center gap-1.5"
+              disabled={sending || emailModalData.sentSuccess}
+              className="px-5 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Send className="w-4 h-4 text-amber-400" />
-              <span>Kirim Sekarang</span>
+              {sending ? <Loader2 className="w-4 h-4 text-amber-400 animate-spin" /> : <Send className="w-4 h-4 text-amber-400" />}
+              <span>{sending ? 'Mengirim...' : 'Kirim Sekarang'}</span>
             </button>
           </div>
         </div>
@@ -447,3 +753,4 @@ export const ReminderView: React.FC = () => {
     </div>
   );
 };
+

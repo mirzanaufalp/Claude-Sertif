@@ -1,9 +1,11 @@
 node_modules/
 dist/
 venv/
+.venv/
 __pycache__/
 *.pyc
 src-tauri/target/
 Sertifikasi-Karyawan-win32-x64/
 .env
+server/data/
 .DS_Store

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   MstKategori,
   MstLookup,
@@ -16,6 +16,8 @@ import {
   INITIAL_PELATIHAN,
   INITIAL_SERTIFIKASI,
 } from '../data/initialData';
+import { reminderApi } from '../lib/api';
+import { migrateLegacyData } from '../lib/excelImport';
 
 interface AppContextType {
   role: UserRole;
@@ -32,6 +34,9 @@ interface AppContextType {
   personilList: TrxPersonil[];
   pelatihanList: TrxPelatihan[];
   sertifikasiList: TrxSertifikasi[];
+  setPersonilList: React.Dispatch<React.SetStateAction<TrxPersonil[]>>;
+  setPelatihanList: React.Dispatch<React.SetStateAction<TrxPelatihan[]>>;
+  setSertifikasiList: React.Dispatch<React.SetStateAction<TrxSertifikasi[]>>;
   auditLogs: AuditLog[];
 
   // CRUD Operations
@@ -64,7 +69,43 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+/** Versi skema data. Naikkan nilai ini untuk memaksa reset data lama di browser. */
+const DATA_VERSION = '2026-11-12-seed-excel';
+
+/** Baca localStorage / data sampel, lalu rapikan ID & isi tanggal pelatihan yang masih kosong. */
+function loadInitialData() {
+  const storedVersion = localStorage.getItem('sertif_data_version');
+  if (storedVersion !== DATA_VERSION) {
+    localStorage.removeItem('sertif_personil');
+    localStorage.removeItem('sertif_pelatihan');
+    localStorage.removeItem('sertif_sertifikasi');
+    localStorage.setItem('sertif_data_version', DATA_VERSION);
+  }
+
+  const readList = <T,>(key: string, fallback: T[]): T[] => {
+    const saved = localStorage.getItem(key);
+    if (!saved) return fallback;
+    try {
+      return JSON.parse(saved) as T[];
+    } catch {
+      return fallback;
+    }
+  };
+
+  const rawPersonil = readList<TrxPersonil>('sertif_personil', INITIAL_PERSONIL);
+  const rawPelatihan = readList<TrxPelatihan>('sertif_pelatihan', INITIAL_PELATIHAN);
+  const rawSertifikasi = readList<TrxSertifikasi>('sertif_sertifikasi', INITIAL_SERTIFIKASI).map(s => ({
+    ...s,
+    JENIS_SERTIFIKASI: s.JENIS_SERTIFIKASI === 'PPP' ? 'POP' : s.JENIS_SERTIFIKASI,
+    NO_SERTIFIKAT: s.NO_SERTIFIKAT ? s.NO_SERTIFIKAT.replace(/PPP/g, 'POP') : s.NO_SERTIFIKAT,
+    DOK_SERTIFIKAT: s.DOK_SERTIFIKAT ? s.DOK_SERTIFIKAT.replace(/ppp/g, 'pop') : s.DOK_SERTIFIKAT,
+  }));
+
+  return migrateLegacyData(rawPersonil, rawPelatihan, rawSertifikasi);
+}
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [initialData] = useState(loadInitialData);
   const [role, setRole] = useState<UserRole>('Administrator');
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('sertif_dark_mode');
@@ -82,26 +123,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return data.map(l => (l.KODE === 'PPP' ? { ...l, KODE: 'POP' } : l));
   });
 
-  const [personilList, setPersonilList] = useState<TrxPersonil[]>(() => {
-    const saved = localStorage.getItem('sertif_personil');
-    return saved ? JSON.parse(saved) : INITIAL_PERSONIL;
-  });
+  const [personilList, setPersonilList] = useState<TrxPersonil[]>(initialData.personilList);
 
-  const [pelatihanList, setPelatihanList] = useState<TrxPelatihan[]>(() => {
-    const saved = localStorage.getItem('sertif_pelatihan');
-    return saved ? JSON.parse(saved) : INITIAL_PELATIHAN;
-  });
+  const [pelatihanList, setPelatihanList] = useState<TrxPelatihan[]>(initialData.pelatihanList);
 
-  const [sertifikasiList, setSertifikasiList] = useState<TrxSertifikasi[]>(() => {
-    const saved = localStorage.getItem('sertif_sertifikasi');
-    const data: TrxSertifikasi[] = saved ? JSON.parse(saved) : INITIAL_SERTIFIKASI;
-    return data.map(s => ({
-      ...s,
-      JENIS_SERTIFIKASI: s.JENIS_SERTIFIKASI === 'PPP' ? 'POP' : s.JENIS_SERTIFIKASI,
-      NO_SERTIFIKAT: s.NO_SERTIFIKAT ? s.NO_SERTIFIKAT.replace(/PPP/g, 'POP') : s.NO_SERTIFIKAT,
-      DOK_SERTIFIKAT: s.DOK_SERTIFIKAT ? s.DOK_SERTIFIKAT.replace(/ppp/g, 'pop') : s.DOK_SERTIFIKAT,
-    }));
-  });
+  const [sertifikasiList, setSertifikasiList] = useState<TrxSertifikasi[]>(initialData.sertifikasiList);
+
+  useEffect(() => {
+    if (initialData.changed) {
+      localStorage.setItem('sertif_personil', JSON.stringify(initialData.personilList));
+      localStorage.setItem('sertif_pelatihan', JSON.stringify(initialData.pelatihanList));
+      localStorage.setItem('sertif_sertifikasi', JSON.stringify(initialData.sertifikasiList));
+    }
+  }, []);
 
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>(() => {
     const saved = localStorage.getItem('sertif_audit_logs');
@@ -146,6 +180,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     localStorage.setItem('sertif_audit_logs', JSON.stringify(auditLogs));
   }, [auditLogs]);
+
+  // Kirim salinan data ke backend email agar cron H-90 hari punya data terbaru
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      reminderApi
+        .sync({ personilList, pelatihanList, sertifikasiList })
+        .catch(() => {
+          // Backend email opsional; abaikan bila tidak dijalankan
+        });
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [personilList, pelatihanList, sertifikasiList]);
 
   const addAuditLog = (action: string, details: string) => {
     const newLog: AuditLog = {
@@ -317,6 +363,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         personilList,
         pelatihanList,
         sertifikasiList,
+        setPersonilList,
+        setPelatihanList,
+        setSertifikasiList,
         auditLogs,
         addPersonil, updatePersonil, deletePersonil,
         addPelatihan, updatePelatihan, deletePelatihan,
@@ -339,3 +388,4 @@ export const useApp = () => {
   }
   return context;
 };
+

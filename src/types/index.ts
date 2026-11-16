@@ -21,12 +21,15 @@ export interface TrxPersonil {
   JENIS_PEGAWAI: string; // Lookup Code
   EMAIL_PERSONIL: string;
   FOTO_PERSONIL: string;
+  STATUS_PERSONIL?: 'AKTIF' | 'NONAKTIF';
 }
 
 export interface TrxPelatihan {
   ID_PELATIHAN: string;
   ID_PERSONIL: string;
   JENIS_PELATIHAN: string; // Lookup Code (POP, POM, POU, SMKP, CP)
+  NAMA_PELATIHAN?: string;
+  PENYELENGGARA?: string;
   TANGGAL_MULAI: string;
   TANGGAL_SELESAI: string;
   STATUS_PELATIHAN: 'BELUM' | 'BERJALAN' | 'SELESAI';

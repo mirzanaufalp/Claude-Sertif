@@ -329,8 +329,7 @@ def halaman_dashboard():
         fig_bar = go.Figure(data=[go.Bar(
             x=div_labels,
             y=div_vals,
-            marker_color="#1e3a8a",
-            borderRadius=4
+            marker=dict(color="#1e3a8a", cornerradius=4)
         )])
         fig_bar.update_layout(
             height=280,
@@ -338,7 +337,7 @@ def halaman_dashboard():
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color="#334155"),
-            yaxis=dict(showgrid=True, gridcolor="#f1f5f9", allowzero=True, dtick=1)
+            yaxis=dict(showgrid=True, gridcolor="#f1f5f9", rangemode="tozero", dtick=1)
         )
         st.plotly_chart(fig_bar, use_container_width=True, config={"displayModeBar": False})
         st.markdown('</div>', unsafe_allow_html=True)
@@ -364,7 +363,7 @@ def halaman_dashboard():
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color="#334155"),
-            yaxis=dict(showgrid=True, gridcolor="#f1f5f9", allowzero=True)
+            yaxis=dict(showgrid=True, gridcolor="#f1f5f9", rangemode="tozero")
         )
         st.plotly_chart(fig_line, use_container_width=True, config={"displayModeBar": False})
         st.markdown('</div>', unsafe_allow_html=True)

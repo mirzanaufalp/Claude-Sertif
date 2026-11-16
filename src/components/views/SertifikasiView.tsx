@@ -222,25 +222,28 @@ export const SertifikasiView: React.FC = () => {
       sortable: true,
       cell: s => {
         // Format tanggal terbit (Terbit: - jika kosong)
-        const tglTerbit = s.TANGGAL_MULAI && s.TANGGAL_MULAI.trim() !== '' 
-          ? s.TANGGAL_MULAI.trim() 
-          : '-';
+        const tglTerbit = s.TANGGAL_MULAI
+          ? s.TANGGAL_MULAI
+          : 'belum ada data';
 
-        // Format tanggal expired (Expired: - jika kosong)
-        const tglExpired = s.TANGGAL_EXPIRED && s.TANGGAL_EXPIRED.trim() !== '' 
-          ? s.TANGGAL_EXPIRED.trim() 
-          : '-';
+        // Format tanggal expired (Expired: belum ada data jika kosong)
+        const tglExpired = s.TANGGAL_EXPIRED
+          ? s.TANGGAL_EXPIRED
+          : 'belum ada data';
 
         const days = calculateDaysRemaining(s.TANGGAL_EXPIRED);
 
         return (
           <div className="text-[11px] space-y-0.5">
             <div>
-              Terbit: <span className="font-semibold text-gray-700 dark:text-gray-300">{tglTerbit}</span>
+              Terbit:{' '}
+              <span className={`font-semibold ${s.TANGGAL_MULAI ? 'text-gray-700 dark:text-gray-300' : 'text-gray-400 italic'}`}>
+                {tglTerbit}
+              </span>
             </div>
             <div>
               Expired:{' '}
-              <span className="font-semibold text-gray-900 dark:text-white">
+              <span className={`font-semibold ${s.TANGGAL_EXPIRED ? 'text-gray-900 dark:text-white' : 'text-gray-400 italic'}`}>
                 {tglExpired}
               </span>
             </div>
