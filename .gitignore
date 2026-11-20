@@ -8,4 +8,6 @@ src-tauri/target/
 Sertifikasi-Karyawan-win32-x64/
 .env
 server/data/
+email-preview*.html
+email-preview*.png
 .DS_Store

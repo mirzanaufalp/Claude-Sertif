@@ -83,6 +83,19 @@ export function mailerStatus() {
   };
 }
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+const PORTAL_URL = /^https?:\/\//i.test(APP_BASE_URL) && !APP_BASE_URL.includes('localhost')
+  ? APP_BASE_URL
+  : '';
+
 export function buildReminderMail(reminders) {
   const first = reminders[0];
   const { owner, daysLeft } = first;
@@ -102,48 +115,56 @@ export function buildReminderMail(reminders) {
 
   const subject =
     count === 1
-      ? `[Reminder H-${REMINDER_DAYS} Hari] Sertifikat ${certRows[0].jenis} ${owner.NAMA} berakhir ${certRows[0].expiry}`
-      : `[Reminder H-${REMINDER_DAYS} Hari] ${count} sertifikat ${owner.NAMA} mendekati kedaluwarsa`;
+      ? `[Reminder H-${REMINDER_DAYS} Hari] Sertifikat ${certRows[0].jenis} berakhir ${certRows[0].expiry}`
+      : `[Reminder H-${REMINDER_DAYS} Hari] ${count} sertifikat Anda segera berakhir`;
+
+  const nearest = certRows[0];
+  const intro =
+    count === 1
+      ? `Sertifikat berikut akan berakhir dalam waktu kurang dari ${REMINDER_DAYS} hari.`
+      : `${count} sertifikat berikut akan berakhir dalam waktu kurang dari ${REMINDER_DAYS} hari.`;
 
   const textLines = [
     `Yth. ${owner.NAMA},`,
     '',
-    count === 1
-      ? `Sertifikat ${certRows[0].jenis} Anda akan berakhir dalam periode H-${REMINDER_DAYS} hari.`
-      : `Ada ${count} sertifikat Anda yang akan berakhir dalam periode H-${REMINDER_DAYS} hari.`,
+    intro,
     '',
-    ...certRows.flatMap(row => [
-      `- ${row.jenis}`,
-      `  No. Sertifikat : ${row.no}`,
-      `  Kedaluwarsa    : ${row.expiry}`,
-      `  Sisa waktu     : ${row.daysLeft} hari`,
+    ...certRows.flatMap((row, index) => [
+      `${index + 1}. ${row.jenis}`,
+      `   Nomor sertifikat : ${row.no}`,
+      `   Berlaku sampai   : ${row.expiry}`,
+      `   Sisa waktu       : ${row.daysLeft} hari`,
       '',
     ]),
-    'Mohon segera mengajukan perpanjangan melalui Divisi HRD / K3LH PT ANTAM Tbk.',
-    `Portal: ${APP_BASE_URL}`,
+    'Langkah selanjutnya:',
+    '1. Ajukan perpanjangan sertifikat ke Divisi HRD / K3LH PT ANTAM Tbk.',
+    '2. Siapkan dokumen pendukung dan jadwal asesmen ulang bila diperlukan.',
+    ...(PORTAL_URL ? ['', `Portal sertifikasi: ${PORTAL_URL}`] : []),
     '',
     'Email ini dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.',
   ];
 
   const certCards = certRows
     .map(
-      row => `
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;border:1px solid #e2e8f0;border-left:4px solid #f59e0b;border-radius:10px;margin:0 0 12px">
+      (row, index) => `
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border:1px solid #e2e8f0;border-left:4px solid #f59e0b;border-radius:10px;margin:0 0 12px;border-collapse:separate">
           <tr>
             <td style="padding:12px 14px;font-family:Arial,Helvetica,sans-serif">
-              <div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:8px">${row.jenis}</div>
-              <div style="font-size:13px;line-height:1.8;color:#334155">
-                <span style="color:#64748b">No. Sertifikat:</span>
-                <strong style="color:#0f172a;word-break:break-all">${row.no}</strong>
-              </div>
-              <div style="font-size:13px;line-height:1.8;color:#334155">
-                <span style="color:#64748b">Kedaluwarsa:</span>
-                <strong style="color:#be123c">${row.expiry}</strong>
-              </div>
-              <div style="font-size:13px;line-height:1.8;color:#334155">
-                <span style="color:#64748b">Sisa waktu:</span>
-                <strong style="color:#b45309">${row.daysLeft} hari lagi</strong>
-              </div>
+              <div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:8px">${index + 1}. ${escapeHtml(row.jenis)}</div>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.7;color:#334155">
+                <tr>
+                  <td style="padding:1px 0;color:#64748b;width:38%">Nomor sertifikat</td>
+                  <td style="padding:1px 0;color:#0f172a;font-weight:700;word-break:break-all">${escapeHtml(row.no)}</td>
+                </tr>
+                <tr>
+                  <td style="padding:1px 0;color:#64748b">Berlaku sampai</td>
+                  <td style="padding:1px 0;color:#be123c;font-weight:700">${escapeHtml(row.expiry)}</td>
+                </tr>
+                <tr>
+                  <td style="padding:1px 0;color:#64748b">Sisa waktu</td>
+                  <td style="padding:1px 0;color:#b45309;font-weight:700">${row.daysLeft} hari lagi</td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>`
@@ -171,19 +192,27 @@ export function buildReminderMail(reminders) {
             </tr>
             <tr>
               <td style="padding:20px 18px">
-                <p style="margin:0 0 10px;font-size:14px;line-height:1.6;color:#0f172a">Yth. <strong>${owner.NAMA}</strong>,</p>
-                <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#334155">
-                  ${
-                    count === 1
-                      ? `Sertifikat <strong>${certRows[0].jenis}</strong> Anda akan berakhir dalam`
-                      : `<strong>${count} sertifikat</strong> Anda akan berakhir dalam periode`
-                  }
-                  <strong style="color:#b45309">H-${REMINDER_DAYS} hari</strong>. Berikut rinciannya:
-                </p>
+                <p style="margin:0 0 4px;font-size:14px;line-height:1.6;color:#0f172a">Yth. <strong>${escapeHtml(owner.NAMA)}</strong>,</p>
+                <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#334155">${escapeHtml(intro)}</p>
+                <div style="margin:0 0 14px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;font-size:12px;line-height:1.6;color:#92400e">
+                  Sertifikat terdekat berakhir <strong>${escapeHtml(nearest.expiry)}</strong>
+                  &mdash; sisa <strong>${nearest.daysLeft} hari</strong>.
+                </div>
                 ${certCards}
-                <p style="margin:16px 0 0;font-size:14px;line-height:1.6;color:#334155">
-                  Mohon segera mengajukan perpanjangan melalui Divisi HRD / K3LH PT ANTAM Tbk.
-                </p>
+                <div style="margin:16px 0 0;padding:12px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px">
+                  <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px">Langkah selanjutnya</div>
+                  <ol style="margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:#334155">
+                    <li>Ajukan perpanjangan sertifikat ke Divisi HRD / K3LH PT ANTAM Tbk.</li>
+                    <li>Siapkan dokumen pendukung dan jadwal asesmen ulang bila diperlukan.</li>
+                  </ol>
+                </div>
+                ${
+                  PORTAL_URL
+                    ? `<div style="margin-top:14px">
+                  <a href="${escapeHtml(PORTAL_URL)}" style="display:inline-block;padding:10px 16px;background:#1e3a8a;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border-radius:8px">Buka Portal Sertifikasi</a>
+                </div>`
+                    : ''
+                }
                 <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:11px;line-height:1.6;color:#64748b">
                   Email ini dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.
                 </div>
@@ -196,6 +225,7 @@ export function buildReminderMail(reminders) {
   </div>
 </body>
 </html>`;
+
 
   return { subject, text: textLines.join('\n'), html };
 }
@@ -256,16 +286,73 @@ export async function sendReminderEmail(reminder) {
 export async function sendTestEmail(to) {
   const { transporter, mode } = await getTransporter();
   const kode = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
+  const waktu = new Date().toLocaleString('id-ID', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+    timeZone: 'Asia/Jakarta',
+  });
+  const text =
+    `Tes pengiriman email SIM-K3 Mining BERHASIL.\n\n` +
+    `Kode uji     : ${kode}\n` +
+    `Waktu kirim  : ${waktu} WIB\n` +
+    `Dikirim ke   : ${to}\n` +
+    `Dari         : ${MAIL_FROM}\n` +
+    `Mode         : ${mode}\n\n` +
+    `Ini hanya email tes. Email reminder produksi berisi daftar sertifikat yang\n` +
+    `akan berakhir dalam ${REMINDER_DAYS} hari, lengkap dengan nomor sertifikat,\n` +
+    `tanggal berakhir, dan sisa waktu.\n\n` +
+    `Kalau email ini tidak masuk Inbox, cek folder Spam, Promotions, dan All Mail.`;
+  const html = `<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tes Email SIM-K3 Mining</title>
+</head>
+<body style="margin:0;padding:0;background:#eef2f7">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#eef2f7;border-collapse:collapse">
+    <tr>
+      <td align="center" style="padding:16px 12px">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px;table-layout:fixed;background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif">
+          <tr>
+            <td style="background:#1e3a8a;padding:18px 20px">
+              <div style="font-size:11px;letter-spacing:2px;color:#fbbf24;font-weight:700">SIM-K3 MINING</div>
+              <div style="font-size:17px;line-height:1.35;font-weight:700;color:#ffffff;margin-top:4px">Tes Pengiriman Email</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px 18px">
+              <div style="margin:0 0 14px;padding:10px 12px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:10px;font-size:13px;line-height:1.6;color:#065f46">
+                <strong>Koneksi email berhasil.</strong> Email tes ini sampai ke tujuan.
+              </div>
+              <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#334155">
+                Ini hanya email tes. Email reminder produksi berisi daftar sertifikat yang akan berakhir dalam
+                <strong>${REMINDER_DAYS} hari</strong>, lengkap dengan nomor sertifikat, tanggal berakhir, dan sisa waktu.
+              </p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border:1px solid #e2e8f0;border-radius:10px;border-collapse:collapse;font-size:13px;line-height:1.8;color:#334155">
+                <tr><td style="padding:8px 12px;color:#64748b;width:35%">Kode uji</td><td style="padding:8px 12px;font-weight:700;color:#0f172a">${escapeHtml(kode)}</td></tr>
+                <tr><td style="padding:8px 12px;color:#64748b">Waktu kirim</td><td style="padding:8px 12px;color:#0f172a">${escapeHtml(waktu)} WIB</td></tr>
+                <tr><td style="padding:8px 12px;color:#64748b">Dikirim ke</td><td style="padding:8px 12px;color:#0f172a;word-break:break-all">${escapeHtml(to)}</td></tr>
+                <tr><td style="padding:8px 12px;color:#64748b">Dari</td><td style="padding:8px 12px;color:#0f172a;word-break:break-all">${escapeHtml(MAIL_FROM)}</td></tr>
+              </table>
+              <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:11px;line-height:1.6;color:#64748b">
+                Kalau email ini tidak masuk Inbox, cek folder Spam, Promotions, dan All Mail.<br>
+                Dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
   const info = await transporter.sendMail({
     from: MAIL_FROM,
     to,
     subject: `[SIM-K3 Mining] Tes email reminder ${kode}`,
-    text:
-      `Konfigurasi email reminder berhasil.\n\n` +
-      `Kode uji : ${kode}\n` +
-      `Mode     : ${mode}\n` +
-      `Pengirim : ${MAIL_FROM}\n\n` +
-      `Kalau email ini tidak masuk Inbox, cek folder Spam, Promotions, dan All Mail.`,
+    text,
+    html,
   });
   console.log(`[mail] kode uji: ${kode}`);
 

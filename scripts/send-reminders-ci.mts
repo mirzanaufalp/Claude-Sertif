@@ -75,10 +75,14 @@ if (forceCertId) {
     console.error(`[ci] ${forceCertId} tidak punya TANGGAL_EXPIRED yang valid`);
     process.exit(1);
   }
+  // Opsi uji: kirim template reminder ke alamat arbitrer tanpa mengubah data Excel.
+  const overrideEmail = String(process.env.TEST_REMINDER_EMAIL || '').trim();
+  const penerima = overrideEmail ? { ...owner, EMAIL_PERSONIL: overrideEmail } : owner;
+
   const item = {
     key: `${cert.ID_SERTIFIKASI}|${cert.TANGGAL_EXPIRED}`,
     cert,
-    owner,
+    owner: penerima,
     pelatihan,
     daysLeft: daysBetween(new Date(), expiry),
   };

@@ -187,7 +187,8 @@ Setup sekali:
 3. Buka tab **Actions** → **Email Reminder H-90** → **Run workflow** untuk tes.
 4. Untuk memastikan SMTP benar-benar terkirim, **Run workflow** dengan input
    `test_email` = alamat tujuan. Untuk melihat template reminder tanpa menunggu
-   H-90, isi `force_cert_id`, mis. `SERT_9217_POP` (tidak menandai sent-log).
+   H-90, isi `force_cert_id`, mis. `SERT_9217_POP`, dan `test_reminder_email`
+   = alamat tujuan uji (tidak menandai sent-log, tidak mengubah Excel).
 5. Kalau log workflow muncul `535 BadCredentials`, App Password sudah salah atau
    di-revoke. Buat yang baru di https://myaccount.google.com/apppasswords lalu
    perbarui secret `SMTP_PASS`. Cek kredensial lokal tanpa mengirim email:
