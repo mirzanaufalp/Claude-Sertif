@@ -709,7 +709,7 @@ export const ReminderView: React.FC = () => {
                       <td className="p-3 font-mono text-rose-600 dark:text-rose-400 font-bold">{s.TANGGAL_EXPIRED}</td>
                       <td className="p-3">
                         <span className="px-2 py-0.5 text-[10px] font-bold rounded bg-rose-100 text-rose-800 border border-rose-300">
-                          ðŸ”´ EXPIRED
+                          EXPIRED
                         </span>
                       </td>
                       <td className="p-3 text-center">
