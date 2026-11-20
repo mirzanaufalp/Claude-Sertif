@@ -188,6 +188,14 @@ Setup sekali:
 4. Untuk memastikan SMTP benar-benar terkirim, **Run workflow** dengan input
    `test_email` = alamat tujuan. Untuk melihat template reminder tanpa menunggu
    H-90, isi `force_cert_id`, mis. `SERT_9217_POP` (tidak menandai sent-log).
+5. Kalau log workflow muncul `535 BadCredentials`, App Password sudah salah atau
+   di-revoke. Buat yang baru di https://myaccount.google.com/apppasswords lalu
+   perbarui secret `SMTP_PASS`. Cek kredensial lokal tanpa mengirim email:
+   ```
+   npm run email:verify
+   ```
+   Hasil `OK` berarti kredensial `.env` valid; hasil `GAGAL` berarti App Password
+   harus diganti.
 
 Reminder production hanya membaca sertifikasi dari Excel di repo. Perubahan yang
 dilakukan lewat UI di browser tersimpan di `localStorage` masing-masing dan

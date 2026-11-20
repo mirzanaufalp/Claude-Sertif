@@ -10,7 +10,8 @@
     "server": "node server/index.js",
     "email:test": "node server/test-email.js",
     "email:gmail": "node server/setup-gmail.js",
-    "dev:full": "concurrently -n WEB,MAIL -c cyan,magenta \"npm:dev\" \"npm:server\""
+    "dev:full": "concurrently -n WEB,MAIL -c cyan,magenta \"npm:dev\" \"npm:server\"",
+    "email:verify": "tsx scripts/verify-smtp.mts"
   },
   "dependencies": {
     "cors": "^2.8.5",

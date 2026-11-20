@@ -18,11 +18,27 @@ console.log(`[ci] mode=${status.mode} reminderDays=${REMINDER_DAYS} from=${statu
 
 const pending = getDueReminders().filter(item => !item.alreadySentAt);
 
+function gagalKirim(label: string, error: any): never {
+  const detail = error?.response || error?.message || String(error);
+  console.error(`[ci] ${label} GAGAL: ${detail}`);
+  if (String(detail).includes('535') || error?.code === 'EAUTH') {
+    console.error(
+      '[ci] Kredensial SMTP ditolak Gmail. Buat App Password baru di ' +
+        'https://myaccount.google.com/apppasswords lalu perbarui secret SMTP_PASS.'
+    );
+  }
+  process.exit(1);
+}
+
 // Mode uji dari tab Actions: kirim email tes ke alamat tertentu.
 const testEmail = String(process.env.TEST_EMAIL || '').trim();
 if (testEmail) {
-  const result = await sendTestEmail(testEmail);
-  console.log(`[ci] email tes terkirim ke ${result.to} (mode ${result.mode}, id ${result.messageId || '-'})`);
+  try {
+    const result = await sendTestEmail(testEmail);
+    console.log(`[ci] email tes terkirim ke ${result.to} (mode ${result.mode}, id ${result.messageId || '-'})`);
+  } catch (error) {
+    gagalKirim('email tes', error);
+  }
   process.exit(0);
 }
 
@@ -54,9 +70,13 @@ if (forceCertId) {
     pelatihan,
     daysLeft: daysBetween(new Date(), expiry),
   };
-  const result = await sendReminderEmailGroup([item], { markSent: false });
-  console.log(`[ci] uji reminder ${forceCertId} -> ${result.to}: ${result.subject}`);
-  console.log('[ci] sent-log tidak diubah, jadi reminder asli tetap akan terkirim saat waktunya tiba');
+  try {
+    const result = await sendReminderEmailGroup([item], { markSent: false });
+    console.log(`[ci] uji reminder ${forceCertId} -> ${result.to}: ${result.subject}`);
+    console.log('[ci] sent-log tidak diubah, jadi reminder asli tetap akan terkirim saat waktunya tiba');
+  } catch (error) {
+    gagalKirim(`uji reminder ${forceCertId}`, error);
+  }
   process.exit(0);
 }
 
