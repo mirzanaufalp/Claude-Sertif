@@ -15,9 +15,11 @@ import {
   RefreshCw,
   ServerOff,
   CalendarDays,
+  Download,
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { API_ENABLED, reminderApi, ServerHealth, ReminderPreviewItem } from '../../lib/api';
+import { downloadEmailData } from '../../lib/emailDataExport';
 
 function formatTanggal(iso?: string) {
   if (!iso) return 'belum ada data';
@@ -327,6 +329,14 @@ export const ReminderView: React.FC = () => {
             Monitoring otomatis sertifikat kedaluwarsa, sisa hari &lt;90 hari, dan analisis sertifikasi wajib pegawai.
           </p>
         </div>
+        <button
+          onClick={() => downloadEmailData(personilList, pelatihanList, sertifikasiList)}
+          title="Simpan ke root repo sebagai email-data.json, lalu commit+push agar email memakai data web ini"
+          className="shrink-0 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-[11px] rounded-xl flex items-center gap-2 shadow"
+        >
+          <Download className="w-4 h-4 text-amber-400" />
+          Unduh Data Email
+        </button>
       </div>
 
       {!API_ENABLED && (
@@ -342,6 +352,8 @@ export const ReminderView: React.FC = () => {
               <p className="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                 Pengiriman dijalankan GitHub Actions setiap hari pukul 08:00 WIB. Tombol kirim manual
                 tidak tersedia di domain Vercel karena backend Express tidak di-deploy di sana.
+                Klik <strong>Unduh Data Email</strong>, simpan sebagai <code>email-data.json</code> di root repo,
+                lalu commit + push agar email memakai data yang sama dengan web ini.
               </p>
             </div>
           </div>

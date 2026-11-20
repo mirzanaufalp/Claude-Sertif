@@ -209,9 +209,32 @@ Run manual pada **Email Reminder H-90** tanpa input sekarang akan gagal dengan
 pesan `Run manual tanpa input` — sebelumnya terlihat sukses padahal tidak ada
 email yang dikirim.
 
-Reminder production hanya membaca sertifikasi dari Excel di repo. Perubahan yang
-dilakukan lewat UI di browser tersimpan di `localStorage` masing-masing dan
-**tidak** sampai ke GitHub Actions.
+### Menyamakan data email dengan data di web
+
+Data web tersimpan di `localStorage` browser, sedangkan GitHub Actions tidak bisa
+membacanya. Jembatannya adalah file `email-data.json`:
+
+1. Buka halaman **Reminder** di web, klik **Unduh Data Email**.
+2. Simpan file `email-data.json` di root repo ini (satu folder dengan
+   `package.json`).
+3. Commit dan push:
+   ```
+   git add email-data.json
+   git commit -m "data email dari web"
+   git push
+   ```
+
+Kalau file itu ada, script GitHub Actions memakai isinya apa adanya; data email
+akan sama dengan yang tampil di web saat file diunduh. Kalau file tidak ada,
+script kembali memakai seed dari `DB_Sertifikasi HSE.xlsx`.
+
+Log workflow menampilkan sumber yang dipakai:
+```
+[ci] sumber data: email-data.json (unduhan web 2026-11-20T...)
+```
+
+Setiap kali data di web berubah dan ingin dipakai untuk email, ulangi unduh →
+commit → push. File lama ditimpa.
 
 Excel sumber tidak punya kolom nomor sertifikat. Nomor tidak dikarang: UI dan
 email menampilkan `belum ada data` bila kolom kosong. Email uji memakai template

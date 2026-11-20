@@ -2,16 +2,46 @@
 // Data diambil dari src/data/seedFromExcel.ts (hasil parse DB_Sertifikasi HSE.xlsx).
 // Jalankan: npx tsx scripts/send-reminders-ci.mts
 import 'dotenv/config';
+import fs from 'node:fs';
 import { SEED_PERSONIL, SEED_PELATIHAN, SEED_SERTIFIKASI } from '../src/data/seedFromExcel.ts';
 import { saveStore } from '../server/store.js';
 import { getDueReminders, parseDate, daysBetween, REMINDER_DAYS } from '../server/reminders.js';
 import { mailerStatus, sendReminderEmailGroup } from '../server/mailer.js';
 
+// `email-data.json` diunduh dari web (tombol "Unduh Data Email") dan di-commit ke
+// root repo. Kalau ada, isinya dipakai apa adanya supaya email = data yang tampil
+// di web. Kalau tidak ada, fallback ke seed hasil parse Excel.
+const DATA_FILE = 'email-data.json';
+let dataSumber = 'seedFromExcel.ts (DB_Sertifikasi HSE.xlsx)';
+let PERSONIL: any[] = SEED_PERSONIL;
+let PELATIHAN: any[] = SEED_PELATIHAN;
+let SERTIFIKASI: any[] = SEED_SERTIFIKASI;
+
+if (fs.existsSync(DATA_FILE)) {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    if (Array.isArray(parsed.personilList) && Array.isArray(parsed.pelatihanList) && Array.isArray(parsed.sertifikasiList)) {
+      PERSONIL = parsed.personilList;
+      PELATIHAN = parsed.pelatihanList;
+      SERTIFIKASI = parsed.sertifikasiList;
+      dataSumber = `${DATA_FILE} (unduhan web ${parsed.generatedAt || 'tanpa tanggal'})`;
+    } else {
+      console.warn(`[ci] ${DATA_FILE} tidak berisi personilList/pelatihanList/sertifikasiList; pakai seed Excel`);
+    }
+  } catch (error: any) {
+    console.warn(`[ci] gagal membaca ${DATA_FILE}: ${error.message}; pakai seed Excel`);
+  }
+}
+
 saveStore({
-  personilList: SEED_PERSONIL,
-  pelatihanList: SEED_PELATIHAN,
-  sertifikasiList: SEED_SERTIFIKASI,
+  personilList: PERSONIL,
+  pelatihanList: PELATIHAN,
+  sertifikasiList: SERTIFIKASI,
 });
+
+console.log(
+  `[ci] sumber data: ${dataSumber} | personil=${PERSONIL.length} pelatihan=${PELATIHAN.length} sertifikasi=${SERTIFIKASI.length}`
+);
 
 const status = mailerStatus();
 console.log(`[ci] event=${process.env.GITHUB_EVENT_NAME || 'lokal'} mode=${status.mode} reminderDays=${REMINDER_DAYS} from=${status.from}`);
@@ -45,13 +75,13 @@ if (isManual && !testEmail && !String(process.env.FORCE_CERT_ID || '').trim() &&
 }
 
 function buatItemUji(cert: any, keEmail: string) {
-  const pelatihan = SEED_PELATIHAN.find(item => String(item.ID_PELATIHAN) === String(cert.ID_PELATIHAN));
+  const pelatihan = PELATIHAN.find(item => String(item.ID_PELATIHAN) === String(cert.ID_PELATIHAN));
   // Cocokkan ID personil secara persis. Jangan pakai `includes`, karena ID pendek
   // bisa ikut cocok dengan sertifikat milik orang lain.
   const idDariSertifikat = String(cert.ID_SERTIFIKASI).match(/^SERT_(.+)_(POP|POM|POU|SMKP|CP)$/)?.[1];
   const owner =
-    SEED_PERSONIL.find(item => String(item.ID_PERSONIL) === String(pelatihan?.ID_PERSONIL)) ||
-    SEED_PERSONIL.find(item => String(item.ID_PERSONIL) === String(idDariSertifikat || ''));
+    PERSONIL.find(item => String(item.ID_PERSONIL) === String(pelatihan?.ID_PERSONIL)) ||
+    PERSONIL.find(item => String(item.ID_PERSONIL) === String(idDariSertifikat || ''));
   const expiry = parseDate(cert.TANGGAL_EXPIRED);
   if (!owner || !expiry) return null;
   return {
@@ -68,14 +98,14 @@ function buatItemUji(cert: any, keEmail: string) {
 function pilihContoh() {
   const forceCertId = String(process.env.FORCE_CERT_ID || '').trim();
   if (forceCertId) {
-    const cert = SEED_SERTIFIKASI.find(item => item.ID_SERTIFIKASI === forceCertId);
+    const cert = SERTIFIKASI.find(item => item.ID_SERTIFIKASI === forceCertId);
     if (!cert) {
-      console.error(`[ci] sertifikat "${forceCertId}" tidak ditemukan di seedFromExcel.ts`);
+      console.error(`[ci] sertifikat "${forceCertId}" tidak ditemukan di sumber data aktif (${dataSumber})`);
       process.exit(1);
     }
     return cert;
   }
-  const kandidat = SEED_SERTIFIKASI.map(cert => ({ cert, expiry: parseDate(cert.TANGGAL_EXPIRED) }))
+  const kandidat = SERTIFIKASI.map(cert => ({ cert, expiry: parseDate(cert.TANGGAL_EXPIRED) }))
     .filter(item => item.expiry)
     .sort(
       (a, b) =>
