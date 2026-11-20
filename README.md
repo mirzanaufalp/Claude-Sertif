@@ -163,6 +163,37 @@ itu ke `SMTP_PASS` (bukan password akun). Cek juga folder Spam/Promotions.
 dikirim sungguhan, hasilnya disimpan sebagai file `.eml` di
 `server/data/outbox/` untuk diperiksa.
 
+### Produksi di Vercel (email lewat GitHub Actions)
+
+Vercel hanya menjalankan frontend statis (`vercel.json`: `npm run build` → `dist`).
+Express + cron di `server/` **tidak** ikut ter-deploy, jadi pengiriman email
+production dijalankan oleh workflow GitHub Actions:
+
+`.github/workflows/email-reminder.yml`
+- Jadwal `0 1 * * *` UTC = **08:00 WIB** setiap hari.
+- Bisa dijalankan manual: tab **Actions** → **Email Reminder H-90** → **Run workflow**.
+- Membaca `DB_Sertifikasi HSE.xlsx` dari repo, regenerate `seedFromExcel.ts`,
+  lalu mengirim satu email per pegawai untuk sertifikat dalam jendela H-90.
+- `sent-log.json` disimpan sebagai cache Actions agar sertifikat yang sama tidak
+  dikirim ulang.
+
+Setup sekali:
+
+1. Repo → **Settings** → **Secrets and variables** → **Actions** → **Secrets**:
+   - `SMTP_USER` = alamat Gmail pengirim
+   - `SMTP_PASS` = Gmail App Password 16 digit
+2. Opsional, tab **Variables**:
+   - `APP_BASE_URL` = URL production, mis. `https://claude-sertif.vercel.app`
+3. Buka tab **Actions** → **Email Reminder H-90** → **Run workflow** untuk tes.
+
+Catatan:
+- Kalau cache Actions kedaluwarsa/dibersihkan, `sent-log.json` hilang dan
+  reminder yang masih di jendela H-90 bisa terkirim ulang. Jalankan manual
+  setelah mengubah data untuk memastikan.
+- Panel status server di UI akan menampilkan "server email belum aktif" di
+  domain Vercel karena memang tidak ada backend di sana. Pengiriman tetap
+  berjalan dari GitHub Actions.
+
 ### Endpoint
 
 | Method | Endpoint | Fungsi |

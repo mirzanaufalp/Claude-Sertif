@@ -1,0 +1,64 @@
+name: Email Reminder H-90
+
+on:
+  # GitHub Actions cron memakai UTC. 01:00 UTC = 08:00 WIB.
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: email-reminder-h90
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      REMINDER_DAYS: '90'
+      DRY_RUN: '0'
+      ETHEREAL: '0'
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: '587'
+      SMTP_SECURE: 'false'
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      MAIL_FROM: SIM-K3 Mining <${{ secrets.SMTP_USER }}>
+      APP_BASE_URL: ${{ vars.APP_BASE_URL }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # sent-log berisi kunci "ID_SERTIFIKASI|tanggal expired" + timestamp.
+      # Dicache agar sertifikat yang sama tidak dikirim ulang tiap hari.
+      - name: Restore sent log
+        uses: actions/cache@v4
+        with:
+          path: server/data/sent-log.json
+          key: sent-log-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            sent-log-
+
+      - name: Pastikan sent-log ada
+        run: |
+          mkdir -p server/data
+          if [ ! -f server/data/sent-log.json ]; then echo '{}' > server/data/sent-log.json; fi
+
+      - name: Regenerate seed dari Excel
+        run: npx tsx generate_seed_excel.mts
+
+      - name: Kirim reminder H-90
+        run: npx tsx scripts/send-reminders-ci.mts
