@@ -18,6 +18,10 @@ on:
         description: 'Alamat tujuan uji template reminder (opsional, dipakai bersama force_cert_id)'
         required: false
         type: string
+      test_reminder_nama:
+        description: 'Nama di salam email uji (opsional)'
+        required: false
+        type: string
 
 concurrency:
   group: email-reminder-h90
@@ -44,6 +48,7 @@ jobs:
       TEST_EMAIL: ${{ inputs.test_email }}
       FORCE_CERT_ID: ${{ inputs.force_cert_id }}
       TEST_REMINDER_EMAIL: ${{ inputs.test_reminder_email }}
+      TEST_REMINDER_NAMA: ${{ inputs.test_reminder_nama }}
 
     steps:
       - name: Checkout repo

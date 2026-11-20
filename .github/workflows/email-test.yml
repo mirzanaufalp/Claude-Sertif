@@ -7,6 +7,10 @@ on:
         description: 'Alamat email tujuan (wajib diisi)'
         required: true
         type: string
+      nama:
+        description: 'Nama di salam email (opsional)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -25,6 +29,7 @@ jobs:
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       MAIL_FROM: SIM-K3 Mining <${{ secrets.SMTP_USER }}>
       TEST_EMAIL: ${{ inputs.to }}
+      TEST_REMINDER_NAMA: ${{ inputs.nama }}
 
     steps:
       - name: Checkout repo

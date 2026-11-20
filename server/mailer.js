@@ -108,7 +108,9 @@ export function buildReminderMail(reminders, options = {}) {
   const { owner } = first;
   const count = reminders.length;
   const testTo = String(options.testTo || '').trim();
-  const sapaan = testTo || owner.NAMA;
+  const sapaan = testTo
+    ? String(options.sapaanUji || '').trim() || testTo
+    : owner.NAMA;
 
   const certRows = reminders
     .map(r => {
@@ -128,62 +130,35 @@ export function buildReminderMail(reminders, options = {}) {
       : `[Reminder H-${REMINDER_DAYS} Hari] ${count} sertifikat Anda segera berakhir`;
   const subject = testTo ? `[UJI] ${baseSubject}` : baseSubject;
 
-  const nearest = certRows[0];
-  const intro =
+  const pembuka =
     count === 1
-      ? `Sertifikat berikut akan berakhir dalam waktu kurang dari ${REMINDER_DAYS} hari.`
-      : `${count} sertifikat berikut akan berakhir dalam waktu kurang dari ${REMINDER_DAYS} hari.`;
+      ? `Sertifikat ${certRows[0].jenis} Anda akan berakhir dalam H-${REMINDER_DAYS} hari.`
+      : `${count} sertifikat Anda akan berakhir dalam H-${REMINDER_DAYS} hari.`;
 
   const textLines = [
     `Yth. ${sapaan},`,
     '',
-    ...(testTo
-      ? [
-          'INI ADALAH EMAIL UJI. Sertifikat di bawah adalah contoh dari data Excel, bukan data Anda.',
-          '',
-        ]
-      : []),
-    intro,
+    pembuka,
     '',
-    ...certRows.flatMap((row, index) => [
-      `${index + 1}. ${row.jenis}`,
-      `   Nomor sertifikat : ${row.no}`,
-      `   Berlaku sampai   : ${row.expiry}`,
-      `   Sisa waktu       : ${row.daysLeft} hari`,
-      '',
-    ]),
-    'Langkah selanjutnya:',
-    '1. Ajukan perpanjangan sertifikat ke Divisi HRD / K3LH PT ANTAM Tbk.',
-    '2. Siapkan dokumen pendukung dan jadwal asesmen ulang bila diperlukan.',
+    'JENIS | NO. SERTIFIKAT | KEDALUWARSA | SISA',
+    ...certRows.map(row => `${row.jenis} | ${row.no} | ${row.expiry} | ${row.daysLeft} hari`),
+    '',
+    'Mohon segera mengajukan perpanjangan melalui Divisi HRD / K3LH PT ANTAM Tbk.',
     ...(PORTAL_URL ? ['', `Portal sertifikasi: ${PORTAL_URL}`] : []),
     '',
-    'Email ini dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.',
+    'Email ini dikirim otomatis oleh SIM-K3 Mining.',
+    ...(testTo ? ['Email ini adalah contoh uji, bukan pemberitahuan resmi.'] : []),
   ];
 
-  const certCards = certRows
+  const certRowsHtml = certRows
     .map(
-      (row, index) => `
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border:1px solid #e2e8f0;border-left:4px solid #f59e0b;border-radius:10px;margin:0 0 12px;border-collapse:separate">
-          <tr>
-            <td style="padding:12px 14px;font-family:Arial,Helvetica,sans-serif">
-              <div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:8px">${index + 1}. ${escapeHtml(row.jenis)}</div>
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;font-size:13px;line-height:1.7;color:#334155">
-                <tr>
-                  <td style="padding:1px 0;color:#64748b;width:38%">Nomor sertifikat</td>
-                  <td style="padding:1px 0;color:#0f172a;font-weight:700;word-break:break-all">${escapeHtml(row.no)}</td>
-                </tr>
-                <tr>
-                  <td style="padding:1px 0;color:#64748b">Berlaku sampai</td>
-                  <td style="padding:1px 0;color:#be123c;font-weight:700">${escapeHtml(row.expiry)}</td>
-                </tr>
-                <tr>
-                  <td style="padding:1px 0;color:#64748b">Sisa waktu</td>
-                  <td style="padding:1px 0;color:#b45309;font-weight:700">${row.daysLeft} hari lagi</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>`
+      row => `
+              <tr>
+                <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;font-size:12px;color:#475569;word-break:break-word">${escapeHtml(row.jenis)}</td>
+                <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;font-size:12px;font-weight:700;color:#0f172a;word-break:break-all">${escapeHtml(row.no)}</td>
+                <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;font-size:12px;font-weight:700;color:#be123c">${escapeHtml(row.expiry)}</td>
+                <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;font-size:12px;font-weight:700;color:#b45309;text-align:right;white-space:nowrap">${row.daysLeft} hari</td>
+              </tr>`
     )
     .join('');
 
@@ -208,36 +183,37 @@ export function buildReminderMail(reminders, options = {}) {
             </tr>
             <tr>
               <td style="padding:20px 18px">
-                <p style="margin:0 0 4px;font-size:14px;line-height:1.6;color:#0f172a">Yth. <strong>${escapeHtml(sapaan)}</strong>,</p>
-                ${
-                  testTo
-                    ? `<div style="margin:10px 0 14px;padding:10px 12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;font-size:12px;line-height:1.6;color:#1e40af">
-                  <strong>Email uji.</strong> Sertifikat di bawah adalah contoh dari data Excel, bukan data Anda.
-                </div>`
-                    : ''
-                }
-                <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#334155">${escapeHtml(intro)}</p>
-                <div style="margin:0 0 14px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;font-size:12px;line-height:1.6;color:#92400e">
-                  Sertifikat terdekat berakhir <strong>${escapeHtml(nearest.expiry)}</strong>
-                  &mdash; sisa <strong>${nearest.daysLeft} hari</strong>.
-                </div>
-                ${certCards}
-                <div style="margin:16px 0 0;padding:12px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px">
-                  <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px">Langkah selanjutnya</div>
-                  <ol style="margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:#334155">
-                    <li>Ajukan perpanjangan sertifikat ke Divisi HRD / K3LH PT ANTAM Tbk.</li>
-                    <li>Siapkan dokumen pendukung dan jadwal asesmen ulang bila diperlukan.</li>
-                  </ol>
-                </div>
+                <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#0f172a">Yth. ${escapeHtml(sapaan)},</p>
+                <p style="margin:0 0 18px;font-size:14px;line-height:1.6;color:#334155">
+                  ${
+                    count === 1
+                      ? `Sertifikat <strong style="color:#0f172a">${escapeHtml(certRows[0].jenis)}</strong> Anda akan berakhir dalam`
+                      : `<strong style="color:#0f172a">${count} sertifikat</strong> Anda akan berakhir dalam`
+                  }
+                  <strong style="color:#b45309">H-${REMINDER_DAYS} hari</strong>.
+                </p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;table-layout:fixed">
+                  <tr>
+                    <td style="padding:0 0 8px;font-size:10px;letter-spacing:0.5px;color:#94a3b8;font-weight:700;width:15%">JENIS</td>
+                    <td style="padding:0 0 8px;font-size:10px;letter-spacing:0.5px;color:#94a3b8;font-weight:700;width:37%">NO. SERTIFIKAT</td>
+                    <td style="padding:0 0 8px;font-size:10px;letter-spacing:0.5px;color:#94a3b8;font-weight:700;width:30%">KEDALUWARSA</td>
+                    <td style="padding:0 0 8px;font-size:10px;letter-spacing:0.5px;color:#94a3b8;font-weight:700;width:18%;text-align:right">SISA</td>
+                  </tr>
+                  ${certRowsHtml}
+                </table>
+                <p style="margin:18px 0 0;font-size:14px;line-height:1.6;color:#334155">
+                  Mohon segera mengajukan perpanjangan melalui Divisi HRD / K3LH PT ANTAM Tbk.
+                </p>
                 ${
                   PORTAL_URL
-                    ? `<div style="margin-top:14px">
-                  <a href="${escapeHtml(PORTAL_URL)}" style="display:inline-block;padding:10px 16px;background:#1e3a8a;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border-radius:8px">Buka Portal Sertifikasi</a>
-                </div>`
+                    ? `<p style="margin:10px 0 0;font-size:12px;line-height:1.6;color:#1e3a8a">
+                  <a href="${escapeHtml(PORTAL_URL)}" style="color:#1e3a8a;text-decoration:underline">Buka Portal Sertifikasi</a>
+                </p>`
                     : ''
                 }
-                <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:11px;line-height:1.6;color:#64748b">
-                  Email ini dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.
+                <div style="margin-top:18px;font-size:11px;line-height:1.6;color:#94a3b8">
+                  Email ini dikirim otomatis oleh SIM-K3 Mining.
+                  ${testTo ? '<br>Email ini adalah contoh uji, bukan pemberitahuan resmi.' : ''}
                 </div>
               </td>
             </tr>
@@ -248,7 +224,6 @@ export function buildReminderMail(reminders, options = {}) {
   </div>
 </body>
 </html>`;
-
 
   return { subject, text: textLines.join('\n'), html };
 }

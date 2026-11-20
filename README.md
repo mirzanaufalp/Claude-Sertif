@@ -185,10 +185,12 @@ Setup sekali:
 2. Opsional, tab **Variables**:
    - `APP_BASE_URL` = URL production, mis. `https://claude-sertif.vercel.app`
 3. Buka tab **Actions** → **Email Reminder H-90** → **Run workflow** untuk tes.
-4. Untuk memastikan SMTP benar-benar terkirim, **Run workflow** dengan input
-   `test_email` = alamat tujuan. Untuk melihat template reminder tanpa menunggu
-   H-90, isi `force_cert_id`, mis. `SERT_9217_POP`, dan `test_reminder_email`
-   = alamat tujuan uji (tidak menandai sent-log, tidak mengubah Excel).
+4. Untuk mencoba template reminder, **Run workflow** dengan input
+   `test_email` = alamat tujuan. Email yang dikirim memakai template produksi
+   yang sama (tabel JENIS / NO. SERTIFIKAT / KEDALUWARSA / SISA), berprefix
+   `[UJI]`. Isi `force_cert_id`, mis. `SERT_9217_POP`, untuk memilih sertifikat
+   tertentu, dan `test_reminder_nama` untuk nama di salam. Tidak menandai
+   sent-log, tidak mengubah Excel.
 5. Kalau log workflow muncul `535 BadCredentials`, App Password sudah salah atau
    di-revoke. Buat yang baru di https://myaccount.google.com/apppasswords lalu
    perbarui secret `SMTP_PASS`. Cek kredensial lokal tanpa mengirim email:
@@ -212,9 +214,9 @@ dilakukan lewat UI di browser tersimpan di `localStorage` masing-masing dan
 **tidak** sampai ke GitHub Actions.
 
 Excel sumber tidak punya kolom nomor sertifikat. Nomor tidak dikarang: UI dan
-email menampilkan `belum ada data` bila kolom kosong. Email uji dengan
-`force_cert_id` + `test_reminder_email` diberi prefix `[UJI]` dan banner agar
-salam ditujukan ke alamat uji, bukan ke nama pemilik sertifikat di Excel.
+email menampilkan `belum ada data` bila kolom kosong. Email uji memakai template
+reminder produksi dan diberi prefix `[UJI]`, dengan salam ke alamat/nama uji
+(`test_reminder_nama`), bukan ke pemilik sertifikat contoh di Excel.
 
 Catatan:
 - Kalau cache Actions kedaluwarsa/dibersihkan, `sent-log.json` hilang dan
