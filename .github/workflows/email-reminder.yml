@@ -5,6 +5,15 @@ on:
   schedule:
     - cron: '0 1 * * *'
   workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Kirim email tes ke alamat ini (opsional)'
+        required: false
+        type: string
+      force_cert_id:
+        description: 'Paksa kirim reminder satu sertifikat, mis. SERT_9217_POP (opsional)'
+        required: false
+        type: string
 
 concurrency:
   group: email-reminder-h90
@@ -28,6 +37,8 @@ jobs:
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       MAIL_FROM: SIM-K3 Mining <${{ secrets.SMTP_USER }}>
       APP_BASE_URL: ${{ vars.APP_BASE_URL }}
+      TEST_EMAIL: ${{ inputs.test_email }}
+      FORCE_CERT_ID: ${{ inputs.force_cert_id }}
 
     steps:
       - name: Checkout repo

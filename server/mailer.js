@@ -204,7 +204,7 @@ function safeFileName(value) {
   return String(value || 'reminder').replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120);
 }
 
-export async function sendReminderEmailGroup(reminders) {
+export async function sendReminderEmailGroup(reminders, options = {}) {
   const list = Array.isArray(reminders) ? reminders.filter(Boolean) : [];
   if (list.length === 0) throw new Error('Tidak ada reminder untuk dikirim.');
 
@@ -221,8 +221,9 @@ export async function sendReminderEmailGroup(reminders) {
 
   const { transporter, mode } = await getTransporter();
   const info = await transporter.sendMail(mail);
-  // Hanya mode SMTP nyata yang dicatat, agar uji dry-run/Ethereal tidak memblokir reminder produksi
-  if (mode === 'smtp') markSent(list.map(item => item.key));
+  // Hanya mode SMTP nyata yang dicatat, agar uji dry-run/Ethereal tidak memblokir reminder produksi.
+  // options.markSent=false dipakai untuk uji kirim dari workflow tanpa mengunci reminder asli.
+  if (mode === 'smtp' && options.markSent !== false) markSent(list.map(item => item.key));
 
   const certIds = list.map(item => item.cert.ID_SERTIFIKASI);
 

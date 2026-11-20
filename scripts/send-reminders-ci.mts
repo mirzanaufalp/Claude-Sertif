@@ -4,8 +4,8 @@
 import 'dotenv/config';
 import { SEED_PERSONIL, SEED_PELATIHAN, SEED_SERTIFIKASI } from '../src/data/seedFromExcel.ts';
 import { saveStore } from '../server/store.js';
-import { getDueReminders, REMINDER_DAYS } from '../server/reminders.js';
-import { mailerStatus, sendReminderEmailGroup } from '../server/mailer.js';
+import { getDueReminders, parseDate, daysBetween, REMINDER_DAYS } from '../server/reminders.js';
+import { mailerStatus, sendReminderEmailGroup, sendTestEmail } from '../server/mailer.js';
 
 saveStore({
   personilList: SEED_PERSONIL,
@@ -16,6 +16,50 @@ saveStore({
 const status = mailerStatus();
 console.log(`[ci] mode=${status.mode} reminderDays=${REMINDER_DAYS} from=${status.from}`);
 
+const pending = getDueReminders().filter(item => !item.alreadySentAt);
+
+// Mode uji dari tab Actions: kirim email tes ke alamat tertentu.
+const testEmail = String(process.env.TEST_EMAIL || '').trim();
+if (testEmail) {
+  const result = await sendTestEmail(testEmail);
+  console.log(`[ci] email tes terkirim ke ${result.to} (mode ${result.mode}, id ${result.messageId || '-'})`);
+  process.exit(0);
+}
+
+// Mode uji dari tab Actions: paksa kirim reminder satu sertifikat, tanpa menandai terkirim.
+const forceCertId = String(process.env.FORCE_CERT_ID || '').trim();
+if (forceCertId) {
+  const cert = SEED_SERTIFIKASI.find(item => item.ID_SERTIFIKASI === forceCertId);
+  if (!cert) {
+    console.error(`[ci] sertifikat "${forceCertId}" tidak ditemukan di seedFromExcel.ts`);
+    process.exit(1);
+  }
+  const pelatihan = SEED_PELATIHAN.find(item => String(item.ID_PELATIHAN) === String(cert.ID_PELATIHAN));
+  const owner =
+    SEED_PERSONIL.find(item => String(item.ID_PERSONIL) === String(pelatihan?.ID_PERSONIL)) ||
+    SEED_PERSONIL.find(item => cert.ID_SERTIFIKASI.includes(String(item.ID_PERSONIL)));
+  if (!owner?.EMAIL_PERSONIL) {
+    console.error(`[ci] pemilik/email untuk ${forceCertId} tidak ditemukan`);
+    process.exit(1);
+  }
+  const expiry = parseDate(cert.TANGGAL_EXPIRED);
+  if (!expiry) {
+    console.error(`[ci] ${forceCertId} tidak punya TANGGAL_EXPIRED yang valid`);
+    process.exit(1);
+  }
+  const item = {
+    key: `${cert.ID_SERTIFIKASI}|${cert.TANGGAL_EXPIRED}`,
+    cert,
+    owner,
+    pelatihan,
+    daysLeft: daysBetween(new Date(), expiry),
+  };
+  const result = await sendReminderEmailGroup([item], { markSent: false });
+  console.log(`[ci] uji reminder ${forceCertId} -> ${result.to}: ${result.subject}`);
+  console.log('[ci] sent-log tidak diubah, jadi reminder asli tetap akan terkirim saat waktunya tiba');
+  process.exit(0);
+}
+
 if (status.mode !== 'smtp') {
   console.error(
     '[ci] Mode email bukan SMTP. Isi repository secrets SMTP_USER dan SMTP_PASS, ' +
@@ -24,7 +68,6 @@ if (status.mode !== 'smtp') {
   process.exit(1);
 }
 
-const pending = getDueReminders().filter(item => !item.alreadySentAt);
 console.log(`[ci] sertifikat jatuh tempo H-${REMINDER_DAYS}: ${pending.length}`);
 
 if (pending.length === 0) {

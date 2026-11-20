@@ -185,6 +185,13 @@ Setup sekali:
 2. Opsional, tab **Variables**:
    - `APP_BASE_URL` = URL production, mis. `https://claude-sertif.vercel.app`
 3. Buka tab **Actions** → **Email Reminder H-90** → **Run workflow** untuk tes.
+4. Untuk memastikan SMTP benar-benar terkirim, **Run workflow** dengan input
+   `test_email` = alamat tujuan. Untuk melihat template reminder tanpa menunggu
+   H-90, isi `force_cert_id`, mis. `SERT_9217_POP` (tidak menandai sent-log).
+
+Reminder production hanya membaca sertifikasi dari Excel di repo. Perubahan yang
+dilakukan lewat UI di browser tersimpan di `localStorage` masing-masing dan
+**tidak** sampai ke GitHub Actions.
 
 Catatan:
 - Kalau cache Actions kedaluwarsa/dibersihkan, `sent-log.json` hilang dan
