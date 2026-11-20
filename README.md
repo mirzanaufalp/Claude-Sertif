@@ -1,6 +1,6 @@
 ﻿# SIM-K3 MINING v2.0
 
-Sistem Pendataan Sertifikasi K3 & Operasional Pertambangan (POP â€¢ POM â€¢ POU â€¢ SMPKP).
+Sistem Pendataan Sertifikasi K3 & Operasional Pertambangan (POP | POM | POU | SMPKP).
 Dibangun dengan Streamlit + CSS Custom + Plotly + SQLite.
 
 ## Fitur Utama

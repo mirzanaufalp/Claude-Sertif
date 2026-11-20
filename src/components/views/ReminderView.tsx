@@ -782,7 +782,7 @@ export const ReminderView: React.FC = () => {
                             className="px-2 py-0.5 text-[10px] font-bold rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 flex items-center gap-1 shadow-sm"
                             title="Sudah Memiliki Sertifikat"
                           >
-                            âœ“ {cert}
+                            <CheckCircle2 className="w-3 h-3" /> {cert}
                           </span>
                         ))}
 
@@ -793,7 +793,7 @@ export const ReminderView: React.FC = () => {
                             className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-amber-50 text-amber-900 dark:bg-amber-950/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 flex items-center gap-1"
                             title="Belum Memiliki Sertifikat"
                           >
-                            âšª {cert}
+                            <XCircle className="w-3 h-3" /> {cert}
                           </span>
                         ))}
                       </div>
