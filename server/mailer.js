@@ -306,8 +306,7 @@ export async function sendReminderEmail(reminder) {
   return sendReminderEmailGroup([reminder]);
 }
 
-export async function sendTestEmail(to) {
-  const { transporter, mode } = await getTransporter();
+export function buildTestMail(to, mode) {
   const kode = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
   const waktu = new Date().toLocaleString('id-ID', {
     dateStyle: 'long',
@@ -316,15 +315,22 @@ export async function sendTestEmail(to) {
   });
   const text =
     `Tes pengiriman email SIM-K3 Mining BERHASIL.\n\n` +
+    `Server SMTP menerima email ini untuk dikirim ke alamat tujuan.\n` +
+    `Ini email uji koneksi: tidak memakai data pegawai dan tidak mengubah catatan pengiriman.\n\n` +
     `Kode uji     : ${kode}\n` +
     `Waktu kirim  : ${waktu} WIB\n` +
     `Dikirim ke   : ${to}\n` +
     `Dari         : ${MAIL_FROM}\n` +
-    `Mode         : ${mode}\n\n` +
-    `Ini hanya email tes. Email reminder produksi berisi daftar sertifikat yang\n` +
-    `akan berakhir dalam ${REMINDER_DAYS} hari, lengkap dengan nomor sertifikat,\n` +
-    `tanggal berakhir, dan sisa waktu.\n\n` +
-    `Kalau email ini tidak masuk Inbox, cek folder Spam, Promotions, dan All Mail.`;
+    `Jalur        : ${mode}\n\n` +
+    `TENTANG EMAIL REMINDER PRODUKSI\n` +
+    `- Dikirim otomatis setiap hari pukul 08:00 WIB.\n` +
+    `- Berisi sertifikat yang berakhir dalam ${REMINDER_DAYS} hari: jenis sertifikat,\n` +
+    `  nomor sertifikat (bila tersedia di Excel), tanggal berakhir, dan sisa waktu.\n` +
+    `- Subjek berawalan "[Reminder H-${REMINDER_DAYS} Hari]".\n\n` +
+    `Kalau email ini masuk Inbox, jalur pengiriman produksi sudah siap.\n` +
+    `Kalau masuk Spam atau Promotions, tandai "Bukan spam" agar reminder berikutnya\n` +
+    `masuk Inbox.\n\n` +
+    `Email ini dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.`;
   const html = `<!DOCTYPE html>
 <html lang="id">
 <head>
@@ -346,20 +352,28 @@ export async function sendTestEmail(to) {
           <tr>
             <td style="padding:20px 18px">
               <div style="margin:0 0 14px;padding:10px 12px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:10px;font-size:13px;line-height:1.6;color:#065f46">
-                <strong>Koneksi email berhasil.</strong> Email tes ini sampai ke tujuan.
+                <strong>Server SMTP menerima email ini.</strong> Jalur pengiriman siap dipakai.
               </div>
-              <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#334155">
-                Ini hanya email tes. Email reminder produksi berisi daftar sertifikat yang akan berakhir dalam
-                <strong>${REMINDER_DAYS} hari</strong>, lengkap dengan nomor sertifikat, tanggal berakhir, dan sisa waktu.
+              <p style="margin:0 0 14px;font-size:13px;line-height:1.6;color:#475569">
+                Email uji koneksi. Tidak memakai data pegawai dan tidak mengubah catatan pengiriman.
               </p>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border:1px solid #e2e8f0;border-radius:10px;border-collapse:collapse;font-size:13px;line-height:1.8;color:#334155">
                 <tr><td style="padding:8px 12px;color:#64748b;width:35%">Kode uji</td><td style="padding:8px 12px;font-weight:700;color:#0f172a">${escapeHtml(kode)}</td></tr>
                 <tr><td style="padding:8px 12px;color:#64748b">Waktu kirim</td><td style="padding:8px 12px;color:#0f172a">${escapeHtml(waktu)} WIB</td></tr>
                 <tr><td style="padding:8px 12px;color:#64748b">Dikirim ke</td><td style="padding:8px 12px;color:#0f172a;word-break:break-all">${escapeHtml(to)}</td></tr>
                 <tr><td style="padding:8px 12px;color:#64748b">Dari</td><td style="padding:8px 12px;color:#0f172a;word-break:break-all">${escapeHtml(MAIL_FROM)}</td></tr>
+                <tr><td style="padding:8px 12px;color:#64748b">Jalur</td><td style="padding:8px 12px;color:#0f172a">${escapeHtml(mode)}</td></tr>
               </table>
+              <div style="margin:14px 0 0;padding:12px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px">
+                <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px">Email reminder produksi</div>
+                <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:#334155">
+                  <li>Dikirim otomatis tiap hari pukul <strong>08:00 WIB</strong>.</li>
+                  <li>Berisi sertifikat yang berakhir dalam <strong>${REMINDER_DAYS} hari</strong>: jenis, nomor sertifikat bila tersedia di Excel, tanggal berakhir, dan sisa waktu.</li>
+                  <li>Subjek berawalan <strong>[Reminder H-${REMINDER_DAYS} Hari]</strong>.</li>
+                </ul>
+              </div>
               <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:11px;line-height:1.6;color:#64748b">
-                Kalau email ini tidak masuk Inbox, cek folder Spam, Promotions, dan All Mail.<br>
+                Kalau email ini masuk Inbox, jalur pengiriman produksi sudah siap. Kalau masuk Spam atau Promotions, tandai <strong>Bukan spam</strong>.<br>
                 Dikirim otomatis oleh SIM-K3 Mining. Mohon tidak membalas email ini.
               </div>
             </td>
@@ -370,10 +384,16 @@ export async function sendTestEmail(to) {
   </table>
 </body>
 </html>`;
+  return { subject: `[SIM-K3 Mining] Tes email reminder ${kode}`, text, html, kode };
+}
+
+export async function sendTestEmail(to) {
+  const { transporter, mode } = await getTransporter();
+  const { subject, text, html, kode } = buildTestMail(to, mode);
   const info = await transporter.sendMail({
     from: MAIL_FROM,
     to,
-    subject: `[SIM-K3 Mining] Tes email reminder ${kode}`,
+    subject,
     text,
     html,
   });
