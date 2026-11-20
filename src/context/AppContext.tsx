@@ -18,6 +18,7 @@ import {
 } from '../data/initialData';
 import { API_ENABLED, reminderApi } from '../lib/api';
 import { migrateLegacyData } from '../lib/excelImport';
+import { hasGithubToken, syncEmailDataToGithub } from '../lib/githubSync';
 
 interface AppContextType {
   role: UserRole;
@@ -191,6 +192,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           // Backend email opsional; abaikan bila tidak dijalankan
         });
     }, 1200);
+    return () => clearTimeout(timer);
+  }, [personilList, pelatihanList, sertifikasiList]);
+
+  // Sumber email produksi = data web. Kalau token GitHub sudah diisi di panel
+  // Reminder, tulis email-data.json ke repo otomatis setiap data berubah.
+  useEffect(() => {
+    if (!hasGithubToken()) return;
+    const timer = setTimeout(() => {
+      syncEmailDataToGithub(personilList, pelatihanList, sertifikasiList).catch(() => {
+        // Status/errors ditampilkan di panel Reminder; jangan ganggu aplikasi.
+      });
+    }, 4000);
     return () => clearTimeout(timer);
   }, [personilList, pelatihanList, sertifikasiList]);
 

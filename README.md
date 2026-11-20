@@ -212,7 +212,26 @@ email yang dikirim.
 ### Menyamakan data email dengan data di web
 
 Data web tersimpan di `localStorage` browser, sedangkan GitHub Actions tidak bisa
-membacanya. Jembatannya adalah file `email-data.json`:
+membacanya. Jembatannya adalah file `email-data.json` di root repo.
+
+**Otomatis (disarankan, sekali setup)**
+
+1. Buat token GitHub: **Settings → Developer settings → Personal access tokens →
+   Fine-grained tokens → Generate new token**.
+2. Repository access: pilih `mirzanaufalp/Claude-Sertif`.
+   Permissions: **Contents: Read and write**. Masa berlaku bebas.
+3. Buka halaman **Reminder** di web, isi kolom **Sinkron Data ke GitHub** dengan
+   token itu (repo sudah terisi `mirzanaufalp/Claude-Sertif`), klik **Simpan**,
+   lalu **Sinkron Sekarang**. Status akan menampilkan `Berhasil: ...`.
+4. Setelah itu setiap perubahan personil/pelatihan/sertifikasi di web otomatis
+   menulis `email-data.json` ke repo (±4 detik setelah berubah). Tidak perlu
+   unduh/commit manual.
+
+Token hanya disimpan di `localStorage` browser itu sendiri dan dikirim langsung
+ke `api.github.com`. Jangan pakai token ini di komputer bersama; tombol **Hapus**
+menghilangkannya.
+
+**Manual (cadangan)**
 
 1. Buka halaman **Reminder** di web, klik **Unduh Data Email**.
 2. Simpan file `email-data.json` di root repo ini (satu folder dengan
@@ -225,16 +244,13 @@ membacanya. Jembatannya adalah file `email-data.json`:
    ```
 
 Kalau file itu ada, script GitHub Actions memakai isinya apa adanya; data email
-akan sama dengan yang tampil di web saat file diunduh. Kalau file tidak ada,
-script kembali memakai seed dari `DB_Sertifikasi HSE.xlsx`.
+akan sama dengan yang tampil di web. Kalau file tidak ada, script kembali memakai
+seed dari `DB_Sertifikasi HSE.xlsx`.
 
 Log workflow menampilkan sumber yang dipakai:
 ```
 [ci] sumber data: email-data.json (unduhan web 2026-11-20T...)
 ```
-
-Setiap kali data di web berubah dan ingin dipakai untuk email, ulangi unduh →
-commit → push. File lama ditimpa.
 
 Excel sumber tidak punya kolom nomor sertifikat. Nomor tidak dikarang: UI dan
 email menampilkan `belum ada data` bila kolom kosong. Email uji memakai template

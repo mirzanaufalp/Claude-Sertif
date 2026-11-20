@@ -20,6 +20,7 @@ import {
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { API_ENABLED, reminderApi, ServerHealth, ReminderPreviewItem } from '../../lib/api';
 import { downloadEmailData } from '../../lib/emailDataExport';
+import { clearGithubConfig, getGithubConfig, saveGithubConfig, syncEmailDataToGithub } from '../../lib/githubSync';
 
 function formatTanggal(iso?: string) {
   if (!iso) return 'belum ada data';
@@ -58,6 +59,10 @@ export const ReminderView: React.FC = () => {
   const [simInfo, setSimInfo] = useState<string | null>(null);
   const [simPreviewUrl, setSimPreviewUrl] = useState<string | null>(null);
   const [simPreviewList, setSimPreviewList] = useState<ReminderPreviewItem[]>([]);
+  const [githubToken, setGithubToken] = useState(() => getGithubConfig().token);
+  const [githubRepo, setGithubRepo] = useState(() => getGithubConfig().repo);
+  const [syncStatus, setSyncStatus] = useState('');
+  const [syncing, setSyncing] = useState(false);
 
   const refreshServerStatus = () => {
     if (!API_ENABLED) return;
@@ -316,6 +321,28 @@ export const ReminderView: React.FC = () => {
     },
   ];
 
+  const simpanKonfigurasiGithub = () => {
+    if (!githubToken.trim()) {
+      setSyncStatus('Token GitHub masih kosong.');
+      return;
+    }
+    saveGithubConfig(githubToken, githubRepo);
+    setSyncStatus('Token tersimpan di browser ini. Klik Sinkron Sekarang.');
+  };
+
+  const sinkronSekarang = async () => {
+    setSyncing(true);
+    try {
+      saveGithubConfig(githubToken, githubRepo);
+      const result = await syncEmailDataToGithub(personilList, pelatihanList, sertifikasiList);
+      setSyncStatus(`Berhasil: ${result.message} pukul ${result.updatedAt}.`);
+    } catch (error: any) {
+      setSyncStatus(`Gagal: ${error?.message || String(error)}`);
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header Bar */}
@@ -339,6 +366,69 @@ export const ReminderView: React.FC = () => {
         </button>
       </div>
 
+      {/* SINKRON DATA WEB -> GITHUB (sumber email produksi) */}
+      <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          <div>
+            <div className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <RefreshCw className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              Sinkron Data ke GitHub
+            </div>
+            <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 max-w-2xl leading-relaxed">
+              Email dikirim GitHub Actions dari <code>email-data.json</code> di repo. Isi token GitHub di sini —
+              data web akan otomatis tersimpan ke repo setiap kali berubah, tanpa unduh manual. Token hanya
+              disimpan di browser ini, bukan di server kami.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+            <input
+              type="password"
+              value={githubToken}
+              onChange={e => setGithubToken(e.target.value)}
+              placeholder="GitHub token (Contents: read & write)"
+              className="px-3 py-2 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white min-w-[240px]"
+            />
+            <input
+              value={githubRepo}
+              onChange={e => setGithubRepo(e.target.value)}
+              placeholder="owner/nama-repo"
+              className="px-3 py-2 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white min-w-[200px]"
+            />
+            <button
+              onClick={simpanKonfigurasiGithub}
+              className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-[11px] rounded-xl"
+            >
+              Simpan
+            </button>
+            <button
+              onClick={sinkronSekarang}
+              disabled={syncing}
+              className="px-3 py-2 bg-blue-900 hover:bg-blue-800 disabled:opacity-60 text-white font-bold text-[11px] rounded-xl flex items-center gap-2"
+            >
+              {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+              Sinkron Sekarang
+            </button>
+            {githubToken && (
+              <button
+                onClick={() => {
+                  clearGithubConfig();
+                  setGithubToken('');
+                  setSyncStatus('Token dihapus dari browser ini.');
+                }}
+                className="px-3 py-2 border border-rose-300 text-rose-600 font-bold text-[11px] rounded-xl"
+              >
+                Hapus
+              </button>
+            )}
+          </div>
+        </div>
+        {syncStatus && (
+          <div className="mt-3 text-[11px] text-gray-600 dark:text-gray-300 border-t border-slate-100 dark:border-slate-800 pt-2">
+            {syncStatus}
+          </div>
+        )}
+      </div>
+
       {!API_ENABLED && (
         <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-start gap-3">
@@ -352,8 +442,9 @@ export const ReminderView: React.FC = () => {
               <p className="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                 Pengiriman dijalankan GitHub Actions setiap hari pukul 08:00 WIB. Tombol kirim manual
                 tidak tersedia di domain Vercel karena backend Express tidak di-deploy di sana.
-                Klik <strong>Unduh Data Email</strong>, simpan sebagai <code>email-data.json</code> di root repo,
-                lalu commit + push agar email memakai data yang sama dengan web ini.
+                Isi panel <strong>Sinkron Data ke GitHub</strong> dengan token GitHub agar data web
+                otomatis masuk ke <code>email-data.json</code>. <strong>Unduh Data Email</strong>
+                hanya cadangan bila akan commit manual.
               </p>
             </div>
           </div>
