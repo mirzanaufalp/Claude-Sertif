@@ -255,12 +255,19 @@ export async function sendReminderEmail(reminder) {
 
 export async function sendTestEmail(to) {
   const { transporter, mode } = await getTransporter();
+  const kode = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
   const info = await transporter.sendMail({
     from: MAIL_FROM,
     to,
-    subject: '[SIM-K3 Mining] Tes koneksi email reminder',
-    text: `Konfigurasi email berhasil. Mode: ${mode}.`,
+    subject: `[SIM-K3 Mining] Tes email reminder ${kode}`,
+    text:
+      `Konfigurasi email reminder berhasil.\n\n` +
+      `Kode uji : ${kode}\n` +
+      `Mode     : ${mode}\n` +
+      `Pengirim : ${MAIL_FROM}\n\n` +
+      `Kalau email ini tidak masuk Inbox, cek folder Spam, Promotions, dan All Mail.`,
   });
+  console.log(`[mail] kode uji: ${kode}`);
 
   if (mode === 'dry-run') {
     const file = path.join(getOutboxDir(), `test_${Date.now()}.eml`);
