@@ -197,6 +197,15 @@ Setup sekali:
    Hasil `OK` berarti kredensial `.env` valid; hasil `GAGAL` berarti App Password
    harus diganti.
 
+Cara paling pasti untuk uji kirim: workflow **Tes Email SMTP** di
+`.github/workflows/email-test.yml`. Kolom `to` wajib diisi, jadi tidak mungkin
+jalankan tanpa alamat tujuan:
+https://github.com/mirzanaufalp/Claude-Sertif/actions/workflows/email-test.yml
+
+Run manual pada **Email Reminder H-90** tanpa input sekarang akan gagal dengan
+pesan `Run manual tanpa input` — sebelumnya terlihat sukses padahal tidak ada
+email yang dikirim.
+
 Reminder production hanya membaca sertifikasi dari Excel di repo. Perubahan yang
 dilakukan lewat UI di browser tersimpan di `localStorage` masing-masing dan
 **tidak** sampai ke GitHub Actions.

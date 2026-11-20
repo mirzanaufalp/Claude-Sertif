@@ -1,0 +1,43 @@
+name: Tes Email SMTP
+
+on:
+  workflow_dispatch:
+    inputs:
+      to:
+        description: 'Alamat email tujuan (wajib diisi)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      DRY_RUN: '0'
+      ETHEREAL: '0'
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: '587'
+      SMTP_SECURE: 'false'
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      MAIL_FROM: SIM-K3 Mining <${{ secrets.SMTP_USER }}>
+      TEST_EMAIL: ${{ inputs.to }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Kirim email tes
+        run: npx tsx scripts/send-reminders-ci.mts

@@ -14,7 +14,7 @@ saveStore({
 });
 
 const status = mailerStatus();
-console.log(`[ci] mode=${status.mode} reminderDays=${REMINDER_DAYS} from=${status.from}`);
+console.log(`[ci] event=${process.env.GITHUB_EVENT_NAME || 'lokal'} mode=${status.mode} reminderDays=${REMINDER_DAYS} from=${status.from}`);
 
 const pending = getDueReminders().filter(item => !item.alreadySentAt);
 
@@ -32,6 +32,18 @@ function gagalKirim(label: string, error: any): never {
 
 // Mode uji dari tab Actions: kirim email tes ke alamat tertentu.
 const testEmail = String(process.env.TEST_EMAIL || '').trim();
+const isManual = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
+console.log(`[ci] input test_email="${testEmail}" force_cert_id="${process.env.FORCE_CERT_ID || ''}"`);
+
+if (isManual && !testEmail && !String(process.env.FORCE_CERT_ID || '').trim() && pending.length === 0) {
+  console.error(
+    '[ci] Run manual tanpa input: kolom test_email dan force_cert_id kosong, ' +
+      `dan tidak ada sertifikat jatuh tempo H-${REMINDER_DAYS}. Tidak ada email yang dikirim. ` +
+      'Jalankan ulang dan isi kolom test_email.'
+  );
+  process.exit(1);
+}
+
 if (testEmail) {
   try {
     const result = await sendTestEmail(testEmail);
