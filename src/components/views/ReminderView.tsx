@@ -19,6 +19,13 @@ import {
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { API_ENABLED, reminderApi, ServerHealth, ReminderPreviewItem } from '../../lib/api';
 
+function formatTanggal(iso?: string) {
+  if (!iso) return 'belum ada data';
+  const date = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return 'belum ada data';
+  return date.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
 export const ReminderView: React.FC = () => {
   const {
     sertifikasiList,
@@ -158,7 +165,7 @@ export const ReminderView: React.FC = () => {
       }
       addAuditLog(
         'KIRIM_EMAIL_REMINDER',
-        `Notifikasi email pengingat kedaluwarsa terkirim ke ${owner?.EMAIL_PERSONIL || '-'} untuk Sertifikat ${cert.NO_SERTIFIKAT}${
+        `Notifikasi email pengingat kedaluwarsa terkirim ke ${owner?.EMAIL_PERSONIL || '-'} untuk Sertifikat ${cert.NO_SERTIFIKAT || 'tanpa nomor'}${
           result.dryRun ? ' (dry-run)' : ''
         }`
       );
@@ -251,7 +258,12 @@ export const ReminderView: React.FC = () => {
       header: 'No. Sertifikat',
       accessorKey: 'NO_SERTIFIKAT',
       sortable: true,
-      cell: s => <span className="font-mono font-bold text-amber-700 dark:text-amber-400">{s.NO_SERTIFIKAT}</span>,
+      cell: s =>
+        s.NO_SERTIFIKAT ? (
+          <span className="font-mono font-bold text-amber-700 dark:text-amber-400">{s.NO_SERTIFIKAT}</span>
+        ) : (
+          <span className="text-gray-400 italic">belum ada data</span>
+        ),
     },
     {
       header: 'Pegawai',
@@ -586,7 +598,9 @@ export const ReminderView: React.FC = () => {
                   const owner = personilList.find(per => per.ID_PERSONIL === pel?.ID_PERSONIL);
                   return (
                     <tr key={s.ID_SERTIFIKASI} className="hover:bg-rose-50/20 transition">
-                      <td className="p-3 font-mono font-bold text-rose-700 dark:text-rose-400">{s.NO_SERTIFIKAT}</td>
+                      <td className="p-3 font-mono font-bold text-rose-700 dark:text-rose-400">
+                        {s.NO_SERTIFIKAT || <span className="text-gray-400 italic">belum ada data</span>}
+                      </td>
                       <td className="p-3 font-bold text-gray-900 dark:text-white">{owner?.NAMA || 'Pegawai'}</td>
                       <td className="p-3 font-bold">{getLookupName('SRT', s.JENIS_SERTIFIKASI)} ({s.JENIS_SERTIFIKASI})</td>
                       <td className="p-3 font-mono text-rose-600 dark:text-rose-400 font-bold">{s.TANGGAL_EXPIRED}</td>
@@ -727,13 +741,16 @@ export const ReminderView: React.FC = () => {
             <div className="flex justify-between items-center text-xs">
               <span className="text-gray-400">Sertifikat:</span>
               <span className="font-bold text-amber-600 dark:text-amber-400">
-                {emailModalData.cert?.NO_SERTIFIKAT} ({emailModalData.cert?.JENIS_SERTIFIKASI})
+                {emailModalData.cert?.NO_SERTIFIKAT || 'belum ada data'} ({emailModalData.cert?.JENIS_SERTIFIKASI})
               </span>
             </div>
           </div>
 
           <div className="p-3 bg-gray-100 dark:bg-slate-800 rounded-xl font-mono text-[11px] text-gray-700 dark:text-gray-300 leading-relaxed border">
-            <p><strong>Subjek:</strong> Peringatan Masa Berlaku Sertifikat Kompetensi Pertambangan</p>
+            <p>
+              <strong>Subjek:</strong> [Reminder H-90 Hari] Sertifikat {emailModalData.cert?.JENIS_SERTIFIKASI} berakhir{' '}
+              {formatTanggal(emailModalData.cert?.TANGGAL_EXPIRED)}
+            </p>
             <p className="mt-2">Yth. {emailModalData.owner?.NAMA},</p>
             <p className="mt-1">
               Sertifikat Anda ({emailModalData.cert?.NO_SERTIFIKAT}) untuk bidang {emailModalData.cert?.JENIS_SERTIFIKASI} akan berakhir pada tanggal <strong>{emailModalData.cert?.TANGGAL_EXPIRED}</strong>.

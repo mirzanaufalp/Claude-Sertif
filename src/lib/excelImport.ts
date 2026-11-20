@@ -253,9 +253,9 @@ export function buildImportBundle(rows: any[]): ImportBundle {
         STATUS_PELATIHAN: 'SELESAI',
       };
 
-      const noSertifikat = String(
-        row.NO_SERTIFIKAT || row['No Sertifikat'] || `${type}-${personilId}`
-      ).trim();
+      // Excel sumber tidak memuat kolom nomor sertifikat. Jangan mengarang nomor:
+      // kosongkan agar UI/email menampilkan "belum ada data".
+      const noSertifikat = String(row.NO_SERTIFIKAT || row['No Sertifikat'] || '').trim();
 
       const sertifikasi: TrxSertifikasi = {
         ID_SERTIFIKASI: sertifikasiId,

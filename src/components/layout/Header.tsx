@@ -181,7 +181,9 @@ export const Header: React.FC<HeaderProps> = ({ onMobileMenuToggle }) => {
                         <div className="flex-1">
                           <div className="font-semibold text-gray-900 dark:text-white flex justify-between">
                             <span>Sertifikat {cert.JENIS_SERTIFIKASI}</span>
-                            <span className="font-mono text-[10px] text-gray-400">{cert.NO_SERTIFIKAT}</span>
+                            <span className="font-mono text-[10px] text-gray-400">
+                              {cert.NO_SERTIFIKAT || 'belum ada data'}
+                            </span>
                           </div>
                           <p className="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5">
                             {status === 'EXPIRED'

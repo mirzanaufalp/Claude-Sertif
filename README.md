@@ -211,6 +211,11 @@ Reminder production hanya membaca sertifikasi dari Excel di repo. Perubahan yang
 dilakukan lewat UI di browser tersimpan di `localStorage` masing-masing dan
 **tidak** sampai ke GitHub Actions.
 
+Excel sumber tidak punya kolom nomor sertifikat. Nomor tidak dikarang: UI dan
+email menampilkan `belum ada data` bila kolom kosong. Email uji dengan
+`force_cert_id` + `test_reminder_email` diberi prefix `[UJI]` dan banner agar
+salam ditujukan ke alamat uji, bukan ke nama pemilik sertifikat di Excel.
+
 Catatan:
 - Kalau cache Actions kedaluwarsa/dibersihkan, `sent-log.json` hilang dan
   reminder yang masih di jendela H-90 bisa terkirim ulang. Jalankan manual

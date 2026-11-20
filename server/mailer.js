@@ -83,6 +83,13 @@ export function mailerStatus() {
   };
 }
 
+const TANPA_DATA = 'belum ada data';
+
+function tampil(value) {
+  const text = String(value ?? '').trim();
+  return text || TANPA_DATA;
+}
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -96,27 +103,30 @@ const PORTAL_URL = /^https?:\/\//i.test(APP_BASE_URL) && !APP_BASE_URL.includes(
   ? APP_BASE_URL
   : '';
 
-export function buildReminderMail(reminders) {
+export function buildReminderMail(reminders, options = {}) {
   const first = reminders[0];
-  const { owner, daysLeft } = first;
+  const { owner } = first;
   const count = reminders.length;
+  const testTo = String(options.testTo || '').trim();
+  const sapaan = testTo || owner.NAMA;
 
   const certRows = reminders
     .map(r => {
       const jenis = r.cert.JENIS_SERTIFIKASI || 'Kompetensi';
       return {
         jenis,
-        no: r.cert.NO_SERTIFIKAT || '-',
+        no: tampil(r.cert.NO_SERTIFIKAT),
         expiry: formatDate(parseDate(r.cert.TANGGAL_EXPIRED)),
         daysLeft: r.daysLeft,
       };
     })
     .sort((a, b) => a.daysLeft - b.daysLeft);
 
-  const subject =
+  const baseSubject =
     count === 1
       ? `[Reminder H-${REMINDER_DAYS} Hari] Sertifikat ${certRows[0].jenis} berakhir ${certRows[0].expiry}`
       : `[Reminder H-${REMINDER_DAYS} Hari] ${count} sertifikat Anda segera berakhir`;
+  const subject = testTo ? `[UJI] ${baseSubject}` : baseSubject;
 
   const nearest = certRows[0];
   const intro =
@@ -125,8 +135,14 @@ export function buildReminderMail(reminders) {
       : `${count} sertifikat berikut akan berakhir dalam waktu kurang dari ${REMINDER_DAYS} hari.`;
 
   const textLines = [
-    `Yth. ${owner.NAMA},`,
+    `Yth. ${sapaan},`,
     '',
+    ...(testTo
+      ? [
+          'INI ADALAH EMAIL UJI. Sertifikat di bawah adalah contoh dari data Excel, bukan data Anda.',
+          '',
+        ]
+      : []),
     intro,
     '',
     ...certRows.flatMap((row, index) => [
@@ -192,7 +208,14 @@ export function buildReminderMail(reminders) {
             </tr>
             <tr>
               <td style="padding:20px 18px">
-                <p style="margin:0 0 4px;font-size:14px;line-height:1.6;color:#0f172a">Yth. <strong>${escapeHtml(owner.NAMA)}</strong>,</p>
+                <p style="margin:0 0 4px;font-size:14px;line-height:1.6;color:#0f172a">Yth. <strong>${escapeHtml(sapaan)}</strong>,</p>
+                ${
+                  testTo
+                    ? `<div style="margin:10px 0 14px;padding:10px 12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;font-size:12px;line-height:1.6;color:#1e40af">
+                  <strong>Email uji.</strong> Sertifikat di bawah adalah contoh dari data Excel, bukan data Anda.
+                </div>`
+                    : ''
+                }
                 <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#334155">${escapeHtml(intro)}</p>
                 <div style="margin:0 0 14px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;font-size:12px;line-height:1.6;color:#92400e">
                   Sertifikat terdekat berakhir <strong>${escapeHtml(nearest.expiry)}</strong>
@@ -239,7 +262,7 @@ export async function sendReminderEmailGroup(reminders, options = {}) {
   if (list.length === 0) throw new Error('Tidak ada reminder untuk dikirim.');
 
   const { owner } = list[0];
-  const { subject, text, html } = buildReminderMail(list);
+  const { subject, text, html } = buildReminderMail(list, options);
   const mail = {
     from: MAIL_FROM,
     to: owner.EMAIL_PERSONIL,

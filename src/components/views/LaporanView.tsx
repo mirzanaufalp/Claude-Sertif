@@ -77,7 +77,12 @@ export const LaporanView: React.FC = () => {
       header: 'No. Sertifikat',
       accessorKey: 'NO_SERTIFIKAT',
       sortable: true,
-      cell: r => <span className="font-mono font-bold text-blue-900 dark:text-blue-400">{r.NO_SERTIFIKAT}</span>,
+      cell: r =>
+        r.NO_SERTIFIKAT ? (
+          <span className="font-mono font-bold text-blue-900 dark:text-blue-400">{r.NO_SERTIFIKAT}</span>
+        ) : (
+          <span className="text-gray-400 italic">belum ada data</span>
+        ),
     },
     {
       header: 'Nama Pegawai',

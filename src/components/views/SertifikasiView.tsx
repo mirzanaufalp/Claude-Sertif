@@ -186,7 +186,7 @@ export const SertifikasiView: React.FC = () => {
       cell: s => (
         <div>
           <div className="font-mono font-bold text-blue-900 dark:text-blue-400">
-            {s.NO_SERTIFIKAT || '-'}
+            {s.NO_SERTIFIKAT || <span className="text-gray-400 italic">belum ada data</span>}
           </div>
           <div className="text-[10px] text-gray-400 font-mono">ID: {s.ID_SERTIFIKASI}</div>
         </div>

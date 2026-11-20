@@ -70,7 +70,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 /** Versi skema data. Naikkan nilai ini untuk memaksa reset data lama di browser. */
-const DATA_VERSION = '2026-11-12-seed-excel';
+const DATA_VERSION = '2026-11-20-no-fake-cert-number';
 
 /** Baca localStorage / data sampel, lalu rapikan ID & isi tanggal pelatihan yang masih kosong. */
 function loadInitialData() {

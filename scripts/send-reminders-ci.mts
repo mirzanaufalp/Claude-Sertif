@@ -63,9 +63,12 @@ if (forceCertId) {
     process.exit(1);
   }
   const pelatihan = SEED_PELATIHAN.find(item => String(item.ID_PELATIHAN) === String(cert.ID_PELATIHAN));
+  // Cocokkan ID personil secara persis. Jangan pakai `includes`, karena ID pendek
+  // bisa ikut cocok dengan sertifikat milik orang lain.
+  const idDariSertifikat = String(cert.ID_SERTIFIKASI).match(/^SERT_(.+)_(POP|POM|POU|SMKP|CP)$/)?.[1];
   const owner =
     SEED_PERSONIL.find(item => String(item.ID_PERSONIL) === String(pelatihan?.ID_PERSONIL)) ||
-    SEED_PERSONIL.find(item => cert.ID_SERTIFIKASI.includes(String(item.ID_PERSONIL)));
+    SEED_PERSONIL.find(item => String(item.ID_PERSONIL) === String(idDariSertifikat || ''));
   if (!owner?.EMAIL_PERSONIL) {
     console.error(`[ci] pemilik/email untuk ${forceCertId} tidak ditemukan`);
     process.exit(1);
@@ -87,7 +90,10 @@ if (forceCertId) {
     daysLeft: daysBetween(new Date(), expiry),
   };
   try {
-    const result = await sendReminderEmailGroup([item], { markSent: false });
+    const result = await sendReminderEmailGroup([item], {
+      markSent: false,
+      testTo: overrideEmail,
+    });
     console.log(`[ci] uji reminder ${forceCertId} -> ${result.to}: ${result.subject}`);
     console.log('[ci] sent-log tidak diubah, jadi reminder asli tetap akan terkirim saat waktunya tiba');
   } catch (error) {

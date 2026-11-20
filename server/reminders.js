@@ -62,9 +62,12 @@ export function reminderKey(cert) {
 
 function findOwner(store, cert) {
   const pelatihan = store.pelatihanList.find(p => String(p.ID_PELATIHAN) === String(cert.ID_PELATIHAN));
+  // Fallback dari ID sertifikat harus persis: SERT_<ID_PERSONIL>_<JENIS>.
+  // `includes()` lama bisa menautkan sertifikat ke orang lain bila ID pendek.
+  const idDariSertifikat = String(cert.ID_SERTIFIKASI || '').match(/^SERT_(.+)_(POP|POM|POU|SMKP|CP)$/)?.[1];
   const owner =
     store.personilList.find(p => String(p.ID_PERSONIL) === String(pelatihan?.ID_PERSONIL)) ||
-    store.personilList.find(p => cert.ID_SERTIFIKASI && String(cert.ID_SERTIFIKASI).includes(String(p.ID_PERSONIL)));
+    store.personilList.find(p => String(p.ID_PERSONIL) === String(idDariSertifikat || ''));
   return { pelatihan, owner };
 }
 

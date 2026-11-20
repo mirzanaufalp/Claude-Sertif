@@ -742,7 +742,7 @@ export const PersonilView: React.FC = () => {
                                 {getLookupName('SRT', s.JENIS_SERTIFIKASI)} ({s.JENIS_SERTIFIKASI})
                               </td>
                               <td className="p-2.5 font-mono text-blue-600 dark:text-blue-400 font-bold">
-                                {s.NO_SERTIFIKAT}
+                                {s.NO_SERTIFIKAT || <span className="text-gray-400 italic">belum ada data</span>}
                               </td>
                               <td className="p-2.5">{s.TANGGAL_MULAI}</td>
                               <td className="p-2.5">{s.TANGGAL_EXPIRED}</td>
