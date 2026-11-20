@@ -16,7 +16,7 @@ import {
   INITIAL_PELATIHAN,
   INITIAL_SERTIFIKASI,
 } from '../data/initialData';
-import { reminderApi } from '../lib/api';
+import { API_ENABLED, reminderApi } from '../lib/api';
 import { migrateLegacyData } from '../lib/excelImport';
 
 interface AppContextType {
@@ -183,6 +183,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Kirim salinan data ke backend email agar cron H-90 hari punya data terbaru
   useEffect(() => {
+    if (!API_ENABLED) return;
     const timer = setTimeout(() => {
       reminderApi
         .sync({ personilList, pelatihanList, sertifikasiList })

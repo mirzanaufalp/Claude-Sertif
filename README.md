@@ -190,9 +190,9 @@ Catatan:
 - Kalau cache Actions kedaluwarsa/dibersihkan, `sent-log.json` hilang dan
   reminder yang masih di jendela H-90 bisa terkirim ulang. Jalankan manual
   setelah mengubah data untuk memastikan.
-- Panel status server di UI akan menampilkan "server email belum aktif" di
-  domain Vercel karena memang tidak ada backend di sana. Pengiriman tetap
-  berjalan dari GitHub Actions.
+- Di domain Vercel, panel status menampilkan info GitHub Actions dan tombol kirim
+  manual disembunyikan (tidak ada backend yang bisa dipanggil dari browser).
+  Pengiriman tetap berjalan dari GitHub Actions.
 
 ### Endpoint
 

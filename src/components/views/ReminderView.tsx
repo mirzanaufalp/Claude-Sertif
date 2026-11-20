@@ -17,7 +17,7 @@ import {
   CalendarDays,
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { reminderApi, ServerHealth, ReminderPreviewItem } from '../../lib/api';
+import { API_ENABLED, reminderApi, ServerHealth, ReminderPreviewItem } from '../../lib/api';
 
 export const ReminderView: React.FC = () => {
   const {
@@ -51,6 +51,7 @@ export const ReminderView: React.FC = () => {
   const [simPreviewList, setSimPreviewList] = useState<ReminderPreviewItem[]>([]);
 
   const refreshServerStatus = () => {
+    if (!API_ENABLED) return;
     reminderApi
       .health()
       .then(health => {
@@ -286,15 +287,18 @@ export const ReminderView: React.FC = () => {
     },
     {
       header: 'Kirim Reminder Email',
-      cell: s => (
-        <button
-          onClick={() => handleSendEmailNotification(s)}
-          className="px-3 py-1.5 bg-blue-900 hover:bg-blue-800 text-white font-bold text-[11px] rounded-lg transition flex items-center gap-1.5 shadow"
-        >
-          <Mail className="w-3.5 h-3.5 text-amber-400" />
-          <span>Kirim Reminder Email</span>
-        </button>
-      ),
+      cell: s =>
+        API_ENABLED ? (
+          <button
+            onClick={() => handleSendEmailNotification(s)}
+            className="px-3 py-1.5 bg-blue-900 hover:bg-blue-800 text-white font-bold text-[11px] rounded-lg transition flex items-center gap-1.5 shadow"
+          >
+            <Mail className="w-3.5 h-3.5 text-amber-400" />
+            <span>Kirim Reminder Email</span>
+          </button>
+        ) : (
+          <span className="text-[10px] text-gray-400">Otomatis via GitHub Actions</span>
+        ),
     },
   ];
 
@@ -313,7 +317,35 @@ export const ReminderView: React.FC = () => {
         </div>
       </div>
 
+      {!API_ENABLED && (
+        <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="p-2.5 rounded-xl bg-emerald-600 text-white shadow">
+              <Mail className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-gray-900 dark:text-white">
+                Reminder Email Otomatis H-90 Hari
+              </div>
+              <p className="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                Pengiriman dijalankan GitHub Actions setiap hari pukul 08:00 WIB. Tombol kirim manual
+                tidak tersedia di domain Vercel karena backend Express tidak di-deploy di sana.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://github.com/mirzanaufalp/Claude-Sertif/actions/workflows/email-reminder.yml"
+            target="_blank"
+            rel="noreferrer"
+            className="shrink-0 px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] rounded-xl text-center"
+          >
+            Buka GitHub Actions
+          </a>
+        </div>
+      )}
+
       {/* STATUS LAYANAN EMAIL OTOMATIS H-90 HARI */}
+      {API_ENABLED && (
       <div
         className={`p-4 rounded-2xl border flex flex-col lg:flex-row lg:items-center justify-between gap-3 ${
           serverOnline === false
@@ -377,6 +409,7 @@ export const ReminderView: React.FC = () => {
           </button>
         </div>
       </div>
+      )}
 
       {serverHealth && serverHealth.mailer.mode !== 'smtp' && (
         <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm space-y-3">

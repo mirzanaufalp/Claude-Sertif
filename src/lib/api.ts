@@ -1,4 +1,14 @@
 ﻿const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? '';
+const LOCAL_HOSTS = ['localhost', '127.0.0.1', '::1'];
+const configuredBase = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? '';
+const isLocalHost =
+  typeof window !== 'undefined' && LOCAL_HOSTS.includes(window.location.hostname);
+
+/**
+ * Backend email (Express) hanya ada saat dev lokal atau saat VITE_API_BASE_URL diisi.
+ * Di Vercel statis, panggilan /api akan 405, jadi fitur server harus dinonaktifkan.
+ */
+export const API_ENABLED = Boolean(configuredBase) || isLocalHost;
 
 export interface MailerStatus {
   mode: 'smtp' | 'ethereal' | 'dry-run';
