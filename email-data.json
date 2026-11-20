@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-20T09:30:54.688Z",
+  "generatedAt": "2026-11-20T09:30:59.214Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
     {
@@ -834,6 +834,15 @@
     }
   ],
   "pelatihanList": [
+    {
+      "ID_PELATIHAN": "PLTHNPOP8836987",
+      "ID_PERSONIL": "8836",
+      "JENIS_PELATIHAN": "POP",
+      "TANGGAL_MULAI": "2026-11-20",
+      "TANGGAL_SELESAI": "2026-11-24",
+      "STATUS_PELATIHAN": "BERJALAN",
+      "DOK_PELATIHAN": "sertifikat_pelatihan.pdf"
+    },
     {
       "ID_PELATIHAN": "PEL_8632_POP",
       "ID_PERSONIL": "8632",
