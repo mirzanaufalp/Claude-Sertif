@@ -1,8 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T02:15:36.090Z",
+  "generatedAt": "2026-11-23T02:21:19.988Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
+    {
+      "ID_PERSONIL": "6485",
+      "NAMA": "adinda",
+      "JABATAN": "Supervisor",
+      "DIVISI_DEPARTEMEN": "GGD",
+      "JENIS_PEGAWAI": "Pegawai Tetap",
+      "EMAIL_PERSONIL": "dheanovaadinda@gmail.com",
+      "FOTO_PERSONIL": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+    },
     {
       "ID_PERSONIL": "5786",
       "NAMA": "el",
