@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T02:21:19.988Z",
+  "generatedAt": "2026-11-23T02:21:33.656Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
     {
@@ -833,6 +833,15 @@
     }
   ],
   "pelatihanList": [
+    {
+      "ID_PELATIHAN": "PLTHNPOP6485641",
+      "ID_PERSONIL": "6485",
+      "JENIS_PELATIHAN": "POP",
+      "TANGGAL_MULAI": "2026-11-23",
+      "TANGGAL_SELESAI": "2026-11-27",
+      "STATUS_PELATIHAN": "SELESAI",
+      "DOK_PELATIHAN": "sertifikat_pelatihan.pdf"
+    },
     {
       "ID_PELATIHAN": "PLTHNPOP5786277",
       "ID_PERSONIL": "5786",
@@ -2074,6 +2083,16 @@
     }
   ],
   "sertifikasiList": [
+    {
+      "ID_SERTIFIKASI": "SERTPOP6485741",
+      "ID_PELATIHAN": "PLTHNPOP6485641",
+      "JENIS_SERTIFIKASI": "POP",
+      "NO_SERTIFIKAT": "POP-2026-4466",
+      "TANGGAL_MULAI": "2026-11-27",
+      "TANGGAL_EXPIRED": "2031-11-27",
+      "STATUS_SERTIFIKASI": "LULUS",
+      "DOK_SERTIFIKAT": "sertifikat_pelatihan.pdf"
+    },
     {
       "ID_SERTIFIKASI": "SERTPOP5786513",
       "ID_PELATIHAN": "PLTHNPOP5786277",
