@@ -1,17 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-20T09:31:19.613Z",
+  "generatedAt": "2026-11-23T01:45:32.385Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
-    {
-      "ID_PERSONIL": "8836",
-      "NAMA": "el",
-      "JABATAN": "Supervisor",
-      "DIVISI_DEPARTEMEN": "GGD",
-      "JENIS_PEGAWAI": "Pegawai Tetap",
-      "EMAIL_PERSONIL": "wijayastudio92@gmail.com",
-      "FOTO_PERSONIL": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
-    },
     {
       "ID_PERSONIL": "8632",
       "NAMA": "FIANDRI INDRAGUNAWAN RINAWAN",
@@ -834,15 +825,6 @@
     }
   ],
   "pelatihanList": [
-    {
-      "ID_PELATIHAN": "PLTHNPOP8836987",
-      "ID_PERSONIL": "8836",
-      "JENIS_PELATIHAN": "POP",
-      "TANGGAL_MULAI": "2026-11-20",
-      "TANGGAL_SELESAI": "2026-11-24",
-      "STATUS_PELATIHAN": "SELESAI",
-      "DOK_PELATIHAN": "sertifikat_pelatihan.pdf"
-    },
     {
       "ID_PELATIHAN": "PEL_8632_POP",
       "ID_PERSONIL": "8632",
@@ -2085,16 +2067,6 @@
     }
   ],
   "sertifikasiList": [
-    {
-      "ID_SERTIFIKASI": "SERTPOP8836520",
-      "ID_PELATIHAN": "PLTHNPOP8836987",
-      "JENIS_SERTIFIKASI": "POP",
-      "NO_SERTIFIKAT": "POP-2026-6391",
-      "TANGGAL_MULAI": "2026-11-24",
-      "TANGGAL_EXPIRED": "2026-12-24",
-      "STATUS_SERTIFIKASI": "LULUS",
-      "DOK_SERTIFIKAT": "sertifikat_pelatihan.pdf"
-    },
     {
       "ID_SERTIFIKASI": "SERT_8632_POP",
       "ID_PELATIHAN": "PEL_8632_POP",
