@@ -8,6 +8,11 @@ terlanjur, langsung revoke di https://github.com/settings/tokens lalu buat baru.
 ## Fakta penting
 - Data web ada di `localStorage` browser. GitHub Actions tidak bisa membacanya.
 - Jembatan: file `email-data.json` di root repo `mirzanaufalp/Claude-Sertif`.
+- Saat aplikasi dibuka, web membaca `email-data.json` dari
+  `raw.githubusercontent.com` (tanpa token). Jadi semua device melihat data yang
+  sama. Device tanpa token hanya bisa membaca, tidak bisa menulis.
+- Sinkronisasi menunggu data repo selesai dimuat, supaya device baru yang masih
+  berisi data seed tidak menimpa data bersama.
 - Script CI memakai `email-data.json` kalau ada; kalau tidak, fallback ke `DB_Sertifikasi HSE.xlsx`.
 - Akun GitHub `Elyazid29` sudah ber-role **write** di repo. Tidak perlu ubah permission.
 - Token fine-grained tidak bisa dipakai untuk repo personal milik akun lain. Pakai **classic token** scope `repo`.

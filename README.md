@@ -225,10 +225,13 @@ membacanya. Jembatannya adalah file `email-data.json` di root repo.
 2. Buka halaman **Reminder** di web, isi kolom **Sinkron Data ke GitHub** dengan
    token itu (repo sudah terisi `mirzanaufalp/Claude-Sertif`), klik **Simpan**,
    lalu **Sinkron Sekarang**. Status akan menampilkan `Berhasil: ...`.
-3. Setelah itu setiap perubahan personil/pelatihan/sertifikasi di web otomatis
+3. Setiap kali aplikasi dibuka di device mana pun, data diambil dari
+   `email-data.json` di repo, jadi tampilan web selalu sama dengan sumber email.
+   Device tanpa token tetap bisa membaca, tapi tidak bisa menulis perubahan.
+4. Setelah itu setiap perubahan personil/pelatihan/sertifikasi di web otomatis
    menulis `email-data.json` ke repo (±4 detik setelah berubah). File tidak akan
    ditulis ulang bila isinya sama.
-4. Setiap kali `email-data.json` berubah, workflow **Email Reminder H-90** jalan
+5. Setiap kali `email-data.json` berubah, workflow **Email Reminder H-90** jalan
    sendiri dan langsung mengirim email yang jatuh tempo. Tidak perlu klik
    **Run workflow**, unduh data, atau commit manual.
 

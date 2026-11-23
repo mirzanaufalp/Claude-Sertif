@@ -375,9 +375,9 @@ export const ReminderView: React.FC = () => {
               Sinkron Data ke GitHub
             </div>
             <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 max-w-2xl leading-relaxed">
-              Isi token GitHub di sini sekali. Data web otomatis tersimpan ke <code>email-data.json</code> saat
-              berubah, lalu pengirim email langsung berjalan sendiri. Tidak perlu klik Run workflow, unduh data,
-              atau commit manual. Token hanya disimpan di browser ini.
+              Saat aplikasi dibuka, data diambil dari <code>email-data.json</code> di repo, jadi semua device
+              melihat data yang sama dengan email. Isi token GitHub di sini sekali agar perubahan bisa ditulis
+              balik; lalu pengirim email jalan sendiri tanpa klik Run workflow. Token hanya disimpan di browser ini.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 shrink-0">

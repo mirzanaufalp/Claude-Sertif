@@ -19,6 +19,7 @@ import {
 import { API_ENABLED, reminderApi } from '../lib/api';
 import { migrateLegacyData } from '../lib/excelImport';
 import { hasGithubToken, syncEmailDataToGithub } from '../lib/githubSync';
+import { fetchRemoteEmailData } from '../lib/remoteData';
 
 interface AppContextType {
   role: UserRole;
@@ -130,6 +131,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [sertifikasiList, setSertifikasiList] = useState<TrxSertifikasi[]>(initialData.sertifikasiList);
 
+  // Data bersama dari repo dipakai sebagai sumber utama saat aplikasi dibuka.
+  // Tanpa ini tiap device memakai localStorage sendiri dan bisa menimpa data
+  // device lain lewat sinkronisasi GitHub.
+  const [remoteReady, setRemoteReady] = useState(false);
+
+  useEffect(() => {
+    let aktif = true;
+    fetchRemoteEmailData().then(remote => {
+      if (!aktif) return;
+      if (remote) {
+        const data = migrateLegacyData(remote.personilList, remote.pelatihanList, remote.sertifikasiList);
+        setPersonilList(data.personilList);
+        setPelatihanList(data.pelatihanList);
+        setSertifikasiList(data.sertifikasiList);
+      }
+      setRemoteReady(true);
+    });
+    return () => {
+      aktif = false;
+    };
+  }, []);
+
   useEffect(() => {
     if (initialData.changed) {
       localStorage.setItem('sertif_personil', JSON.stringify(initialData.personilList));
@@ -198,14 +221,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Sumber email produksi = data web. Kalau token GitHub sudah diisi di panel
   // Reminder, tulis email-data.json ke repo otomatis setiap data berubah.
   useEffect(() => {
-    if (!hasGithubToken()) return;
+    // Tunggu data repo termuat dulu. Kalau tidak, device baru yang masih berisi
+    // data seed bisa menimpa email-data.json sebelum data bersama terbaca.
+    if (!remoteReady || !hasGithubToken()) return;
     const timer = setTimeout(() => {
       syncEmailDataToGithub(personilList, pelatihanList, sertifikasiList).catch(() => {
         // Status/errors ditampilkan di panel Reminder; jangan ganggu aplikasi.
       });
     }, 4000);
     return () => clearTimeout(timer);
-  }, [personilList, pelatihanList, sertifikasiList]);
+  }, [remoteReady, personilList, pelatihanList, sertifikasiList]);
 
   const addAuditLog = (action: string, details: string) => {
     const newLog: AuditLog = {
