@@ -1,8 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T01:58:59.563Z",
+  "generatedAt": "2026-11-23T02:08:33.708Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
+    {
+      "ID_PERSONIL": "7440",
+      "NAMA": "egi",
+      "JABATAN": "Supervisor",
+      "DIVISI_DEPARTEMEN": "GGD",
+      "JENIS_PEGAWAI": "Pegawai Tetap",
+      "EMAIL_PERSONIL": "mentahanopoae@gmail.com",
+      "FOTO_PERSONIL": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+    },
     {
       "ID_PERSONIL": "5786",
       "NAMA": "el",
