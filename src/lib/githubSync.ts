@@ -64,10 +64,24 @@ export async function syncEmailDataToGithub(
   const api = `https://api.github.com/repos/${repo}/contents/${FILE_PATH}`;
 
   let sha: string | undefined;
+  let dataSama = false;
   const existing = await fetch(api, { headers });
   if (existing.ok) {
     const data = await existing.json();
     sha = data.sha;
+    // Jangan commit ulang kalau isi tiga daftar tidak berubah. `generatedAt`
+    // sengaja tidak dibandingkan karena selalu berubah tiap kali dipanggil.
+    try {
+      const isiLama = JSON.parse(
+        decodeURIComponent(escape(atob(String(data.content || '').replace(/\s/g, ''))))
+      );
+      dataSama =
+        JSON.stringify(isiLama.personilList) === JSON.stringify(personilList) &&
+        JSON.stringify(isiLama.pelatihanList) === JSON.stringify(pelatihanList) &&
+        JSON.stringify(isiLama.sertifikasiList) === JSON.stringify(sertifikasiList);
+    } catch {
+      dataSama = false;
+    }
   } else if (existing.status !== 404) {
     const detail = await existing.text();
     throw new Error(
@@ -79,6 +93,16 @@ export async function syncEmailDataToGithub(
     );
   }
 
+  const updatedAt = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+  if (dataSama) {
+    return {
+      ok: true,
+      repo,
+      updatedAt,
+      message: `data tidak berubah, ${FILE_PATH} tidak ditulis ulang`,
+    };
+  }
+
   const payload = {
     version: 1,
     generatedAt: new Date().toISOString(),
@@ -87,7 +111,6 @@ export async function syncEmailDataToGithub(
     pelatihanList,
     sertifikasiList,
   };
-  const updatedAt = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
   const response = await fetch(api, {
     method: 'PUT',

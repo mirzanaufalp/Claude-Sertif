@@ -1,6 +1,12 @@
 name: Email Reminder H-90
 
 on:
+  # Kirim otomatis begitu data web selesai disinkronkan ke repo.
+  # Tidak perlu klik Run workflow.
+  push:
+    branches: [main]
+    paths:
+      - 'email-data.json'
   # GitHub Actions cron memakai UTC. 01:00 UTC = 08:00 WIB.
   schedule:
     - cron: '0 1 * * *'

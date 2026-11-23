@@ -171,9 +171,12 @@ production dijalankan oleh workflow GitHub Actions:
 
 `.github/workflows/email-reminder.yml`
 - Jadwal `0 1 * * *` UTC = **08:00 WIB** setiap hari.
+- **Otomatis juga saat `email-data.json` berubah** (push ke `main`), jadi begitu
+  web selesai sinkron email langsung diproses tanpa klik **Run workflow**.
 - Bisa dijalankan manual: tab **Actions** → **Email Reminder H-90** → **Run workflow**.
-- Membaca `DB_Sertifikasi HSE.xlsx` dari repo, regenerate `seedFromExcel.ts`,
-  lalu mengirim satu email per pegawai untuk sertifikat dalam jendela H-90.
+- Membaca `email-data.json` bila ada (fallback `DB_Sertifikasi HSE.xlsx`), lalu
+  mengirim satu email per pegawai untuk sertifikat dalam jendela H-90 yang belum
+  pernah dikirim.
 - `sent-log.json` disimpan sebagai cache Actions agar sertifikat yang sama tidak
   dikirim ulang.
 
@@ -216,16 +219,18 @@ membacanya. Jembatannya adalah file `email-data.json` di root repo.
 
 **Otomatis (disarankan, sekali setup)**
 
-1. Buat token GitHub: **Settings → Developer settings → Personal access tokens →
-   Fine-grained tokens → Generate new token**.
-2. Repository access: pilih `mirzanaufalp/Claude-Sertif`.
-   Permissions: **Contents: Read and write**. Masa berlaku bebas.
-3. Buka halaman **Reminder** di web, isi kolom **Sinkron Data ke GitHub** dengan
+1. Buat **classic token**: https://github.com/settings/tokens/new → centang scope
+   `repo` → **Generate token**. (Token fine-grained tidak bisa dipakai untuk repo
+   personal milik akun lain meski Anda collaborator.)
+2. Buka halaman **Reminder** di web, isi kolom **Sinkron Data ke GitHub** dengan
    token itu (repo sudah terisi `mirzanaufalp/Claude-Sertif`), klik **Simpan**,
    lalu **Sinkron Sekarang**. Status akan menampilkan `Berhasil: ...`.
-4. Setelah itu setiap perubahan personil/pelatihan/sertifikasi di web otomatis
-   menulis `email-data.json` ke repo (±4 detik setelah berubah). Tidak perlu
-   unduh/commit manual.
+3. Setelah itu setiap perubahan personil/pelatihan/sertifikasi di web otomatis
+   menulis `email-data.json` ke repo (±4 detik setelah berubah). File tidak akan
+   ditulis ulang bila isinya sama.
+4. Setiap kali `email-data.json` berubah, workflow **Email Reminder H-90** jalan
+   sendiri dan langsung mengirim email yang jatuh tempo. Tidak perlu klik
+   **Run workflow**, unduh data, atau commit manual.
 
 Token hanya disimpan di `localStorage` browser itu sendiri dan dikirim langsung
 ke `api.github.com`. Jangan pakai token ini di komputer bersama; tombol **Hapus**

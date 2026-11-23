@@ -375,9 +375,9 @@ export const ReminderView: React.FC = () => {
               Sinkron Data ke GitHub
             </div>
             <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 max-w-2xl leading-relaxed">
-              Email dikirim GitHub Actions dari <code>email-data.json</code> di repo. Isi token GitHub di sini —
-              data web akan otomatis tersimpan ke repo setiap kali berubah, tanpa unduh manual. Token hanya
-              disimpan di browser ini, bukan di server kami.
+              Isi token GitHub di sini sekali. Data web otomatis tersimpan ke <code>email-data.json</code> saat
+              berubah, lalu pengirim email langsung berjalan sendiri. Tidak perlu klik Run workflow, unduh data,
+              atau commit manual. Token hanya disimpan di browser ini.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 shrink-0">
@@ -440,11 +440,9 @@ export const ReminderView: React.FC = () => {
                 Reminder Email Otomatis H-90 Hari
               </div>
               <p className="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
-                Pengiriman dijalankan GitHub Actions setiap hari pukul 08:00 WIB. Tombol kirim manual
-                tidak tersedia di domain Vercel karena backend Express tidak di-deploy di sana.
-                Isi panel <strong>Sinkron Data ke GitHub</strong> dengan token GitHub agar data web
-                otomatis masuk ke <code>email-data.json</code>. <strong>Unduh Data Email</strong>
-                hanya cadangan bila akan commit manual.
+                Email dikirim otomatis setiap hari pukul 08:00 WIB, dan langsung setelah data web
+                tersinkron. Tidak perlu klik Run workflow, unduh data, atau commit manual.
+                Email hanya dikirim bila ada sertifikat dalam jendela H-90 dan belum pernah dikirim.
               </p>
             </div>
           </div>
