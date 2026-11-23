@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T02:21:33.656Z",
+  "generatedAt": "2026-11-23T02:21:46.149Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
     {
@@ -2089,7 +2089,7 @@
       "JENIS_SERTIFIKASI": "POP",
       "NO_SERTIFIKAT": "POP-2026-4466",
       "TANGGAL_MULAI": "2026-11-27",
-      "TANGGAL_EXPIRED": "2031-11-27",
+      "TANGGAL_EXPIRED": "2026-11-27",
       "STATUS_SERTIFIKASI": "LULUS",
       "DOK_SERTIFIKAT": "sertifikat_pelatihan.pdf"
     },
