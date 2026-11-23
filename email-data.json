@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T02:21:46.149Z",
+  "generatedAt": "2026-11-23T02:23:52.830Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
     {
@@ -834,7 +834,7 @@
   ],
   "pelatihanList": [
     {
-      "ID_PELATIHAN": "PLTHNPOP6485641",
+      "ID_PELATIHAN": "PEL_6485_POP",
       "ID_PERSONIL": "6485",
       "JENIS_PELATIHAN": "POP",
       "TANGGAL_MULAI": "2026-11-23",
@@ -843,7 +843,7 @@
       "DOK_PELATIHAN": "sertifikat_pelatihan.pdf"
     },
     {
-      "ID_PELATIHAN": "PLTHNPOP5786277",
+      "ID_PELATIHAN": "PEL_5786_POP",
       "ID_PERSONIL": "5786",
       "JENIS_PELATIHAN": "POP",
       "TANGGAL_MULAI": "2026-11-23",
@@ -2084,21 +2084,21 @@
   ],
   "sertifikasiList": [
     {
-      "ID_SERTIFIKASI": "SERTPOP6485741",
-      "ID_PELATIHAN": "PLTHNPOP6485641",
+      "ID_SERTIFIKASI": "SERT_6485_POP",
+      "ID_PELATIHAN": "PEL_6485_POP",
       "JENIS_SERTIFIKASI": "POP",
       "NO_SERTIFIKAT": "POP-2026-4466",
-      "TANGGAL_MULAI": "2026-11-27",
+      "TANGGAL_MULAI": "2026-11-23",
       "TANGGAL_EXPIRED": "2026-11-27",
       "STATUS_SERTIFIKASI": "LULUS",
       "DOK_SERTIFIKAT": "sertifikat_pelatihan.pdf"
     },
     {
-      "ID_SERTIFIKASI": "SERTPOP5786513",
-      "ID_PELATIHAN": "PLTHNPOP5786277",
+      "ID_SERTIFIKASI": "SERT_5786_POP",
+      "ID_PELATIHAN": "PEL_5786_POP",
       "JENIS_SERTIFIKASI": "POP",
       "NO_SERTIFIKAT": "POP-2026-8897",
-      "TANGGAL_MULAI": "2026-11-27",
+      "TANGGAL_MULAI": "2026-11-23",
       "TANGGAL_EXPIRED": "2026-12-27",
       "STATUS_SERTIFIKASI": "LULUS",
       "DOK_SERTIFIKAT": "sertifikat_pelatihan.pdf"
