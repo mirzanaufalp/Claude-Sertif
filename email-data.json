@@ -1,17 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-23T02:09:14.127Z",
+  "generatedAt": "2026-11-23T02:15:36.090Z",
   "source": "web-sertifikasi-hse",
   "personilList": [
-    {
-      "ID_PERSONIL": "7440",
-      "NAMA": "egi",
-      "JABATAN": "Supervisor",
-      "DIVISI_DEPARTEMEN": "GGD",
-      "JENIS_PEGAWAI": "Pegawai Tetap",
-      "EMAIL_PERSONIL": "mentahanopoae@gmail.com",
-      "FOTO_PERSONIL": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
-    },
     {
       "ID_PERSONIL": "5786",
       "NAMA": "el",
@@ -592,16 +583,6 @@
       "STATUS_PERSONIL": "AKTIF"
     },
     {
-      "ID_PERSONIL": "7440",
-      "NAMA": "HALLEY RIONANDA",
-      "JABATAN": "Geology Resource Estimation Concept Senior Engineer",
-      "DIVISI_DEPARTEMEN": "EPMD",
-      "JENIS_PEGAWAI": "PEG",
-      "EMAIL_PERSONIL": "HALLEY@ANTAM.COM",
-      "FOTO_PERSONIL": "",
-      "STATUS_PERSONIL": "AKTIF"
-    },
-    {
       "ID_PERSONIL": "8924",
       "NAMA": "HERLANDO JUNIANSYAH PUTRA PERDANA",
       "JABATAN": "Mine Plan Engineer",
@@ -843,15 +824,6 @@
     }
   ],
   "pelatihanList": [
-    {
-      "ID_PELATIHAN": "PLTHNPOP7440745",
-      "ID_PERSONIL": "7440",
-      "JENIS_PELATIHAN": "POP",
-      "TANGGAL_MULAI": "2026-11-23",
-      "TANGGAL_SELESAI": "2026-11-27",
-      "STATUS_PELATIHAN": "SELESAI",
-      "DOK_PELATIHAN": "sertifikat_pelatihan.pdf"
-    },
     {
       "ID_PELATIHAN": "PLTHNPOP5786277",
       "ID_PERSONIL": "5786",
@@ -1752,16 +1724,6 @@
       "STATUS_PELATIHAN": "SELESAI"
     },
     {
-      "ID_PELATIHAN": "PEL_7440_POP",
-      "ID_PERSONIL": "7440",
-      "JENIS_PELATIHAN": "POP",
-      "NAMA_PELATIHAN": "Pelatihan & Sertifikasi POP",
-      "PENYELENGGARA": "Pusdiklat Antam / Minerba",
-      "TANGGAL_MULAI": "",
-      "TANGGAL_SELESAI": "",
-      "STATUS_PELATIHAN": "SELESAI"
-    },
-    {
       "ID_PELATIHAN": "PEL_8924_POP",
       "ID_PERSONIL": "8924",
       "JENIS_PELATIHAN": "POP",
@@ -2103,16 +2065,6 @@
     }
   ],
   "sertifikasiList": [
-    {
-      "ID_SERTIFIKASI": "SERTPOP7440648",
-      "ID_PELATIHAN": "PLTHNPOP7440745",
-      "JENIS_SERTIFIKASI": "POP",
-      "NO_SERTIFIKAT": "POP-2026-9131",
-      "TANGGAL_MULAI": "2026-11-27",
-      "TANGGAL_EXPIRED": "2027-01-27",
-      "STATUS_SERTIFIKASI": "LULUS",
-      "DOK_SERTIFIKAT": "sertifikat_pelatihan.pdf"
-    },
     {
       "ID_SERTIFIKASI": "SERTPOP5786513",
       "ID_PELATIHAN": "PLTHNPOP5786277",
@@ -3010,16 +2962,6 @@
       "NO_SERTIFIKAT": "",
       "TANGGAL_MULAI": "",
       "TANGGAL_EXPIRED": "2031-01-01",
-      "STATUS_SERTIFIKASI": "LULUS",
-      "DOK_SERTIFIKAT": "sertifikat.pdf"
-    },
-    {
-      "ID_SERTIFIKASI": "SERT_7440_POP",
-      "ID_PELATIHAN": "PEL_7440_POP",
-      "JENIS_SERTIFIKASI": "POP",
-      "NO_SERTIFIKAT": "",
-      "TANGGAL_MULAI": "",
-      "TANGGAL_EXPIRED": "",
       "STATUS_SERTIFIKASI": "LULUS",
       "DOK_SERTIFIKAT": "sertifikat.pdf"
     },
